@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import SortForm from '../../components/sort-form/sort-form';
@@ -11,6 +12,9 @@ function MainPage({countPlaces}: MainPageProps): JSX.Element {
     <div className='page page--gray page--main'>
       <Header isNavShow/>
       <main className='page__main page__main--index'>
+        <Helmet>
+          <title>Six cities</title>
+        </Helmet>
         <Cities/>
         <div className='cities'>
           <div className='cities__places-container container'>

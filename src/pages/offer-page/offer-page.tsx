@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import Card from '../../components/app/card';
 import Header from '../../components/header/header';
 
@@ -7,6 +8,9 @@ function OfferPage(): JSX.Element {
       <Header isNavShow/>
       <main className='page__main page__main--offer'>
         <section className='offer'>
+          <Helmet>
+            <title>Offer</title>
+          </Helmet>
           <div className='offer__gallery-container container'>
             <div className='offer__gallery'>
               <div className='offer__image-wrapper'>

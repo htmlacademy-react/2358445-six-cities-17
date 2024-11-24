@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 function Page404(): JSX.Element {
   return (
@@ -6,6 +7,9 @@ function Page404(): JSX.Element {
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
+            <Helmet>
+              <title>404 Not Found</title>
+            </Helmet>
             <h1 className="login__title">404 Not Found</h1>
             <a className="header__logo-link" href="main.html">Back to main page</a>
           </section>
