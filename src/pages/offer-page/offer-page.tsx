@@ -1,8 +1,13 @@
 import {Helmet} from 'react-helmet-async';
+import {useParams} from 'react-router-dom';
 import Card from '../../components/app/card';
 import Header from '../../components/header/header';
 
 function OfferPage(): JSX.Element {
+  const params = useParams();
+  if (params.id) {
+    //console.log(params);
+  }
   return (
     <div className='page'>
       <Header isNavShow/>
