@@ -1,18 +1,12 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, Location} from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import Page404 from '../../pages/page-404/page-404';
-
-type Location = {
-  id: number;
-  name: string;
-  path: string;
-}
 
 type AppProps = {
   countPlaces: number;
@@ -34,7 +28,7 @@ function App({countPlaces, locations}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage isLogged={AuthorizationStatus.NoAuth}/>}
+            element={<OfferPage authorizationStatus={AuthorizationStatus.NoAuth}/>}
           />
           <Route
             path={AppRoute.Favorites}

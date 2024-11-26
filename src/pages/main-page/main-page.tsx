@@ -3,13 +3,7 @@ import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import SortForm from '../../components/sort-form/sort-form';
 import Card from '../../components/card/card';
-import {AuthorizationStatus} from '../../const';
-
-type Location = {
-  id: number;
-  name: string;
-  path: string;
-}
+import {AuthorizationStatus, Location} from '../../const';
 
 type MainPageProps = {
   countPlaces: number;

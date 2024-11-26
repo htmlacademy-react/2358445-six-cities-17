@@ -2,19 +2,20 @@ import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
 import Card from '../../components/card/card';
 import Header from '../../components/header/header';
+import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
-  isLogged: string;
+  authorizationStatus: AuthorizationStatus;
 }
 
-function OfferPage({isLogged}: OfferPageProps): JSX.Element {
+function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
   const params = useParams();
   if (params.id) {
     //console.log(params);
   }
   return (
     <div className='page'>
-      <Header isNavShow isLogged={isLogged}/>
+      <Header isNavShow authorizationStatus={authorizationStatus}/>
       <main className='page__main page__main--offer'>
         <section className='offer'>
           <Helmet>

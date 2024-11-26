@@ -46,3 +46,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export type Location = {
+  id: number;
+  name: string;
+  path: string;
+}

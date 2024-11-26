@@ -1,11 +1,6 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
-
-type Location = {
-  id: number;
-  name: string;
-  path: string;
-}
+import {Location} from '../../const';
 
 type CitiesProps = {
   locations: Array<Location>;
