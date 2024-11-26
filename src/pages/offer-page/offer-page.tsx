@@ -1,8 +1,9 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
+import {AuthorizationStatus} from '../../const';
 import Card from '../../components/card/card';
 import Header from '../../components/header/header';
-import {AuthorizationStatus} from '../../const';
+import Map from '../../components/map/map';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -213,7 +214,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className='offer__map map'></section>
+          <Map page='offer'/>
         </section>
         <div className='container'>
           <section className='near-places places'>

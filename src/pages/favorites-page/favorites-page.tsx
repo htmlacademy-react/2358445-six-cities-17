@@ -1,7 +1,8 @@
 import {Helmet} from 'react-helmet-async';
+import {AuthorizationStatus} from '../../const';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {AuthorizationStatus} from '../../const';
+import LocationItemLink from '../../components/location-item-link/location-item-link';
 
 type FavoritesPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -22,9 +23,7 @@ function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
               <li className='favorites__locations-items'>
                 <div className='favorites__locations locations locations--current'>
                   <div className='locations__item'>
-                    <a className='locations__item-link' href='#'>
-                      <span>Amsterdam</span>
-                    </a>
+                    <LocationItemLink text='Amsterdam' location='/amsterdam' isTab={false} isActive/>
                   </div>
                 </div>
                 <div className='favorites__places'>
@@ -100,9 +99,7 @@ function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
               <li className='favorites__locations-items'>
                 <div className='favorites__locations locations locations--current'>
                   <div className='locations__item'>
-                    <a className='locations__item-link' href='#'>
-                      <span>Cologne</span>
-                    </a>
+                    <LocationItemLink text='Cologne' location='/cologne' isTab={false} isActive/>
                   </div>
                 </div>
                 <div className='favorites__places'>

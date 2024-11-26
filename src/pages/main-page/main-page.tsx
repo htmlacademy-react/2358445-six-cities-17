@@ -1,9 +1,10 @@
 import {Helmet} from 'react-helmet-async';
+import {AuthorizationStatus, Location} from '../../const';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import SortForm from '../../components/sort-form/sort-form';
 import Card from '../../components/card/card';
-import {AuthorizationStatus, Location} from '../../const';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   countPlaces: number;
@@ -31,7 +32,7 @@ function MainPage({countPlaces, locations, authorizationStatus}: MainPageProps):
               </div>
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map'></section>
+              <Map page='cities'/>
             </div>
           </div>
         </div>
