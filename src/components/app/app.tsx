@@ -8,26 +8,33 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import Page404 from '../../pages/page-404/page-404';
 
-type AppProps = {
-  countPlaces: number;
+type Location = {
+  id: number;
+  name: string;
+  path: string;
 }
 
-function App({countPlaces}: AppProps): JSX.Element {
+type AppProps = {
+  countPlaces: number;
+  locations: Array<Location>;
+}
+
+function App({countPlaces, locations}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage countPlaces={countPlaces}/>}
+            element={<MainPage countPlaces={countPlaces} locations={locations} authorizationStatus={AuthorizationStatus.NoAuth}/>}
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginPage />}
+            element={<LoginPage/>}
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage isLogged={AuthorizationStatus.NoAuth}/>}
           />
           <Route
             path={AppRoute.Favorites}

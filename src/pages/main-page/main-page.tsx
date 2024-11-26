@@ -2,20 +2,30 @@ import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import SortForm from '../../components/sort-form/sort-form';
-import Card from '../../components/app/card';
-type MainPageProps = {
-  countPlaces: number;
+import Card from '../../components/card/card';
+import {AuthorizationStatus} from '../../const';
+
+type Location = {
+  id: number;
+  name: string;
+  path: string;
 }
 
-function MainPage({countPlaces}: MainPageProps): JSX.Element {
+type MainPageProps = {
+  countPlaces: number;
+  locations: Array<Location>;
+  authorizationStatus: AuthorizationStatus;
+}
+
+function MainPage({countPlaces, locations, authorizationStatus}: MainPageProps): JSX.Element {
   return (
     <div className='page page--gray page--main'>
-      <Header isNavShow/>
+      <Header isNavShow authorizationStatus={authorizationStatus}/>
       <main className='page__main page__main--index'>
         <Helmet>
           <title>Six cities</title>
         </Helmet>
-        <Cities/>
+        <Cities locations={locations}/>
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>

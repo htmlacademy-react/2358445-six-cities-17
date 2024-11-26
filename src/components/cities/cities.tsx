@@ -1,40 +1,28 @@
-function Cities(): JSX.Element {
+
+import LocationItemLink from '../../components/location-item-link/location-item-link';
+
+type Location = {
+  id: number;
+  name: string;
+  path: string;
+}
+
+type CitiesProps = {
+  locations: Array<Location>;
+}
+
+function Cities({locations}: CitiesProps): JSX.Element {
+  const cities = locations &&
+    locations.map(({id, name, path})=>
+      <li className='locations__item' key={id}><LocationItemLink text={name} location={path} isTab isActive={name === 'Amsterdam'}/></li>
+    );
   return (
     <>
       <h1 className='visually-hidden'>Cities</h1>
       <div className='tabs'>
         <section className='locations container'>
           <ul className='locations__list tabs__list'>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item' href='#'>
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item' href='#'>
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item' href='#'>
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item tabs__item--active'>
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item' href='#'>
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className='locations__item'>
-              <a className='locations__item-link tabs__item' href='#'>
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            {cities}
           </ul>
         </section>
       </div>
