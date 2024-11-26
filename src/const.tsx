@@ -52,3 +52,10 @@ export type Location = {
   name: string;
   path: string;
 }
+
+export type SettingsType = {
+  [key: string]: {
+    width: number;
+    height: number;
+  };
+}

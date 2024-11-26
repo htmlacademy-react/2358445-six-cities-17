@@ -4,6 +4,7 @@ import {AuthorizationStatus} from '../../const';
 import Card from '../../components/card/card';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -53,12 +54,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                 <h1 className='offer__name'>
                   Beautiful &amp; luxurious studio at great location
                 </h1>
-                <button className='offer__bookmark-button button' type='button'>
-                  <svg className='offer__bookmark-icon' width='31' height='33'>
-                    <use xlinkHref='#icon-bookmark'></use>
-                  </svg>
-                  <span className='visually-hidden'>To bookmarks</span>
-                </button>
+                <BookmarkButton page='offer'/>
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
@@ -220,9 +216,9 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
           <section className='near-places places'>
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <div className='near-places__list places__list'>
-              <Card />
-              <Card />
-              <Card />
+              <Card page='cities'/>
+              <Card page='cities'/>
+              <Card page='cities'/>
             </div>
           </section>
         </div>
