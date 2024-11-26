@@ -7,7 +7,7 @@ type HeaderProps = {
   authorizationStatus?: AuthorizationStatus;
 }
 
-function Header({isNavShow, authorizationStatus=AuthorizationStatus.Unknown}: HeaderProps): JSX.Element {
+function Header({isNavShow, authorizationStatus = AuthorizationStatus.Unknown}: HeaderProps): JSX.Element {
   return (
     <header className='header'>
       <div className='container'>
