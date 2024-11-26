@@ -4,10 +4,10 @@ import Nav from '../../components/header/nav';
 
 type HeaderProps = {
   isNavShow?: boolean;
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus?: AuthorizationStatus;
 }
 
-function Header({isNavShow, authorizationStatus}: HeaderProps): JSX.Element {
+function Header({isNavShow, authorizationStatus=AuthorizationStatus.Unknown}: HeaderProps): JSX.Element {
   return (
     <header className='header'>
       <div className='container'>
