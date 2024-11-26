@@ -36,7 +36,7 @@ function App({countPlaces, locations}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesPage />
+                <FavoritesPage authorizationStatus={AuthorizationStatus.Auth}/>
               </PrivateRoute>
             }
           />

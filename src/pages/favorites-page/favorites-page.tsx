@@ -1,10 +1,16 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-function FavoritesPage(): JSX.Element {
+import {AuthorizationStatus} from '../../const';
+
+type FavoritesPageProps = {
+  authorizationStatus: AuthorizationStatus;
+}
+
+function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
   return (
     <div className='page'>
-      <Header isNavShow/>
+      <Header isNavShow authorizationStatus={authorizationStatus}/>
       <main className='page__main page__main--favorites'>
         <Helmet>
           <title>Favorites</title>
