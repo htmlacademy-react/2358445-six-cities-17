@@ -28,7 +28,7 @@ function MainPage({countPlaces, locations, authorizationStatus}: MainPageProps):
               <b className='places__found'>312 places to stay in Amsterdam</b>
               <SortForm/>
               <div className='cities__places-list places__list tabs__content'>
-                {[...Array<number>(countPlaces)].map(()=> <Card key={Math.random()} page='cities'/>)}
+                {[...Array<number>(countPlaces)].map(()=> <Card key={Math.random()}/>)}
               </div>
             </section>
             <div className='cities__right-section'>

@@ -3,33 +3,27 @@ export const Settings = {
   locations: [
     {
       id: 1,
-      name: 'Paris',
-      path: '/paris'
+      name: 'Paris'
     },
     {
       id: 2,
-      name: 'Cologne',
-      path: '/cologne'
+      name: 'Cologne'
     },
     {
       id: 3,
-      name: 'Brussels',
-      path: '/brussels'
+      name: 'Brussels'
     },
     {
       id: 4,
-      name: 'Amsterdam',
-      path: '/amsterdam'
+      name: 'Amsterdam'
     },
     {
       id: 5,
-      name: 'Hamburg',
-      path: '/hamburg'
+      name: 'Hamburg'
     },
     {
       id: 6,
-      name: 'Dusseldorf',
-      path: '/dusseldorf'
+      name: 'Dusseldorf'
     }
   ]
 };

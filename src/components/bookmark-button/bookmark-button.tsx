@@ -12,10 +12,10 @@ const BookmarkSettings: SettingsType = {
 };
 
 type BookmarkButtonProps = {
-  page: string;
+  page: 'place-card' | 'offer';
 };
 
-function BookmarkButton({page}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({page = 'place-card'}: BookmarkButtonProps): JSX.Element {
   return (
     <button className={`${page}__bookmark-button ${page}__bookmark-button--active button`} type='button'>
       <svg className={`${page}__bookmark-icon`} width={BookmarkSettings[page].width} height={BookmarkSettings[page].height}>

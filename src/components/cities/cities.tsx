@@ -8,8 +8,8 @@ type CitiesProps = {
 
 function Cities({locations}: CitiesProps): JSX.Element {
   const cities = locations &&
-    locations.map(({id, name, path})=>
-      <li className='locations__item' key={id}><LocationItemLink text={name} location={path} isTab isActive={name === 'Amsterdam'}/></li>
+    locations.map(({id, name})=>
+      <li className='locations__item' key={id}><LocationItemLink text={name} isTab isActive={name === 'Paris'}/></li>
     );
   return (
     <>

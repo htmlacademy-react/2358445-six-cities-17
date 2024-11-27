@@ -24,7 +24,7 @@ function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
               <li className='favorites__locations-items'>
                 <div className='favorites__locations locations locations--current'>
                   <div className='locations__item'>
-                    <LocationItemLink text='Amsterdam' location='/amsterdam' isTab={false} isActive/>
+                    <LocationItemLink text='Amsterdam' isTab={false} isActive/>
                   </div>
                 </div>
                 <div className='favorites__places'>
@@ -36,7 +36,7 @@ function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
               <li className='favorites__locations-items'>
                 <div className='favorites__locations locations locations--current'>
                   <div className='locations__item'>
-                    <LocationItemLink text='Cologne' location='/cologne' isTab={false} isActive/>
+                    <LocationItemLink text='Cologne' isTab={false} isActive/>
                   </div>
                 </div>
                 <div className='favorites__places'>

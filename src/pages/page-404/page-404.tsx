@@ -1,5 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
+import LocationItemLink from '../../components/location-item-link/location-item-link';
+
 function Page404(): JSX.Element {
   return (
     <div className="page page--gray page--login">
@@ -15,9 +17,7 @@ function Page404(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <LocationItemLink text='Amsterdam' isTab={false} isActive/>
             </div>
           </section>
         </div>

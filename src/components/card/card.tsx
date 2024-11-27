@@ -13,10 +13,10 @@ const CardSettings: SettingsType = {
 };
 
 type CardProps = {
-  page: string;
+  page?: 'cities' | 'favorites';
 };
 
-function Card({page}: CardProps): JSX.Element {
+function Card({page = 'cities'}: CardProps): JSX.Element {
   return (
     <article className={`${page}__card place-card`}>
       <div className='place-card__mark'>
@@ -33,7 +33,7 @@ function Card({page}: CardProps): JSX.Element {
             <b className='place-card__price-value'>&euro;120</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton page='place-card'/>
+          <BookmarkButton/>
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>

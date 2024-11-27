@@ -28,7 +28,7 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <LocationItemLink text='Amsterdam' location='/amsterdam' isTab={false} isActive/>
+              <LocationItemLink text='Amsterdam' isTab={false} isActive/>
             </div>
           </section>
         </div>
