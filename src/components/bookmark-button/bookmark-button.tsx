@@ -12,7 +12,7 @@ const BookmarkSettings: SettingsType = {
 };
 
 type BookmarkButtonProps = {
-  page: 'place-card' | 'offer';
+  page?: 'place-card' | 'offer';
 };
 
 function BookmarkButton({page = 'place-card'}: BookmarkButtonProps): JSX.Element {
