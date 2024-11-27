@@ -11,6 +11,7 @@ root.render(
   <React.StrictMode>
     <App
       countPlaces = {Settings.countPlaces}
+      locations = {Settings.locations}
     />
   </React.StrictMode>
 );
