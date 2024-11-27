@@ -44,7 +44,6 @@ export enum AuthorizationStatus {
 export type Location = {
   id: number;
   name: string;
-  path: string;
 }
 
 export type SettingsType = {
