@@ -1,4 +1,5 @@
 import {Helmet} from 'react-helmet-async';
+import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 
@@ -13,7 +14,7 @@ function Page404(): JSX.Element {
               <title>404 Not Found</title>
             </Helmet>
             <h1 className="login__title">404 Not Found</h1>
-            <a className="header__logo-link" href="main.html">Back to main page</a>
+            <Link className="header__logo-link" to="/">Back to main page</Link>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">

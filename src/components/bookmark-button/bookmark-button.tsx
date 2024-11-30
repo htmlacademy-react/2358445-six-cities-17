@@ -12,12 +12,14 @@ const BookmarkSettings: SettingsType = {
 };
 
 type BookmarkButtonProps = {
+  isFavorite: boolean;
   page?: 'place-card' | 'offer';
 };
 
-function BookmarkButton({page = 'place-card'}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({isFavorite, page = 'place-card'}: BookmarkButtonProps): JSX.Element {
+  const buttonClass = isFavorite ? `${page}__bookmark-button button ${page}__bookmark-button--active` : `${page}__bookmark-button button`;
   return (
-    <button className={`${page}__bookmark-button ${page}__bookmark-button--active button`} type='button'>
+    <button className={buttonClass} type='button'>
       <svg className={`${page}__bookmark-icon`} width={BookmarkSettings[page].width} height={BookmarkSettings[page].height}>
         <use xlinkHref='#icon-bookmark'></use>
       </svg>
