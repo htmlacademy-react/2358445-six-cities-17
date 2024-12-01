@@ -39,7 +39,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               {premiumIcon}
               <div className='offer__name-wrapper'>
                 <h1 className='offer__name'>{offer.title}</h1>
-                {authorizationStatus === AuthorizationStatus.Auth ? <BookmarkButton isFavorite={offer.isFavorite} page={page} /> : ''}
+                <BookmarkButton isFavorite={offer.isFavorite} page={page} authorizationStatus={authorizationStatus} />
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
