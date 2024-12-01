@@ -39,7 +39,7 @@ function Card({id, title, type, price, previewImage, isPremium, isFavorite, rati
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          {authorizationStatus === AuthorizationStatus.Auth ? <BookmarkButton isFavorite={isFavorite}/> : ''}
+          <BookmarkButton isFavorite={isFavorite} authorizationStatus={authorizationStatus}/>
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
