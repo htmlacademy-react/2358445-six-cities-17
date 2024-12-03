@@ -1,10 +1,9 @@
 import { Review } from '../../const';
+import { formatDate, showRating } from '../../utils';
 
 type ReviewItemProps = Review;
 
 function ReviewItem({ comment, date, rating, user }: ReviewItemProps): JSX.Element {
-  const tempDate = new Date(Date.parse(date));
-  const formatDate = `${tempDate.toLocaleString('en-US', { month: 'long' })} ${tempDate.getFullYear()}`;
   return (
     <li className='reviews__item'>
       <div className='reviews__user user'>
@@ -16,12 +15,12 @@ function ReviewItem({ comment, date, rating, user }: ReviewItemProps): JSX.Eleme
       <div className='reviews__info'>
         <div className='reviews__rating rating'>
           <div className='reviews__stars rating__stars'>
-            <span style={{width: `${rating * 100 / 5}%`}}></span>
+            <span style={{width: showRating(rating)}}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
         <p className='reviews__text'>{comment}</p>
-        <time className='reviews__time' dateTime={date}>{formatDate}</time>
+        <time className='reviews__time' dateTime={date}>{formatDate(date)}</time>
       </div>
     </li>
   );

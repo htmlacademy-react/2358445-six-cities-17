@@ -6,7 +6,7 @@ type CardsListProps = {
   offers: Array<Offer>;
   page?: 'cities' | 'near-places' | 'favorites';
   authorizationStatus: AuthorizationStatus;
-  cardHover: (offer: Offer | undefined) => void;
+  cardHover: (offer: Offer | null) => void;
 };
 
 function CardsList({page = 'cities', offers, cardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
@@ -24,7 +24,7 @@ function CardsList({page = 'cities', offers, cardHover, authorizationStatus = Au
       onMouseLeave={(evt: MouseEvent<HTMLElement>) => {
         evt.preventDefault();
         setActiveCard(false);
-        cardHover(undefined);
+        cardHover(null);
       }}
     >
       <Card

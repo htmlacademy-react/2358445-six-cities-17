@@ -1,4 +1,5 @@
 import {AuthorizationStatus, SettingsType, OfferSimple} from '../../const';
+import { toUpFirstLetter, showRating } from '../../utils';
 import {Link} from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import OfferLabel from '../offerLabel/offerLabel';
@@ -43,7 +44,7 @@ function Card({id, title, type, price, previewImage, isPremium, isFavorite, rati
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{width: `${rating * 100 / 5}%`}}></span>
+            <span style={{width: showRating(rating)}}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
@@ -52,7 +53,7 @@ function Card({id, title, type, price, previewImage, isPremium, isFavorite, rati
             {title}
           </Link>
         </h2>
-        <p className='place-card__type'>{type}</p>
+        <p className='place-card__type'>{toUpFirstLetter(type)}</p>
       </div>
     </>
   );
