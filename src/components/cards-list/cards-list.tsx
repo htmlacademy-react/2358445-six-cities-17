@@ -1,6 +1,6 @@
 import {AuthorizationStatus, Offer} from '../../const';
 import Card from '../../components/card/card';
-import {useState, MouseEvent} from 'react';
+import {MouseEvent} from 'react';
 
 type CardsListProps = {
   offers: Array<Offer>;
@@ -10,20 +10,16 @@ type CardsListProps = {
 };
 
 function CardsList({page = 'cities', offers, cardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
-  const [isActiveCard, setActiveCard] = useState(false);
   const cardsList = offers.map((offer) => (
     <article
       key={offer.id}
       className={`${page}__card place-card`}
-      data-active={isActiveCard}
       onMouseEnter={(evt: MouseEvent<HTMLElement>) => {
         evt.preventDefault();
-        setActiveCard(true);
         cardHover(offer);
       }}
       onMouseLeave={(evt: MouseEvent<HTMLElement>) => {
         evt.preventDefault();
-        setActiveCard(false);
         cardHover(null);
       }}
     >
