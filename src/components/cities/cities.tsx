@@ -1,14 +1,14 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
-import {Location} from '../../const';
+import {City} from '../../const';
 
 type CitiesProps = {
-  locations: Array<Location>;
+  cities: Array<City>;
 }
 
-function Cities({locations}: CitiesProps): JSX.Element {
-  const cities = locations &&
-    locations.map(({id, name})=>
+function Cities({cities}: CitiesProps): JSX.Element {
+  const citiesUl = cities &&
+    cities.map(({id, name})=>
       <li className='locations__item' key={id}><LocationItemLink text={name} isTab isActive={name === 'Paris'}/></li>
     );
   return (
@@ -17,7 +17,7 @@ function Cities({locations}: CitiesProps): JSX.Element {
       <div className='tabs'>
         <section className='locations container'>
           <ul className='locations__list tabs__list'>
-            {cities}
+            {citiesUl}
           </ul>
         </section>
       </div>
