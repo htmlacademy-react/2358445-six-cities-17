@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, Offer, OfferFull, Review } from '../../const';
+import { AuthorizationStatus } from '../../const';
+import { Offer, OfferFull, Review } from '../../types';
+import { showRating } from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -14,8 +16,8 @@ import OfferLabel from '../../components/offerLabel/offerLabel';
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
   offer: OfferFull;
-  reviews: Array<Review>;
-  neighbourhoodOffers: Array<Offer>;
+  reviews: Review[];
+  neighbourhoodOffers: Offer[];
 }
 
 function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
@@ -43,7 +45,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
-                  <span style={{ width: `${offer.rating * 100 / 5}%` }}></span>
+                  <span style={{ width: showRating(offer.rating) }}></span>
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='offer__rating-value rating__value'>{offer.rating}</span>
@@ -83,9 +85,6 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               authorizationStatus={authorizationStatus}
               offers={neighbourhoodOffers}
               page='near-places'
-              cardHover={() => {
-                throw new Error('Function cardHover() is not ready!');
-              }}
             />
           </section>
         </div>
