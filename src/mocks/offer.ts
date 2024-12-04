@@ -1,4 +1,4 @@
-import {OfferFull} from '../const';
+import {OfferFull} from '../types';
 
 export const offer: OfferFull = {
   'id': 'ae9218e7-dfe9-4d3d-b807-a0fdff9d0a58',

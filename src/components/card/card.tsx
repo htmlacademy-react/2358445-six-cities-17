@@ -1,8 +1,10 @@
-import {AuthorizationStatus, SettingsType, OfferSimple} from '../../const';
-import { toUpFirstLetter, showRating } from '../../utils';
+import {AuthorizationStatus, AppRoute} from '../../const';
+import {SettingsType, OfferSimple} from '../../types';
+import {toUpFirstLetter, showRating} from '../../utils';
 import {Link} from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import OfferLabel from '../offerLabel/offerLabel';
+import {generatePath} from 'react-router';
 
 const CardSettings: SettingsType = {
   'cities': {
@@ -19,18 +21,27 @@ const CardSettings: SettingsType = {
   },
 };
 
-type CardProps = OfferSimple & {
+type CardProps = {
+  offer: OfferSimple;
   page?: 'cities' | 'near-places' | 'favorites';
   authorizationStatus: AuthorizationStatus;
+  onCardMouseEnter?: () => void;
+  onCardMouseLeave?: () => void;
 };
 
-function Card({id, title, type, price, previewImage, isPremium, isFavorite, rating, page = 'cities', authorizationStatus = AuthorizationStatus.Unknown}: CardProps): JSX.Element {
-  const premiumIcon = isPremium ? <OfferLabel/> : '';
+function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus.Unknown, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
+  const {id, title, type, previewImage, price, isFavorite, rating} = offer;
+  const premiumIcon = offer.isPremium ? <OfferLabel/> : '';
   return (
-    <>
+    <article
+      key={id}
+      className={`${page}__card place-card`}
+      onMouseEnter={onCardMouseEnter}
+      onMouseLeave={onCardMouseLeave}
+    >
       {premiumIcon}
       <div className={`${page}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`/offer/${id}`}>
+        <Link to={generatePath(AppRoute.Offer, { id: id })}>
           <img className='place-card__image' src={previewImage} width={CardSettings[page].width} height={CardSettings[page].height} alt={title} />
         </Link>
       </div>
@@ -49,13 +60,13 @@ function Card({id, title, type, price, previewImage, isPremium, isFavorite, rati
           </div>
         </div>
         <h2 className='place-card__name'>
-          <Link to={`/offer/${id}`}>
+          <Link to={generatePath(AppRoute.Offer, { id: id })}>
             {title}
           </Link>
         </h2>
         <p className='place-card__type'>{toUpFirstLetter(type)}</p>
       </div>
-    </>
+    </article>
   );
 }
 

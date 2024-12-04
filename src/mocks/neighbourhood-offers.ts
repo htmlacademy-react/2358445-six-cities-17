@@ -1,4 +1,4 @@
-import {Offers} from '../const';
+import {Offers} from '../types';
 
 export const neighbourhoodOffers: Offers = [
   {
