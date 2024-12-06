@@ -8,12 +8,13 @@ type CardsListProps = {
   offers: Offer[];
   page?: 'cities' | 'near-places' | 'favorites';
   authorizationStatus: AuthorizationStatus;
+  onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
-  localStorage.setItem('activeCard', JSON.stringify(activeCard));
+  onCardHover && onCardHover(activeCard);
 
   const cardMouseEnterHandler = (offer: Offer): void => {
     setActiveCard(offer);
@@ -22,6 +23,7 @@ function CardsList({page = 'cities', offers, authorizationStatus = Authorization
   const cardMouseLeaveHandler = (): void => {
     setActiveCard(null);
   };
+
   const cardsList = offers.map((offer) => (
     <Card
       key={offer.id}

@@ -8,6 +8,7 @@ import CardsList from '../../components/cards-list/cards-list';
 import Map from '../../components/map/map';
 import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
+import {useState} from 'react';
 
 type MainPageProps = {
   cities: string[];
@@ -16,6 +17,12 @@ type MainPageProps = {
 }
 
 function MainPage({cities, offers, authorizationStatus}: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
+
+  const handleCardHover = (offer: Offer | null) => {
+    setActiveCard(offer);
+  };
+
   const mainInner = (offers.length ? (
     <>
       <section className='cities__places places'>
@@ -25,16 +32,18 @@ function MainPage({cities, offers, authorizationStatus}: MainPageProps): JSX.Ele
         <CardsList
           authorizationStatus={authorizationStatus}
           offers={offers}
+          onCardHover={handleCardHover}
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' />
+        <Map page='cities' offers={offers} selectedOffer={activeCard}/>
       </div>
     </>
   )
     :
     <MainEmpty/>
   );
+  
   return (
     <div className='page page--gray page--main'>
       <Header isNavShow authorizationStatus={authorizationStatus}/>

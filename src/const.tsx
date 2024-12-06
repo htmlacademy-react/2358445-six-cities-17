@@ -4,6 +4,10 @@ export const starsCount = 5;
 
 export const ratingValues = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
+export const urlMarkerDefault = '/img/pin.svg';
+
+export const urlMarkerCurrent = '/img/pin-active.svg';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',

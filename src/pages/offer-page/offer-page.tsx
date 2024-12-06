@@ -76,7 +76,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               <ReviewsList authorizationStatus={authorizationStatus} reviews={reviews} offerId={offer.id} />
             </div>
           </div>
-          <Map page={page} />
+          <Map page={page} offers={[offer, ...neighbourhoodOffers]} selectedOffer={offer}/>
         </section>
         <div className='container'>
           <section className='near-places places'>
