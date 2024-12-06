@@ -14,7 +14,9 @@ type CardsListProps = {
 function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
-  onCardHover && onCardHover(activeCard);
+  if (onCardHover) {
+    onCardHover(activeCard);
+  }
 
   const cardMouseEnterHandler = (offer: Offer): void => {
     setActiveCard(offer);

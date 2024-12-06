@@ -43,7 +43,7 @@ function MainPage({cities, offers, authorizationStatus}: MainPageProps): JSX.Ele
     :
     <MainEmpty/>
   );
-  
+
   return (
     <div className='page page--gray page--main'>
       <Header isNavShow authorizationStatus={authorizationStatus}/>
