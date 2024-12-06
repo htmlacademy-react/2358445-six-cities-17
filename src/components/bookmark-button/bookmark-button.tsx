@@ -1,5 +1,7 @@
-import {AppRoute, AuthorizationStatus, SettingsType} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {SettingsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
+import cn from 'classnames';
 
 const BookmarkSettings: SettingsType = {
   'place-card': {
@@ -20,9 +22,14 @@ type BookmarkButtonProps = {
 
 function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = AuthorizationStatus.Unknown}: BookmarkButtonProps): JSX.Element {
   const navigate = useNavigate();
-  const buttonClass = isFavorite ? `${page}__bookmark-button button ${page}__bookmark-button--active` : `${page}__bookmark-button button`;
   return (
-    <button className={buttonClass} type='button' onClick={() => {
+    <button className={
+      cn(`${page}__bookmark-button`,
+        'button',
+        { 'place-card__bookmark-button--active': isFavorite && page === 'place-card' },
+        { 'offer__bookmark-button--active': isFavorite && page === 'offer' }
+      )
+    } type='button' onClick={() => {
       if (authorizationStatus === AuthorizationStatus.NoAuth) {
         navigate(AppRoute.Login);
       }
@@ -31,7 +38,7 @@ function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = 
       <svg className={`${page}__bookmark-icon`} width={BookmarkSettings[page].width} height={BookmarkSettings[page].height}>
         <use xlinkHref='#icon-bookmark'></use>
       </svg>
-      <span className='visually-hidden'>In bookmarks</span>
+      <span className='visually-hidden'>{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
     </button>
   );
 }

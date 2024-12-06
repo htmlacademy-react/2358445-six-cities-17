@@ -1,4 +1,4 @@
-import { Review } from '../../const';
+import { Review } from '../../types';
 import { formatDate, showRating } from '../../utils';
 
 type ReviewItemProps = Review;

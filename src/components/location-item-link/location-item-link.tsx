@@ -1,3 +1,5 @@
+import cn from 'classnames';
+
 type LocationItemLinkProps = {
   isTab?: boolean;
   text: string;
@@ -6,7 +8,7 @@ type LocationItemLinkProps = {
 
 function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.Element {
   return (
-    <div className={`locations__item-link${isTab ? ' tabs__item' : ''}${isActive && ' tabs__item--active'}`}>
+    <div className={cn('locations__item-link', {'tabs__item': isTab}, {'tabs__item--active': isActive})}>
       <span>{text}</span>
     </div>
   );

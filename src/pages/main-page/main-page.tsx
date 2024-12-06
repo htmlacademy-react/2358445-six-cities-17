@@ -1,19 +1,28 @@
 import {Helmet} from 'react-helmet-async';
-import {AuthorizationStatus, City, Offer} from '../../const';
+import {AuthorizationStatus} from '../../const';
+import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import SortForm from '../../components/sort-form/sort-form';
 import CardsList from '../../components/cards-list/cards-list';
 import Map from '../../components/map/map';
 import MainEmpty from '../../components/main-empty/main-empty';
+import cn from 'classnames';
+import {useState} from 'react';
 
 type MainPageProps = {
-  cities: Array<City>;
-  offers: Array<Offer>;
+  cities: string[];
+  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 }
 
 function MainPage({cities, offers, authorizationStatus}: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
+
+  const handleCardHover = (offer: Offer | null) => {
+    setActiveCard(offer);
+  };
+
   const mainInner = (offers.length ? (
     <>
       <section className='cities__places places'>
@@ -23,29 +32,28 @@ function MainPage({cities, offers, authorizationStatus}: MainPageProps): JSX.Ele
         <CardsList
           authorizationStatus={authorizationStatus}
           offers={offers}
-          cardHover={() => {
-            throw new Error('Function cardHover() is not ready!');
-          }}
+          onCardHover={handleCardHover}
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' />
+        <Map page='cities' offers={offers} selectedOffer={activeCard}/>
       </div>
     </>
   )
     :
     <MainEmpty/>
   );
+
   return (
     <div className='page page--gray page--main'>
       <Header isNavShow authorizationStatus={authorizationStatus}/>
-      <main className={`page__main page__main--index${!offers.length ? ' page__main--index-empty' : ''}`}>
+      <main className={cn('page__main', 'page__main--index', {'page__main--index-empty': !offers.length})}>
         <Helmet>
           <title>Six cities</title>
         </Helmet>
         <Cities cities={cities}/>
         <div className='cities'>
-          <div className={`cities__places-container container${!offers.length ? ' cities__places-container--empty' : ''}`}>
+          <div className={cn('cities__places-container', 'container', {'cities__places-container--empty':!offers.length})}>
             {mainInner}
           </div>
         </div>

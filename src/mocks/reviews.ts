@@ -1,4 +1,4 @@
-import {Reviews} from '../const';
+import {Reviews} from '../types';
 
 export const reviews: Reviews = [
   {

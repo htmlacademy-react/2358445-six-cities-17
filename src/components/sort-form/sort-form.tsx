@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {MouseEvent} from 'react';
+import cn from 'classnames';
 
 function SortForm(): JSX.Element {
   const [sortParams, setSort] = useState({
@@ -23,7 +24,11 @@ function SortForm(): JSX.Element {
           <use xlinkHref='#icon-arrow-select'></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom${sortParams.isShow ? ' places__options--opened' : ''}`}>
+      <ul className={cn(
+        'places__options',
+        'places__options--custom',
+        {'places__options--opened': sortParams.isShow})}
+      >
         <li className='places__option places__option--active' tabIndex={0} onClick={handleClickSortOption}>Popular</li>
         <li className='places__option' tabIndex={0} onClick={handleClickSortOption}>Price: low to high</li>
         <li className='places__option' tabIndex={0} onClick={handleClickSortOption}>Price: high to low</li>

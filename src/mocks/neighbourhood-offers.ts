@@ -1,4 +1,4 @@
-import {Offers} from '../const';
+import {Offers} from '../types';
 
 export const neighbourhoodOffers: Offers = [
   {
@@ -69,51 +69,5 @@ export const neighbourhoodOffers: Offers = [
     'isFavorite': false,
     'isPremium': true,
     'rating': 1.7
-  },
-  {
-    'id': 'bedf4b45-f404-4cb0-bb3f-e62e3936fc0d',
-    'title': 'Amazing and Extremely Central Flat',
-    'type': 'hotel',
-    'price': 159,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/6.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.87561,
-      'longitude': 2.375499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': false,
-    'rating': 4.7
-  },
-  {
-    'id': '6a89e1df-ba50-41ad-88b1-5269fe98f8e2',
-    'title': 'Beautiful & luxurious apartment at great location',
-    'type': 'house',
-    'price': 512,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/15.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.87961000000001,
-      'longitude': 2.353499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': true,
-    'rating': 4.4
   }
 ];

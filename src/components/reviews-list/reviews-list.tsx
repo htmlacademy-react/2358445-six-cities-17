@@ -1,9 +1,10 @@
-import { AuthorizationStatus, Review } from '../../const';
+import { AuthorizationStatus } from '../../const';
+import { Review } from '../../types';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 
 type ReviewsListProps = {
-  reviews: Array<Review>;
+  reviews: Review[];
   authorizationStatus: AuthorizationStatus;
   offerId: string;
 };
