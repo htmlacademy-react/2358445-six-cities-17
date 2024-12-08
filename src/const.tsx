@@ -1,14 +1,14 @@
-export const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const starsCount = 5;
+export const STARS_COUNT = 5;
 
-export const ratingValues = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
+export const RATING_VALUES = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
-export const urlMarkerDefault = '/img/pin.svg';
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
 
-export const urlMarkerCurrent = '/img/pin-active.svg';
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
-export enum AppRoute {
+export enum APP_ROUTE {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
@@ -16,7 +16,7 @@ export enum AppRoute {
   Page404 = '*'
 }
 
-export enum AuthorizationStatus {
+export enum AUTHORIZATION_STATUS {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',

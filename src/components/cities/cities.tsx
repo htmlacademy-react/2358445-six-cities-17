@@ -1,14 +1,18 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
+import {MouseEvent} from 'react';
 
 type CitiesProps = {
   cities: string[];
+  onCityClick: (city: string | null) => void;
+  activeCity: string | null;
 }
 
-function Cities({cities}: CitiesProps): JSX.Element {
+function Cities({cities, onCityClick, activeCity}: CitiesProps): JSX.Element {
+  const handleListCitiesItemClick = (evt: MouseEvent<HTMLElement>) => onCityClick(evt.currentTarget.textContent);
   const citiesUl = cities &&
     cities.map((city)=>
-      <li className='locations__item' key={city}><LocationItemLink text={city} isTab isActive={city === 'Paris'}/></li>
+      <li className='locations__item' key={city} onClick={handleListCitiesItemClick}><LocationItemLink text={city} isTab isActive={city === activeCity}/></li>
     );
   return (
     <>

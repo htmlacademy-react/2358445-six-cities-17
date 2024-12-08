@@ -1,4 +1,4 @@
-import {starsCount, ratingValues} from '../../const';
+import {STARS_COUNT, RATING_VALUES} from '../../const';
 import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 
 type ReviewsFormProps = {
@@ -24,10 +24,10 @@ function ReviewsForm({offerId, onAddReview}: ReviewsFormProps): JSX.Element {
     >
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
       <div className='reviews__rating-form form__rating'>
-        {ratingValues.map((value: string, key: number)=> (
+        {RATING_VALUES.map((value: string, key: number)=> (
           <Fragment key={`rating_${value}`}>
-            <input className='form__rating-input visually-hidden' name='rating' value={starsCount - key} id={`${starsCount - key}-stars`} type='radio' onChange={handleFieldChange}/>
-            <label htmlFor={`${starsCount - key}-stars`} className='reviews__rating-label form__rating-label' title={value}>
+            <input className='form__rating-input visually-hidden' name='rating' value={STARS_COUNT - key} id={`${STARS_COUNT - key}-stars`} type='radio' onChange={handleFieldChange}/>
+            <label htmlFor={`${STARS_COUNT - key}-stars`} className='reviews__rating-label form__rating-label' title={value}>
               <svg className='form__star-image' width='37' height='33'>
                 <use xlinkHref='#icon-star'></use>
               </svg>

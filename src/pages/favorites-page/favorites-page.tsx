@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {AuthorizationStatus} from '../../const';
+import {AUTHORIZATION_STATUS} from '../../const';
 import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
@@ -8,11 +8,12 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 
 type FavoritesPageProps = {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
   offers: Offer[];
+  countFavorites: number;
 }
 
-function FavoritesPage({offers, authorizationStatus}: FavoritesPageProps): JSX.Element {
+function FavoritesPage({offers, countFavorites, authorizationStatus}: FavoritesPageProps): JSX.Element {
   const favoritesInner = (offers.length ?
     <><h1 className='favorites__title'>Saved listing</h1><FavoritesList authorizationStatus={authorizationStatus} offers={offers}/></>
     :
@@ -20,7 +21,7 @@ function FavoritesPage({offers, authorizationStatus}: FavoritesPageProps): JSX.E
   );
   return (
     <div className='page'>
-      <Header isNavShow authorizationStatus={authorizationStatus}/>
+      <Header isNavShow authorizationStatus={authorizationStatus} countFavorites={countFavorites}/>
       <main className={cn('page__main', 'page__main--favorites', {'page__main--favorites-empty': !offers.length})}>
         <Helmet>
           <title>Saved listing</title>

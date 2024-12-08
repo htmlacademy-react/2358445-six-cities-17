@@ -1,18 +1,18 @@
-import { AuthorizationStatus } from '../../const';
-import { Offer } from '../../types';
+import {AUTHORIZATION_STATUS} from '../../const';
+import {Offer} from '../../types';
 import CardsList from '../cards-list/cards-list';
 import LocationItemLink from '../location-item-link/location-item-link';
 
 type FavoritesListProps = {
   offers: Offer[];
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
 };
 
 type OffersByCity = {
   [key: string]: Offer[];
 };
 
-function FavoritesList({ offers, authorizationStatus = AuthorizationStatus.Unknown }: FavoritesListProps): JSX.Element {
+function FavoritesList({ offers, authorizationStatus = AUTHORIZATION_STATUS.Unknown }: FavoritesListProps): JSX.Element {
   const offersGroup = offers.reduce((acc: OffersByCity, item: Offer)=>{
     const cityName: string = item.city.name;
     if (acc[cityName]) {

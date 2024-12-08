@@ -1,15 +1,15 @@
-import { AuthorizationStatus } from '../../const';
-import { Review } from '../../types';
+import {AUTHORIZATION_STATUS} from '../../const';
+import {Review} from '../../types';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 
 type ReviewsListProps = {
   reviews: Review[];
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
   offerId: string;
 };
 
-function ReviewsList({ reviews, offerId, authorizationStatus = AuthorizationStatus.Unknown }: ReviewsListProps): JSX.Element {
+function ReviewsList({ reviews, offerId, authorizationStatus = AUTHORIZATION_STATUS.Unknown }: ReviewsListProps): JSX.Element {
   const reviewsList = reviews.map((review) => (
     <ReviewItem
       key={review.id}
@@ -25,7 +25,7 @@ function ReviewsList({ reviews, offerId, authorizationStatus = AuthorizationStat
       <ul className='reviews__list'>
         {reviewsList}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth ?
+      {authorizationStatus === AUTHORIZATION_STATUS.Auth ?
         <ReviewsForm
           offerId={offerId}
           onAddReview={() => {

@@ -1,8 +1,8 @@
-import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
-import { Offer, OfferFull, Review } from '../../types';
-import { showRating } from '../../utils';
+import {Helmet} from 'react-helmet-async';
+import {useParams} from 'react-router-dom';
+import {AUTHORIZATION_STATUS} from '../../const';
+import {Offer, OfferFull, Review} from '../../types';
+import {showRating} from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -14,13 +14,14 @@ import CardsList from '../../components/cards-list/cards-list';
 import OfferLabel from '../../components/offerLabel/offerLabel';
 
 type OfferPageProps = {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
   offer: OfferFull;
   reviews: Review[];
   neighbourhoodOffers: Offer[];
+  countFavorites: number;
 }
 
-function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
+function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, authorizationStatus = AUTHORIZATION_STATUS.Unknown }: OfferPageProps): JSX.Element {
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium ? <OfferLabel page={page} /> : '';
@@ -29,7 +30,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
   }
   return (
     <div className='page'>
-      <Header isNavShow authorizationStatus={authorizationStatus} />
+      <Header isNavShow authorizationStatus={authorizationStatus} countFavorites={countFavorites}/>
       <main className='page__main page__main--offer'>
         <section className={page}>
           <Helmet>
@@ -55,10 +56,10 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
                   {offer.type}
                 </li>
                 <li className='offer__feature offer__feature--bedrooms'>
-                  {offer.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedroom{offer.bedrooms > 1 && 's'}
                 </li>
                 <li className='offer__feature offer__feature--adults'>
-                  Max {offer.maxAdults} adults
+                  Max {offer.maxAdults} adult{offer.maxAdults > 1 && 's'}
                 </li>
               </ul>
               <div className='offer__price'>

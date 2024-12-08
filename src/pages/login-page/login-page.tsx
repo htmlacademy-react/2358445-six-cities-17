@@ -1,16 +1,16 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
-import {AuthorizationStatus, AppRoute} from '../../const';
+import {AUTHORIZATION_STATUS, APP_ROUTE} from '../../const';
 import {Navigate} from 'react-router-dom';
 
 type LoginPageProps = {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
 }
 
 function LoginPage({authorizationStatus}: LoginPageProps): JSX.Element {
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    return <Navigate to={AppRoute.Main} />;
+  if (authorizationStatus === AUTHORIZATION_STATUS.Auth) {
+    return <Navigate to={APP_ROUTE.Main} />;
   }
   return (
     <div className="page page--gray page--login">

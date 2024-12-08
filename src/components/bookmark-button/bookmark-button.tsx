@@ -1,4 +1,4 @@
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {APP_ROUTE, AUTHORIZATION_STATUS} from '../../const';
 import {SettingsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
@@ -17,10 +17,10 @@ const BookmarkSettings: SettingsType = {
 type BookmarkButtonProps = {
   isFavorite: boolean;
   page?: 'place-card' | 'offer';
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
 };
 
-function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = AuthorizationStatus.Unknown}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = AUTHORIZATION_STATUS.Unknown}: BookmarkButtonProps): JSX.Element {
   const navigate = useNavigate();
   return (
     <button className={
@@ -30,8 +30,8 @@ function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = 
         { 'offer__bookmark-button--active': isFavorite && page === 'offer' }
       )
     } type='button' onClick={() => {
-      if (authorizationStatus === AuthorizationStatus.NoAuth) {
-        navigate(AppRoute.Login);
+      if (authorizationStatus === AUTHORIZATION_STATUS.NoAuth) {
+        navigate(APP_ROUTE.Login);
       }
     }}
     >

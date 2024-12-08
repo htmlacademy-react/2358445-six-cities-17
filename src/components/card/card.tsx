@@ -1,4 +1,4 @@
-import {AuthorizationStatus, AppRoute} from '../../const';
+import {AUTHORIZATION_STATUS, APP_ROUTE} from '../../const';
 import {SettingsType, OfferSimple} from '../../types';
 import {toUpFirstLetter, showRating} from '../../utils';
 import {Link} from 'react-router-dom';
@@ -24,12 +24,12 @@ const CardSettings: SettingsType = {
 type CardProps = {
   offer: OfferSimple;
   page?: 'cities' | 'near-places' | 'favorites';
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AUTHORIZATION_STATUS;
   onCardMouseEnter?: () => void;
   onCardMouseLeave?: () => void;
 };
 
-function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus.Unknown, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
+function Card({offer, page = 'cities', authorizationStatus = AUTHORIZATION_STATUS.Unknown, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
   const {id, title, type, previewImage, price, isFavorite, rating} = offer;
   const premiumIcon = offer.isPremium ? <OfferLabel/> : '';
   return (
@@ -41,7 +41,7 @@ function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus
     >
       {premiumIcon}
       <div className={`${page}__image-wrapper place-card__image-wrapper`}>
-        <Link to={generatePath(AppRoute.Offer, { id: id })}>
+        <Link to={generatePath(APP_ROUTE.Offer, { id: id })}>
           <img className='place-card__image' src={previewImage} width={CardSettings[page].width} height={CardSettings[page].height} alt={title} />
         </Link>
       </div>
@@ -60,7 +60,7 @@ function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus
           </div>
         </div>
         <h2 className='place-card__name'>
-          <Link to={generatePath(AppRoute.Offer, { id: id })}>
+          <Link to={generatePath(APP_ROUTE.Offer, { id: id })}>
             {title}
           </Link>
         </h2>

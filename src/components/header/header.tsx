@@ -1,13 +1,14 @@
 import {Link} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AUTHORIZATION_STATUS} from '../../const';
 import Nav from '../../components/header/nav';
 
 type HeaderProps = {
   isNavShow?: boolean;
-  authorizationStatus?: AuthorizationStatus;
+  authorizationStatus?: AUTHORIZATION_STATUS;
+  countFavorites?: number;
 }
 
-function Header({isNavShow, authorizationStatus = AuthorizationStatus.Unknown}: HeaderProps): JSX.Element {
+function Header({isNavShow, countFavorites, authorizationStatus = AUTHORIZATION_STATUS.Unknown}: HeaderProps): JSX.Element {
   return (
     <header className='header'>
       <div className='container'>
@@ -17,7 +18,7 @@ function Header({isNavShow, authorizationStatus = AuthorizationStatus.Unknown}: 
               <img className='header__logo' src='img/logo.svg' alt='6 cities logo' width='81' height='41' />
             </Link>
           </div>
-          {isNavShow && <Nav authorizationStatus={authorizationStatus}/>}
+          {(isNavShow && countFavorites) && <Nav authorizationStatus={authorizationStatus} countFavorites={countFavorites}/>}
         </div>
       </div>
     </header>
