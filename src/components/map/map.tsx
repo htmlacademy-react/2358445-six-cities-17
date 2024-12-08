@@ -38,6 +38,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         });
 
         marker
+          .bindPopup(point.title)
           .setIcon(
             selectedOffer !== undefined && point === selectedOffer
               ? currentMapIcon
