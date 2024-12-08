@@ -1,58 +1,52 @@
-import {AuthorizationStatus, Offer} from '../../const';
+import {AuthorizationStatus} from '../../const';
+import {Offer} from '../../types';
 import Card from '../../components/card/card';
-import {MouseEvent} from 'react';
+import cn from 'classnames';
+import { useState } from 'react';
 
 type CardsListProps = {
-  offers: Array<Offer>;
+  offers: Offer[];
   page?: 'cities' | 'near-places' | 'favorites';
   authorizationStatus: AuthorizationStatus;
-  cardHover: (offer: Offer | null) => void;
+  onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, cardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
+
+  if (onCardHover) {
+    onCardHover(activeCard);
+  }
+
+  const cardMouseEnterHandler = (offer: Offer): void => {
+    setActiveCard(offer);
+  };
+
+  const cardMouseLeaveHandler = (): void => {
+    setActiveCard(null);
+  };
+
   const cardsList = offers.map((offer) => (
-    <article
+    <Card
       key={offer.id}
-      className={`${page}__card place-card`}
-      onMouseEnter={(evt: MouseEvent<HTMLElement>) => {
-        evt.preventDefault();
-        cardHover(offer);
+      offer={offer}
+      authorizationStatus={authorizationStatus}
+      page={page}
+      onCardMouseEnter={() => {
+        cardMouseEnterHandler(offer);
       }}
-      onMouseLeave={(evt: MouseEvent<HTMLElement>) => {
-        evt.preventDefault();
-        cardHover(null);
+      onCardMouseLeave={() => {
+        cardMouseLeaveHandler();
       }}
-    >
-      <Card
-        key={offer.id}
-        id={offer.id}
-        title={offer.title}
-        type={offer.type}
-        price={offer.price}
-        previewImage={offer.previewImage}
-        isPremium={offer.isPremium}
-        isFavorite={offer.isFavorite}
-        rating={offer.rating}
-        authorizationStatus={authorizationStatus}
-        page={page}
-      />
-    </article>
+    />
   ));
-  const cardsListClass = (()=> {
-    switch(page) {
-      case 'cities': {
-        return 'cities__places-list places__list tabs__content';
-      }
-      case 'near-places': {
-        return `${page}__list places__list`;
-      }
-      case 'favorites': {
-        return 'favorites__places';
-      }
-    }
-  });
   return (
-    <div className={cardsListClass()}>
+    <div className={cn(
+      {'cities__places-list places__list tabs__content': page === 'cities'},
+      {'near-places__list places__list': page === 'near-places'},
+      {'favorites__places': page === 'favorites'}
+    )}
+    >
       {cardsList}
     </div>
   );

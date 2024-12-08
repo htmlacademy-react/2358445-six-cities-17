@@ -1,9 +1,10 @@
-import { AuthorizationStatus, Review } from '../../const';
+import {AuthorizationStatus} from '../../const';
+import {Review} from '../../types';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 
 type ReviewsListProps = {
-  reviews: Array<Review>;
+  reviews: Review[];
   authorizationStatus: AuthorizationStatus;
   offerId: string;
 };
@@ -24,13 +25,7 @@ function ReviewsList({ reviews, offerId, authorizationStatus = AuthorizationStat
       <ul className='reviews__list'>
         {reviewsList}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth ?
-        <ReviewsForm
-          offerId={offerId}
-          onAddReview={() => {
-            throw new Error('Function cardHover() is not ready!');
-          }}
-        /> : ''}
+      {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm offerId={offerId}/> : ''}
     </section>
   );
 }

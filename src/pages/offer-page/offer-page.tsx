@@ -1,6 +1,8 @@
-import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, Offer, OfferFull, Review } from '../../const';
+import {Helmet} from 'react-helmet-async';
+import {useParams} from 'react-router-dom';
+import {AuthorizationStatus} from '../../const';
+import {Offer, OfferFull, Review} from '../../types';
+import {showRating} from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -14,11 +16,12 @@ import OfferLabel from '../../components/offerLabel/offerLabel';
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
   offer: OfferFull;
-  reviews: Array<Review>;
-  neighbourhoodOffers: Array<Offer>;
+  reviews: Review[];
+  neighbourhoodOffers: Offer[];
+  countFavorites: number;
 }
 
-function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
+function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium ? <OfferLabel page={page} /> : '';
@@ -27,7 +30,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
   }
   return (
     <div className='page'>
-      <Header isNavShow authorizationStatus={authorizationStatus} />
+      <Header isNavShow authorizationStatus={authorizationStatus} countFavorites={countFavorites}/>
       <main className='page__main page__main--offer'>
         <section className={page}>
           <Helmet>
@@ -43,7 +46,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
-                  <span style={{ width: `${offer.rating * 100 / 5}%` }}></span>
+                  <span style={{ width: showRating(offer.rating) }}></span>
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='offer__rating-value rating__value'>{offer.rating}</span>
@@ -53,10 +56,10 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
                   {offer.type}
                 </li>
                 <li className='offer__feature offer__feature--bedrooms'>
-                  {offer.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedroom{offer.bedrooms > 1 && 's'}
                 </li>
                 <li className='offer__feature offer__feature--adults'>
-                  Max {offer.maxAdults} adults
+                  Max {offer.maxAdults} adult{offer.maxAdults > 1 && 's'}
                 </li>
               </ul>
               <div className='offer__price'>
@@ -74,7 +77,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               <ReviewsList authorizationStatus={authorizationStatus} reviews={reviews} offerId={offer.id} />
             </div>
           </div>
-          <Map page={page} />
+          <Map page={page} offers={[offer, ...neighbourhoodOffers]} selectedOffer={offer}/>
         </section>
         <div className='container'>
           <section className='near-places places'>
@@ -83,9 +86,6 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, authorizationStatus = 
               authorizationStatus={authorizationStatus}
               offers={neighbourhoodOffers}
               page='near-places'
-              cardHover={() => {
-                throw new Error('Function cardHover() is not ready!');
-              }}
             />
           </section>
         </div>

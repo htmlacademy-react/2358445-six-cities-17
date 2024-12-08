@@ -1,14 +1,15 @@
-import { AuthorizationStatus, Offer } from '../../const';
+import {AuthorizationStatus} from '../../const';
+import {Offer} from '../../types';
 import CardsList from '../cards-list/cards-list';
 import LocationItemLink from '../location-item-link/location-item-link';
 
 type FavoritesListProps = {
-  offers: Array<Offer>;
+  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 };
 
 type OffersByCity = {
-  [key: string]: Array<Offer>;
+  [key: string]: Offer[];
 };
 
 function FavoritesList({ offers, authorizationStatus = AuthorizationStatus.Unknown }: FavoritesListProps): JSX.Element {
@@ -32,9 +33,6 @@ function FavoritesList({ offers, authorizationStatus = AuthorizationStatus.Unkno
         authorizationStatus={authorizationStatus}
         offers={items[1]}
         page='favorites'
-        cardHover={() => {
-          throw new Error('Function cardHover() is not ready!');
-        }}
       />
     </li>
   ));

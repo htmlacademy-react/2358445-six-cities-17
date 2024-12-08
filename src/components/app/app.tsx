@@ -1,32 +1,33 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute, AuthorizationStatus, City, Offer, Review, OfferFull} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {Offer, Review, OfferFull} from '../../types';
 import PrivateRoute from '../../components/private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import Page404 from '../../pages/page-404/page-404';
-import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import UseScrollToTop from '../hooks/use-scroll-to-top/use-scroll-to-top';
 
 type AppProps = {
-  cities: Array<City>;
-  offers: Array<Offer>;
-  reviews: Array<Review>;
+  cities: string[];
+  offers: Offer[];
+  reviews: Review[];
   offer: OfferFull;
-  favorites: Array<Offer>;
-  neighbourhoodOffers: Array<Offer>;
+  favorites: Offer[];
+  neighbourhoodOffers: Offer[];
 }
 
 function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <ScrollToTop/>
+        <UseScrollToTop/>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage cities={cities} offers={offers} authorizationStatus={AuthorizationStatus.NoAuth}/>}
+            element={<MainPage cities={cities} offers={offers} authorizationStatus={AuthorizationStatus.NoAuth} countFavorites={favorites.length}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -34,7 +35,7 @@ function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: A
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offer={offer} reviews={reviews} neighbourhoodOffers={neighbourhoodOffers} authorizationStatus={AuthorizationStatus.Auth}/>}
+            element={<OfferPage offer={offer} reviews={reviews} neighbourhoodOffers={neighbourhoodOffers} authorizationStatus={AuthorizationStatus.Auth} countFavorites={favorites.length}/>}
           />
           <Route
             path={AppRoute.Favorites}
@@ -42,12 +43,12 @@ function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: A
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesPage offers={favorites} authorizationStatus={AuthorizationStatus.Auth}/>
+                <FavoritesPage offers={favorites} authorizationStatus={AuthorizationStatus.Auth} countFavorites={favorites.length}/>
               </PrivateRoute>
             }
           />
           <Route
-            path="*"
+            path={AppRoute.Page404}
             element={<Page404 />}
           />
         </Routes>

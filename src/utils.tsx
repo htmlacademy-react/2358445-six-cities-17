@@ -5,6 +5,6 @@ const formatDate = (date: string): string => {
   return `${tempDate.toLocaleString('en-US', { month: 'long' })} ${tempDate.getFullYear()}`;
 };
 
-const showRating = (rating: number): string => `${rating * 100 / 5}%`;
+const showRating = (rating: number): string => `${Math.round(rating) * 20}%`;
 
 export { toUpFirstLetter, formatDate, showRating };
