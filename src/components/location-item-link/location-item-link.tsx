@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import {Link} from 'react-router-dom';
 
 type LocationItemLinkProps = {
   isTab?: boolean;
@@ -8,9 +9,9 @@ type LocationItemLinkProps = {
 
 function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.Element {
   return (
-    <div className={cn('locations__item-link', {'tabs__item': isTab}, {'tabs__item--active': isActive})}>
+    <Link className={cn('locations__item-link', {'tabs__item': isTab}, {'tabs__item--active': isActive})} to='/'>
       <span>{text}</span>
-    </div>
+    </Link>
   );
 }
 

@@ -31,7 +31,7 @@ type CardProps = {
 
 function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus.Unknown, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
   const {id, title, type, previewImage, price, isFavorite, rating} = offer;
-  const premiumIcon = offer.isPremium ? <OfferLabel/> : '';
+  const premiumIcon = offer.isPremium && <OfferLabel/>;
   return (
     <article
       key={id}
@@ -41,7 +41,7 @@ function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus
     >
       {premiumIcon}
       <div className={`${page}__image-wrapper place-card__image-wrapper`}>
-        <Link to={generatePath(AppRoute.Offer, { id: id })}>
+        <Link to={generatePath(AppRoute.Offer, { id })}>
           <img className='place-card__image' src={previewImage} width={CardSettings[page].width} height={CardSettings[page].height} alt={title} />
         </Link>
       </div>
@@ -60,7 +60,7 @@ function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus
           </div>
         </div>
         <h2 className='place-card__name'>
-          <Link to={generatePath(AppRoute.Offer, { id: id })}>
+          <Link to={generatePath(AppRoute.Offer, { id })}>
             {title}
           </Link>
         </h2>

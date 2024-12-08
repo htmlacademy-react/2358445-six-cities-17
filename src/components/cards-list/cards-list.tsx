@@ -35,9 +35,7 @@ function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = 
       onCardMouseEnter={() => {
         cardMouseEnterHandler(offer);
       }}
-      onCardMouseLeave={() => {
-        cardMouseLeaveHandler();
-      }}
+      onCardMouseLeave={cardMouseLeaveHandler}
     />
   ));
   return (
