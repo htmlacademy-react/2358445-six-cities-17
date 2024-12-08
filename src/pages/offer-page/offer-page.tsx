@@ -24,7 +24,7 @@ type OfferPageProps = {
 function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
   const params = useParams();
   const page = 'offer';
-  const premiumIcon = offer.isPremium ? <OfferLabel page={page} /> : '';
+  const premiumIcon = offer.isPremium && <OfferLabel page={page} />;
   if (params.id) {
     //console.log(params);
   }

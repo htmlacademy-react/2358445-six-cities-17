@@ -26,8 +26,7 @@ function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = 
     <button className={
       cn(`${page}__bookmark-button`,
         'button',
-        { 'place-card__bookmark-button--active': isFavorite && page === 'place-card' },
-        { 'offer__bookmark-button--active': isFavorite && page === 'offer' }
+        { [`${page}__bookmark-button--active`]: isFavorite }
       )
     } type='button' onClick={() => {
       if (authorizationStatus === AuthorizationStatus.NoAuth) {

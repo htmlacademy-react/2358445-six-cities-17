@@ -25,7 +25,7 @@ function ReviewsList({ reviews, offerId, authorizationStatus = AuthorizationStat
       <ul className='reviews__list'>
         {reviewsList}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm offerId={offerId}/> : ''}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={offerId}/>}
     </section>
   );
 }

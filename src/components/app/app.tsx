@@ -8,7 +8,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import Page404 from '../../pages/page-404/page-404';
-import UseScrollToTop from '../hooks/use-scroll-to-top/use-scroll-to-top';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppProps = {
   cities: string[];
@@ -23,7 +23,7 @@ function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: A
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <UseScrollToTop/>
+        <ScrollToTop/>
         <Routes>
           <Route
             path={AppRoute.Main}

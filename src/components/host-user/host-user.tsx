@@ -6,7 +6,7 @@ type HostUserProps = {
 }
 
 function HostUser({host}: HostUserProps): JSX.Element {
-  const proLabel = host.isPro ? <span className='offer__user-status'>Pro</span> : '';
+  const proLabel = host.isPro && <span className='offer__user-status'>Pro</span>;
   return (
     <div className='offer__host-user user'>
       <div className={cn('offer__avatar-wrapper', 'user__avatar-wrapper', {'offer__avatar-wrapper--pro': host.isPro})}>
