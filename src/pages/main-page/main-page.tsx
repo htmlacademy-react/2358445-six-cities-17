@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {AUTHORIZATION_STATUS} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
@@ -13,7 +13,7 @@ import {useState} from 'react';
 type MainPageProps = {
   cities: string[];
   offers: Offer[];
-  authorizationStatus: AUTHORIZATION_STATUS;
+  authorizationStatus: AuthorizationStatus;
   countFavorites: number;
 }
 

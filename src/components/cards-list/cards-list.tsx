@@ -1,4 +1,4 @@
-import {AUTHORIZATION_STATUS} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
@@ -7,11 +7,11 @@ import { useState } from 'react';
 type CardsListProps = {
   offers: Offer[];
   page?: 'cities' | 'near-places' | 'favorites';
-  authorizationStatus: AUTHORIZATION_STATUS;
+  authorizationStatus: AuthorizationStatus;
   onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AUTHORIZATION_STATUS.Unknown}: CardsListProps): JSX.Element {
+function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
   if (onCardHover) {

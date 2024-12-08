@@ -1,6 +1,6 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {APP_ROUTE, AUTHORIZATION_STATUS} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {Offer, Review, OfferFull} from '../../types';
 import PrivateRoute from '../../components/private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
@@ -26,29 +26,29 @@ function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: A
         <UseScrollToTop/>
         <Routes>
           <Route
-            path={APP_ROUTE.Main}
-            element={<MainPage cities={cities} offers={offers} authorizationStatus={AUTHORIZATION_STATUS.NoAuth} countFavorites={favorites.length}/>}
+            path={AppRoute.Main}
+            element={<MainPage cities={cities} offers={offers} authorizationStatus={AuthorizationStatus.NoAuth} countFavorites={favorites.length}/>}
           />
           <Route
-            path={APP_ROUTE.Login}
-            element={<LoginPage authorizationStatus={AUTHORIZATION_STATUS.NoAuth}/>}
+            path={AppRoute.Login}
+            element={<LoginPage authorizationStatus={AuthorizationStatus.NoAuth}/>}
           />
           <Route
-            path={APP_ROUTE.Offer}
-            element={<OfferPage offer={offer} reviews={reviews} neighbourhoodOffers={neighbourhoodOffers} authorizationStatus={AUTHORIZATION_STATUS.Auth} countFavorites={favorites.length}/>}
+            path={AppRoute.Offer}
+            element={<OfferPage offer={offer} reviews={reviews} neighbourhoodOffers={neighbourhoodOffers} authorizationStatus={AuthorizationStatus.Auth} countFavorites={favorites.length}/>}
           />
           <Route
-            path={APP_ROUTE.Favorites}
+            path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AUTHORIZATION_STATUS.NoAuth}
+                authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <FavoritesPage offers={favorites} authorizationStatus={AUTHORIZATION_STATUS.Auth} countFavorites={favorites.length}/>
+                <FavoritesPage offers={favorites} authorizationStatus={AuthorizationStatus.Auth} countFavorites={favorites.length}/>
               </PrivateRoute>
             }
           />
           <Route
-            path={APP_ROUTE.Page404}
+            path={AppRoute.Page404}
             element={<Page404 />}
           />
         </Routes>

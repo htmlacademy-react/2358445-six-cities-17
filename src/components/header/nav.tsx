@@ -1,15 +1,15 @@
 import {Link} from 'react-router-dom';
-import {APP_ROUTE, AUTHORIZATION_STATUS} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 type NavProps = {
-  authorizationStatus: AUTHORIZATION_STATUS;
+  authorizationStatus: AuthorizationStatus;
   countFavorites: number;
 }
 
 function Nav({authorizationStatus, countFavorites}: NavProps): JSX.Element {
-  const userLine = (authorizationStatus === AUTHORIZATION_STATUS.Auth) &&
+  const userLine = (authorizationStatus === AuthorizationStatus.Auth) &&
     <li className='header__nav-item user'>
-      <Link className='header__nav-link header__nav-link--profile' to={APP_ROUTE.Favorites}>
+      <Link className='header__nav-link header__nav-link--profile' to={AppRoute.Favorites}>
         <div className='header__avatar-wrapper user__avatar-wrapper'>
         </div>
         <span className='header__user-name user__name'>Oliver.conner@gmail.com</span>
@@ -18,8 +18,8 @@ function Nav({authorizationStatus, countFavorites}: NavProps): JSX.Element {
     </li>;
   let actionHref = '#';
   let actionText = 'Log Out';
-  if (authorizationStatus !== AUTHORIZATION_STATUS.Auth) {
-    actionHref = APP_ROUTE.Login;
+  if (authorizationStatus !== AuthorizationStatus.Auth) {
+    actionHref = AppRoute.Login;
     actionText = 'Sign in';
   }
   return (

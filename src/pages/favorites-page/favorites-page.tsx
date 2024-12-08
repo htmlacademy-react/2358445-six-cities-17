@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {AUTHORIZATION_STATUS} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
@@ -8,7 +8,7 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 
 type FavoritesPageProps = {
-  authorizationStatus: AUTHORIZATION_STATUS;
+  authorizationStatus: AuthorizationStatus;
   offers: Offer[];
   countFavorites: number;
 }

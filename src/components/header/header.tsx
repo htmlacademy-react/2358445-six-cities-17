@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom';
-import {AUTHORIZATION_STATUS} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import Nav from '../../components/header/nav';
 
 type HeaderProps = {
   isNavShow?: boolean;
-  authorizationStatus?: AUTHORIZATION_STATUS;
+  authorizationStatus?: AuthorizationStatus;
   countFavorites?: number;
 }
 
-function Header({isNavShow, countFavorites, authorizationStatus = AUTHORIZATION_STATUS.Unknown}: HeaderProps): JSX.Element {
+function Header({isNavShow, countFavorites, authorizationStatus = AuthorizationStatus.Unknown}: HeaderProps): JSX.Element {
   return (
     <header className='header'>
       <div className='container'>

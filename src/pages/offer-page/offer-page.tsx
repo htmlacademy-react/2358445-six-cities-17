@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {AUTHORIZATION_STATUS} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {Offer, OfferFull, Review} from '../../types';
 import {showRating} from '../../utils';
 import Header from '../../components/header/header';
@@ -14,14 +14,14 @@ import CardsList from '../../components/cards-list/cards-list';
 import OfferLabel from '../../components/offerLabel/offerLabel';
 
 type OfferPageProps = {
-  authorizationStatus: AUTHORIZATION_STATUS;
+  authorizationStatus: AuthorizationStatus;
   offer: OfferFull;
   reviews: Review[];
   neighbourhoodOffers: Offer[];
   countFavorites: number;
 }
 
-function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, authorizationStatus = AUTHORIZATION_STATUS.Unknown }: OfferPageProps): JSX.Element {
+function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, authorizationStatus = AuthorizationStatus.Unknown }: OfferPageProps): JSX.Element {
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium ? <OfferLabel page={page} /> : '';
