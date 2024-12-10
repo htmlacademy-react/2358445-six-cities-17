@@ -33,12 +33,13 @@ function MainPage({cities, countFavorites, authorizationStatus}: MainPageProps):
         <b className='places__found'>{offers.length} places to stay in {activeCity}</b>
         <SortForm />
         <CardsList
+          offers={offers}
           authorizationStatus={authorizationStatus}
           onCardHover={handleCardHover}
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' selectedOffer={activeCard}/>
+        <Map page='cities' offers={offers} selectedOffer={activeCard}/>
       </div>
     </>
   )
