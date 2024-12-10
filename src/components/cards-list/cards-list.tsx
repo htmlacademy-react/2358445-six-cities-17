@@ -2,16 +2,17 @@ import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
-import { useState } from 'react';
+import {useState} from 'react';
+import {useAppSelector} from '../../hooks';
 
 type CardsListProps = {
-  offers: Offer[];
   page?: 'cities' | 'near-places' | 'favorites';
   authorizationStatus: AuthorizationStatus;
   onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+function CardsList({page = 'cities', onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
   if (onCardHover) {

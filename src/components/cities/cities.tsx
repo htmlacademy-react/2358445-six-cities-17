@@ -1,15 +1,22 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {MouseEvent} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeCity, getOffers} from '../../store/action';
 
 type CitiesProps = {
   cities: string[];
-  onCityClick: (city: string | null) => void;
-  activeCity: string | null;
 }
 
-function Cities({cities, onCityClick, activeCity}: CitiesProps): JSX.Element {
-  const handleListCitiesItemClick = (evt: MouseEvent<HTMLElement>) => onCityClick(evt.currentTarget.textContent);
+function Cities({cities}: CitiesProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const activeCity = useAppSelector((state) => state.city);
+  const handleListCitiesItemClick = (evt: MouseEvent<HTMLElement>) => {
+    if (evt.currentTarget.textContent) {
+      dispatch(changeCity(evt.currentTarget.textContent));
+      dispatch(getOffers());
+    }
+  };
   const citiesUl = cities &&
     cities.map((city)=>
       <li className='locations__item' key={city} onClick={handleListCitiesItemClick}><LocationItemLink text={city} isTab isActive={city === activeCity}/></li>

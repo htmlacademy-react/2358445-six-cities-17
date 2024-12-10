@@ -9,24 +9,21 @@ import Map from '../../components/map/map';
 import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 import {useState} from 'react';
+import {useAppSelector} from '../../hooks';
 
 type MainPageProps = {
   cities: string[];
-  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
   countFavorites: number;
 }
 
-function MainPage({cities, offers, countFavorites, authorizationStatus}: MainPageProps): JSX.Element {
+function MainPage({cities, countFavorites, authorizationStatus}: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
-  const [activeCity, setActiveCity] = useState<string | null>('Paris');
+  const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
 
   const handleCardHover = (offer: Offer | null) => {
     setActiveCard(offer);
-  };
-
-  const handleCityClick = (city: string | null) => {
-    setActiveCity(city);
   };
 
   const mainInner = (offers.length ? (
@@ -37,12 +34,11 @@ function MainPage({cities, offers, countFavorites, authorizationStatus}: MainPag
         <SortForm />
         <CardsList
           authorizationStatus={authorizationStatus}
-          offers={offers}
           onCardHover={handleCardHover}
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' offers={offers} selectedOffer={activeCard}/>
+        <Map page='cities' selectedOffer={activeCard}/>
       </div>
     </>
   )
@@ -57,7 +53,7 @@ function MainPage({cities, offers, countFavorites, authorizationStatus}: MainPag
         <Helmet>
           <title>Six cities</title>
         </Helmet>
-        <Cities cities={cities} onCityClick={handleCityClick} activeCity={activeCity}/>
+        <Cities cities={cities}/>
         <div className='cities'>
           <div className={cn('cities__places-container', 'container', {'cities__places-container--empty':!offers.length})}>
             {mainInner}
