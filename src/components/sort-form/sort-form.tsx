@@ -1,15 +1,21 @@
 import {useState} from 'react';
 import {MouseEvent} from 'react';
 import cn from 'classnames';
+import {FIRST_SORT} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {changeSort, getOffers} from '../../store/action';
 
 function SortForm(): JSX.Element {
   const [sortParams, setSort] = useState({
     isShow: false,
-    text: 'Popular',
+    text: FIRST_SORT,
   });
+  const dispatch = useAppDispatch();
 
   const handleClickSortOption = (evt: MouseEvent<HTMLElement>) => {
     setSort({ isShow: false, text: evt.currentTarget.textContent || '' });
+    dispatch(changeSort(evt.currentTarget.textContent || 'Popular'));
+    dispatch(getOffers());
   };
 
   return (
