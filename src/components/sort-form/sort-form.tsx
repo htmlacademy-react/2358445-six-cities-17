@@ -1,25 +1,29 @@
 import {useState} from 'react';
 import {MouseEvent} from 'react';
 import cn from 'classnames';
+import {FIRST_SORT, SortTypes} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeSort, getOffers} from '../../store/action';
 
 function SortForm(): JSX.Element {
-  const [sortParams, setSort] = useState({
-    isShow: false,
-    text: 'Popular',
-  });
+  const [isShowSort, setSort] = useState(false);
+  const dispatch = useAppDispatch();
+  const sortName = useAppSelector((state) => state.sort);
 
   const handleClickSortOption = (evt: MouseEvent<HTMLElement>) => {
-    setSort({ isShow: false, text: evt.currentTarget.textContent || '' });
+    setSort(!isShowSort);
+    dispatch(changeSort(evt.currentTarget.textContent || FIRST_SORT));
+    dispatch(getOffers());
   };
+  const sortListUl = (Object.values(SortTypes) as string[]).map((value) => (
+    <li key={value} className={cn('places__option', {'places__option--active': sortName === value})} tabIndex={0} onClick={handleClickSortOption}>{value}</li>
+  ));
 
   return (
     <form className='places__sorting' action='#' method='get'>
       <span className='places__sorting-caption'>Sort by</span>{' '}
-      <span className='places__sorting-type' tabIndex={0} onClick={() => {
-        setSort({ ...sortParams, isShow: true });
-      }}
-      >
-        {sortParams.text}
+      <span className='places__sorting-type' tabIndex={0} onClick={() => setSort(true)}>
+        {sortName}
         <svg className='places__sorting-arrow' width='7' height='4'>
           <use xlinkHref='#icon-arrow-select'></use>
         </svg>
@@ -27,12 +31,9 @@ function SortForm(): JSX.Element {
       <ul className={cn(
         'places__options',
         'places__options--custom',
-        {'places__options--opened': sortParams.isShow})}
+        {'places__options--opened': isShowSort})}
       >
-        <li className='places__option places__option--active' tabIndex={0} onClick={handleClickSortOption}>Popular</li>
-        <li className='places__option' tabIndex={0} onClick={handleClickSortOption}>Price: low to high</li>
-        <li className='places__option' tabIndex={0} onClick={handleClickSortOption}>Price: high to low</li>
-        <li className='places__option' tabIndex={0} onClick={handleClickSortOption}>Top rated first</li>
+        {sortListUl}
       </ul>
     </form>
   );

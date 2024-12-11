@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
-import {AuthorizationStatus, AppRoute} from '../../const';
+import {AuthorizationStatus, AppRoute, CITIES} from '../../const';
 import {Navigate} from 'react-router-dom';
 
 type LoginPageProps = {
@@ -37,7 +37,7 @@ function LoginPage({authorizationStatus}: LoginPageProps): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <LocationItemLink text='Amsterdam' isTab={false} isActive/>
+              <LocationItemLink text={CITIES[Math.floor(Math.random() * CITIES.length)]} isTab={false} isActive/>
             </div>
           </section>
         </div>

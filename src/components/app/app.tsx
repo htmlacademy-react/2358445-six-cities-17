@@ -12,14 +12,13 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppProps = {
   cities: string[];
-  offers: Offer[];
   reviews: Review[];
   offer: OfferFull;
   favorites: Offer[];
   neighbourhoodOffers: Offer[];
 }
 
-function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: AppProps): JSX.Element {
+function App({cities, reviews, offer, favorites, neighbourhoodOffers}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -27,7 +26,7 @@ function App({cities, offers, reviews, offer, favorites, neighbourhoodOffers}: A
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage cities={cities} offers={offers} authorizationStatus={AuthorizationStatus.NoAuth} countFavorites={favorites.length}/>}
+            element={<MainPage cities={cities} authorizationStatus={AuthorizationStatus.NoAuth} countFavorites={favorites.length}/>}
           />
           <Route
             path={AppRoute.Login}
