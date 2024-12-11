@@ -2,7 +2,7 @@ import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
-import { useState } from 'react';
+
 
 type CardsListProps = {
   offers: Offer[];
@@ -12,18 +12,16 @@ type CardsListProps = {
 };
 
 function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<Offer | null>(null);
-
-  if (onCardHover) {
-    onCardHover(activeCard);
-  }
-
   const cardMouseEnterHandler = (offer: Offer): void => {
-    setActiveCard(offer);
+    if (onCardHover) {
+      onCardHover(offer);
+    }
   };
 
   const cardMouseLeaveHandler = (): void => {
-    setActiveCard(null);
+    if (onCardHover) {
+      onCardHover(null);
+    }
   };
 
   const cardsList = offers.map((offer) => (
