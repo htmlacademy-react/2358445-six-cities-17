@@ -31,4 +31,4 @@ export enum SortTypes {
   POPULAR = 'Popular'
 }
 
-export const FIRST_SORT = SortTypes.POPULAR;
+export const FIRST_SORT = 'Popular';

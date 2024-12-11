@@ -15,7 +15,7 @@ function SortForm(): JSX.Element {
     dispatch(changeSort(evt.currentTarget.textContent || FIRST_SORT));
     dispatch(getOffers());
   };
-  const sortListUl = Object.values(SortTypes).map((value) => (
+  const sortListUl = (Object.values(SortTypes) as string[]).map((value) => (
     <li key={value} className={cn('places__option', {'places__option--active': sortName === value})} tabIndex={0} onClick={handleClickSortOption}>{value}</li>
   ));
 
