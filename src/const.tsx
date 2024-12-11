@@ -2,8 +2,6 @@ export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', '
 
 export const FIRST_CITY = CITIES[0];
 
-export const FIRST_SORT = 'Popular';
-
 export const STARS_COUNT = 5;
 
 export const RATING_VALUES = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
@@ -32,3 +30,5 @@ export enum SortTypes {
   PRICE_HIGH_TO_LOW = 'Price: high to low',
   POPULAR = 'Popular'
 }
+
+export const FIRST_SORT = SortTypes.POPULAR;
