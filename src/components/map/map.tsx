@@ -2,8 +2,8 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types';
 import {useEffect, useRef} from 'react';
-import useMap from '../hooks/use-map/use-map';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import useMap from '../../hooks/use-map/use-map';
 
 type MapProps = {
   page: string;
@@ -30,6 +30,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      map.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
         const marker = new Marker({
@@ -51,7 +52,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, city]);
 
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }
