@@ -27,4 +27,15 @@ const getCitySortOffers = (offers: Offer[], sortType: SortType, city: string): O
 
 const randomizeCity = (): string => CITIES[Math.floor(Math.random() * CITIES.length)];
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity };
+const checkPassword = (password: string): boolean => {
+  let result = true;
+  if (!/\d/.test(password)) {
+    result = false;
+  }
+  if (!/[a-zа-яё]/i.test(password)) {
+    result = false;
+  }
+  return result;
+};
+
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword };

@@ -2,7 +2,7 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types';
 import {useEffect, useRef} from 'react';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import {UrlMarker} from '../../const';
 import useMap from '../../hooks/use-map/use-map';
 
 type MapProps = {
@@ -12,15 +12,15 @@ type MapProps = {
 }
 
 const defaultMapIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: UrlMarker.Default,
+  iconSize: [28, 40],
+  iconAnchor: [16, 40]
 });
 
 const currentMapIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: UrlMarker.Current,
+  iconSize: [28, 40],
+  iconAnchor: [16, 40]
 });
 
 function Map({page, offers, selectedOffer}: MapProps): JSX.Element {

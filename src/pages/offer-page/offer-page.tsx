@@ -25,6 +25,8 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, author
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium && <OfferLabel page={page} />;
+  const nearOffers = neighbourhoodOffers.slice(0, 3);
+  const offersForMap = [offer, ...nearOffers];
   if (params.id) {
     //console.log(params);
   }
@@ -77,14 +79,14 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, author
               <ReviewsList authorizationStatus={authorizationStatus} reviews={reviews} offerId={offer.id} />
             </div>
           </div>
-          <Map page={page} offers={[offer, ...neighbourhoodOffers]} selectedOffer={offer}/>
+          <Map page={page} offers={offersForMap} selectedOffer={offer}/>
         </section>
         <div className='container'>
           <section className='near-places places'>
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <CardsList
               authorizationStatus={authorizationStatus}
-              offers={neighbourhoodOffers}
+              offers={nearOffers}
               page='near-places'
             />
           </section>
