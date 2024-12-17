@@ -12,17 +12,9 @@ type CardsListProps = {
 };
 
 function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
-  const cardMouseEnterHandler = (offer: Offer): void => {
-    if (onCardHover) {
-      onCardHover(offer);
-    }
-  };
+  const cardMouseEnterHandler = (offer: Offer): void => onCardHover?.(offer);
 
-  const cardMouseLeaveHandler = (): void => {
-    if (onCardHover) {
-      onCardHover(null);
-    }
-  };
+  const cardMouseLeaveHandler = (): void => onCardHover?.(null);
 
   const cardsList = offers.map((offer) => (
     <Card

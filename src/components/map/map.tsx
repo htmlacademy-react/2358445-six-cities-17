@@ -31,6 +31,11 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
   useEffect(() => {
     if (map) {
       map.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
+    }
+  }, [map, city]);
+
+  useEffect(() => {
+    if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
         const marker = new Marker({
@@ -41,7 +46,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         marker
           .bindPopup(point.title)
           .setIcon(
-            selectedOffer && point === selectedOffer
+            selectedOffer && point.id === selectedOffer.id
               ? currentMapIcon
               : defaultMapIcon
           )
@@ -52,7 +57,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer, city]);
+  }, [map, offers, selectedOffer]);
 
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }

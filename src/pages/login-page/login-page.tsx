@@ -1,8 +1,9 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
-import {AuthorizationStatus, AppRoute, CITIES} from '../../const';
+import {AuthorizationStatus, AppRoute} from '../../const';
 import {Navigate} from 'react-router-dom';
+import {randomizeCity} from '../../utils';
 
 type LoginPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -12,6 +13,7 @@ function LoginPage({authorizationStatus}: LoginPageProps): JSX.Element {
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
   }
+  const randomCity = randomizeCity();
   return (
     <div className="page page--gray page--login">
       <Header/>
@@ -37,7 +39,7 @@ function LoginPage({authorizationStatus}: LoginPageProps): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <LocationItemLink text={CITIES[Math.floor(Math.random() * CITIES.length)]} isTab={false} isActive/>
+              <LocationItemLink text={randomCity} isTab={false} isActive/>
             </div>
           </section>
         </div>

@@ -24,11 +24,9 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum SortTypes {
+export enum SortType {
   TOP_RATED_FIRST = 'Top rated first',
   PRICE_LOW_TO_HIGH = 'Price: low to high',
   PRICE_HIGH_TO_LOW = 'Price: high to low',
   POPULAR = 'Popular'
 }
-
-export const FIRST_SORT = 'Popular';

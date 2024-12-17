@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import {useAppDispatch} from '../../hooks';
-import {changeCity, getOffers} from '../../store/action';
+import {changeCity} from '../../store/action';
 import {MouseEvent} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -23,7 +23,6 @@ function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.E
     }
     if (evt.currentTarget.textContent) {
       dispatch(changeCity(evt.currentTarget.textContent));
-      dispatch(getOffers());
     }
   };
   return (
