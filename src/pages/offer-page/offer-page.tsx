@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, NEARBY_COUNT} from '../../const';
 import {Offer, OfferFull, Review} from '../../types';
 import {showRating} from '../../utils';
 import Header from '../../components/header/header';
@@ -25,6 +25,8 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, author
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium && <OfferLabel page={page} />;
+  const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
+  const offersForMap = [offer, ...nearOffers];
   if (params.id) {
     //console.log(params);
   }
@@ -77,14 +79,14 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, author
               <ReviewsList authorizationStatus={authorizationStatus} reviews={reviews} offerId={offer.id} />
             </div>
           </div>
-          <Map page={page} offers={[offer, ...neighbourhoodOffers]} selectedOffer={offer}/>
+          <Map page={page} offers={offersForMap} selectedOffer={offer}/>
         </section>
         <div className='container'>
           <section className='near-places places'>
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <CardsList
               authorizationStatus={authorizationStatus}
-              offers={neighbourhoodOffers}
+              offers={nearOffers}
               page='near-places'
             />
           </section>

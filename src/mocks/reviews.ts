@@ -4,7 +4,7 @@ export const reviews: Reviews = [
   {
     'id': '64f25ab7-3e09-40e6-b303-85be5c5d932d',
     'comment': 'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
-    'date': '2024-11-07T21:00:00.490Z',
+    'date': '2024-10-07T21:00:00.490Z',
     'rating': 5,
     'user': {
       'name': 'Emely',

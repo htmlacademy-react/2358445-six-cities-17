@@ -2,7 +2,7 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types';
 import {useEffect, useRef} from 'react';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import {UrlMarker} from '../../const';
 import useMap from '../../hooks/use-map/use-map';
 
 type MapProps = {
@@ -12,15 +12,15 @@ type MapProps = {
 }
 
 const defaultMapIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: UrlMarker.Default,
+  iconSize: [28, 40],
+  iconAnchor: [16, 40]
 });
 
 const currentMapIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: UrlMarker.Current,
+  iconSize: [28, 40],
+  iconAnchor: [16, 40]
 });
 
 function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
@@ -31,6 +31,11 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
   useEffect(() => {
     if (map) {
       map.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
+    }
+  }, [map, city]);
+
+  useEffect(() => {
+    if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
         const marker = new Marker({
@@ -41,7 +46,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         marker
           .bindPopup(point.title)
           .setIcon(
-            selectedOffer && point === selectedOffer
+            selectedOffer && point.id === selectedOffer.id
               ? currentMapIcon
               : defaultMapIcon
           )
@@ -52,7 +57,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer, city]);
+  }, [map, offers, selectedOffer]);
 
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }

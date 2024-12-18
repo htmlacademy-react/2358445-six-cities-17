@@ -1,4 +1,4 @@
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, REVIEWS_COUNT} from '../../const';
 import {Review} from '../../types';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
@@ -10,7 +10,8 @@ type ReviewsListProps = {
 };
 
 function ReviewsList({ reviews, offerId, authorizationStatus = AuthorizationStatus.Unknown }: ReviewsListProps): JSX.Element {
-  const reviewsList = reviews.map((review) => (
+  const sortedReviews = reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
+  const reviewsList = sortedReviews.map((review) => (
     <ReviewItem
       key={review.id}
       comment={review.comment}
