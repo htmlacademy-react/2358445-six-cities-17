@@ -35,3 +35,15 @@ export enum SortType {
   PRICE_HIGH_TO_LOW = 'Price: high to low',
   POPULAR = 'Popular'
 }
+
+export enum APIRoute {
+  Offers = '/offers',
+  Offer = '/offers/{offerId}',
+  NearBy = '/offers/{offerId}/nearby',
+  Login = '/login',
+  Logout = '/logout',
+  Favorite = '/favorite',
+  FavoriteStatus = '/favorite/{offerId}/{status}',
+  Comments = '/comments/{offerId}'
+}
+
