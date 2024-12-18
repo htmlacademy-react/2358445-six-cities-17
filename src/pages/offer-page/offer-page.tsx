@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, NEARBY_COUNT} from '../../const';
 import {Offer, OfferFull, Review} from '../../types';
 import {showRating} from '../../utils';
 import Header from '../../components/header/header';
@@ -25,7 +25,7 @@ function OfferPage({ offer, reviews, neighbourhoodOffers, countFavorites, author
   const params = useParams();
   const page = 'offer';
   const premiumIcon = offer.isPremium && <OfferLabel page={page} />;
-  const nearOffers = neighbourhoodOffers.slice(0, 3);
+  const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
   const offersForMap = [offer, ...nearOffers];
   if (params.id) {
     //console.log(params);

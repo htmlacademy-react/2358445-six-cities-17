@@ -4,6 +4,10 @@ export const FIRST_CITY = CITIES[0];
 
 export const STARS_COUNT = 5;
 
+export const REVIEWS_COUNT = 10;
+
+export const NEARBY_COUNT = 3;
+
 export const RATING_VALUES = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
 export enum UrlMarker {
