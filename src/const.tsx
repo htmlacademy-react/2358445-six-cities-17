@@ -38,12 +38,12 @@ export enum SortType {
 
 export enum APIRoute {
   Offers = '/offers',
-  Offer = '/offers/{offerId}',
-  NearBy = '/offers/{offerId}/nearby',
+  Offer = '/offers/',
+  NearBy = '/nearby',
   Login = '/login',
   Logout = '/logout',
   Favorite = '/favorite',
-  FavoriteStatus = '/favorite/{offerId}/{status}',
-  Comments = '/comments/{offerId}'
+  FavoriteStatus = '/favorite/',
+  Comments = '/comments/'
 }
 

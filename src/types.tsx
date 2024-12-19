@@ -69,9 +69,13 @@ export type AppDispatch = typeof store.dispatch;
 
 export type InitalState = {
   city: string;
-  offers: Offer[];
+  offers: Offers;
+  offer: OfferFull;
+  sortedOffers: Offers;
   sort: SortType;
   authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
+  reviews: Reviews;
 };
 
 export type AuthData = {

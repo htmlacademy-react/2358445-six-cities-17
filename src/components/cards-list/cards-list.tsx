@@ -1,4 +1,3 @@
-import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
@@ -7,11 +6,10 @@ import cn from 'classnames';
 type CardsListProps = {
   offers: Offer[];
   page?: 'cities' | 'near-places' | 'favorites';
-  authorizationStatus: AuthorizationStatus;
   onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = AuthorizationStatus.Unknown}: CardsListProps): JSX.Element {
+function CardsList({page = 'cities', offers, onCardHover}: CardsListProps): JSX.Element {
   const cardMouseEnterHandler = (offer: Offer): void => onCardHover?.(offer);
 
   const cardMouseLeaveHandler = (): void => onCardHover?.(null);
@@ -20,7 +18,6 @@ function CardsList({page = 'cities', offers, onCardHover, authorizationStatus = 
     <Card
       key={offer.id}
       offer={offer}
-      authorizationStatus={authorizationStatus}
       page={page}
       onCardMouseEnter={() => {
         cardMouseEnterHandler(offer);
