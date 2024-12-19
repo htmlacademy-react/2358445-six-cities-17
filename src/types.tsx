@@ -1,4 +1,5 @@
-import { store } from './store';
+import {AuthorizationStatus, SortType} from './const';
+import {store} from './store';
 
 export type Location = {
   latitude: number;
@@ -65,3 +66,25 @@ export type SettingsType = {
 export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
+export type InitalState = {
+  city: string;
+  offers: Offers;
+  offer: OfferFull;
+  sortedOffers: Offers;
+  sort: SortType;
+  authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
+  reviews: Reviews;
+};
+
+export type AuthData = {
+  login: string;
+  password: string;
+};
+
+export type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};

@@ -1,5 +1,4 @@
 import {Helmet} from 'react-helmet-async';
-import {AuthorizationStatus} from '../../const';
 import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
@@ -13,14 +12,13 @@ import {useAppSelector} from '../../hooks';
 
 type MainPageProps = {
   cities: string[];
-  authorizationStatus: AuthorizationStatus;
   countFavorites: number;
 }
 
-function MainPage({cities, countFavorites, authorizationStatus}: MainPageProps): JSX.Element {
+function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.sortedOffers);
 
   const handleCardHover = (offer: Offer | null) => {
     setActiveCard(offer);
@@ -34,7 +32,6 @@ function MainPage({cities, countFavorites, authorizationStatus}: MainPageProps):
         <SortForm />
         <CardsList
           offers={offers}
-          authorizationStatus={authorizationStatus}
           onCardHover={handleCardHover}
         />
       </section>
@@ -49,7 +46,7 @@ function MainPage({cities, countFavorites, authorizationStatus}: MainPageProps):
 
   return (
     <div className='page page--gray page--main'>
-      <Header isNavShow authorizationStatus={authorizationStatus} countFavorites={countFavorites}/>
+      <Header isNavShow countFavorites={countFavorites}/>
       <main className={cn('page__main', 'page__main--index', {'page__main--index-empty': !offers.length})}>
         <Helmet>
           <title>Six cities</title>
