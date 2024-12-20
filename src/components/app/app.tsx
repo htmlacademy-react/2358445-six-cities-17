@@ -17,10 +17,9 @@ import browserHistory from '../../browser-history';
 type AppProps = {
   cities: string[];
   favorites: Offer[];
-  neighbourhoodOffers: Offer[];
 }
 
-function App({cities, favorites, neighbourhoodOffers}: AppProps): JSX.Element {
+function App({cities, favorites}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
@@ -45,7 +44,7 @@ function App({cities, favorites, neighbourhoodOffers}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage neighbourhoodOffers={neighbourhoodOffers} countFavorites={favorites.length}/>}
+            element={<OfferPage countFavorites={favorites.length}/>}
           />
           <Route
             path={AppRoute.Favorites}

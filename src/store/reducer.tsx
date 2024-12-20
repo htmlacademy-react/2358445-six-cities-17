@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, changeSort, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {changeCity, changeSort, loadNearBy, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
 import {AuthorizationStatus, EMPTY_OFFER, FIRST_CITY, SortType} from '../const';
 import {InitalState} from '../types';
 
@@ -10,7 +10,8 @@ const initialState: InitalState = {
   sort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
-  reviews: []
+  reviews: [],
+  nearBy: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,6 +37,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(loadNearBy, (state, action) => {
+      state.nearBy = action.payload;
     });
 });
 

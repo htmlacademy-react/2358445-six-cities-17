@@ -12,6 +12,8 @@ export const loadOffer = createAction<OfferFull>('loadOffer');
 
 export const loadReviews = createAction<Reviews>('loadReviews');
 
+export const loadNearBy = createAction<Offer[]>('loadNearBy');
+
 export const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');

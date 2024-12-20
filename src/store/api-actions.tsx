@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, AppState, AuthData, OfferFull, Offers, Reviews, UserData } from '../types';
 import { AxiosInstance } from 'axios';
-import { loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus } from './action';
+import { loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
 
@@ -48,6 +48,20 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
     const { data } = await api.get<Reviews>(APIRoute.Comments + offerId);
     dispatch(setOffersDataLoadingStatus(false));
     dispatch(loadReviews(data));
+  },
+);
+
+export const fetchNearByAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: AppState;
+  extra: AxiosInstance;
+}>(
+  'fetchNearBy',
+  async (offerId, { dispatch, extra: api }) => {
+    dispatch(setOffersDataLoadingStatus(true));
+    const { data } = await api.get<Offers>(APIRoute.Offer + offerId + APIRoute.NearBy);
+    dispatch(setOffersDataLoadingStatus(false));
+    dispatch(loadNearBy(data));
   },
 );
 

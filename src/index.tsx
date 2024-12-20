@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {CITIES} from './const';
 import {savedListing} from './mocks/saved-listing';
-import {neighbourhoodOffers} from './mocks/neighbourhood-offers';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {checkAuthAction, fetchOffersAction} from './store/api-actions';
@@ -24,7 +23,6 @@ root.render(
       <App
         cities = {CITIES}
         favorites = {savedListing}
-        neighbourhoodOffers = {neighbourhoodOffers}
       />
     </Provider>
   </React.StrictMode>

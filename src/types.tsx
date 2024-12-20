@@ -75,6 +75,7 @@ export type InitalState = {
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
   reviews: Reviews;
+  nearBy: Offers;
 };
 
 export type AuthData = {
