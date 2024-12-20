@@ -88,3 +88,9 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type ReviewData = {
+  offerId: string;
+  comment: string;
+  rating: number;
+};

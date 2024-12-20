@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, changeSort, loadNearBy, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {addReviewToList, changeCity, changeSort, loadNearBy, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
 import {AuthorizationStatus, EMPTY_OFFER, FIRST_CITY, SortType} from '../const';
 import {InitalState} from '../types';
 
@@ -37,6 +37,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(addReviewToList, (state, action) => {
+      state.reviews = [ action.payload, ...state.reviews ];
     })
     .addCase(loadNearBy, (state, action) => {
       state.nearBy = action.payload;

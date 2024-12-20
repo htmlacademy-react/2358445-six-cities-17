@@ -1,5 +1,7 @@
 import {STARS_COUNT, RATING_VALUES} from '../../const';
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
+import { useAppDispatch } from '../../hooks';
+import { addReviewAction } from '../../store/api-actions';
 
 type ReviewsFormProps = {
   offerId: string;
@@ -13,10 +15,10 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     review: '',
     ratingDisabled: false,
     reviewDisabled: false,
-    submitDisabled: true,
-    offerId: offerId
+    submitDisabled: true
   });
   const reviewCondition: boolean = (formData.review.length >= 50 && formData.review.length < 300);
+  const dispatch = useAppDispatch();
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({ ...prevState, 'rating': +evt.target.value }));
@@ -58,9 +60,13 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         review: '',
         ratingDisabled: true,
         reviewDisabled: true,
-        submitDisabled: true,
-        offerId: offerId
+        submitDisabled: true
       });
+      dispatch(addReviewAction({
+        comment: formData.review,
+        rating: formData.rating,
+        offerId: offerId
+      }));
     }}
     >
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
