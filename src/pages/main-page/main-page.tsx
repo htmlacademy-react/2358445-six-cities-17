@@ -9,6 +9,7 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
+import {getCitySortOffers} from '../../utils';
 
 type MainPageProps = {
   cities: string[];
@@ -18,25 +19,28 @@ type MainPageProps = {
 function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.sortedOffers);
+  const offers = useAppSelector((state) => state.offers);
+  const sort = useAppSelector((state) => state.sort);
+  const city = useAppSelector((state) => state.city);
+  const sortedOffers = getCitySortOffers(offers, sort, city);
 
   const handleCardHover = (offer: Offer | null) => {
     setActiveCard(offer);
   };
 
-  const mainInner = (offers.length ? (
+  const mainInner = (sortedOffers.length ? (
     <>
       <section className='cities__places places'>
         <h2 className='visually-hidden'>Places</h2>
-        <b className='places__found'>{offers.length} places to stay in {activeCity}</b>
+        <b className='places__found'>{sortedOffers.length} places to stay in {activeCity}</b>
         <SortForm />
         <CardsList
-          offers={offers}
+          offers={sortedOffers}
           onCardHover={handleCardHover}
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' offers={offers} selectedOffer={activeCard}/>
+        <Map page='cities' offers={sortedOffers} selectedOffer={activeCard}/>
       </div>
     </>
   )
@@ -47,13 +51,13 @@ function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
   return (
     <div className='page page--gray page--main'>
       <Header isNavShow countFavorites={countFavorites}/>
-      <main className={cn('page__main', 'page__main--index', {'page__main--index-empty': !offers.length})}>
+      <main className={cn('page__main', 'page__main--index', {'page__main--index-empty': !sortedOffers.length})}>
         <Helmet>
           <title>Six cities</title>
         </Helmet>
         <Cities cities={cities}/>
         <div className='cities'>
-          <div className={cn('cities__places-container', 'container', {'cities__places-container--empty':!offers.length})}>
+          <div className={cn('cities__places-container', 'container', {'cities__places-container--empty':!sortedOffers.length})}>
             {mainInner}
           </div>
         </div>

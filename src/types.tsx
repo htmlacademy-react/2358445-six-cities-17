@@ -71,7 +71,6 @@ export type InitalState = {
   city: string;
   offers: Offers;
   offer: OfferFull;
-  sortedOffers: Offers;
   sort: SortType;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
