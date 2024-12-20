@@ -9,7 +9,7 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
-import {getCitySortOffers} from '../../utils';
+import {getCitySortOffers, getMapPoints} from '../../utils';
 
 type MainPageProps = {
   cities: string[];
@@ -23,6 +23,7 @@ function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
   const sort = useAppSelector((state) => state.sort);
   const city = useAppSelector((state) => state.city);
   const sortedOffers = getCitySortOffers(offers, sort, city);
+  const mapPoints = getMapPoints(sortedOffers);
 
   const handleCardHover = (offer: Offer | null) => {
     setActiveCard(offer);
@@ -40,7 +41,7 @@ function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
         />
       </section>
       <div className='cities__right-section'>
-        <Map page='cities' offers={sortedOffers} selectedOffer={activeCard}/>
+        <Map page='cities' offers={mapPoints} selectedOffer={activeCard}/>
       </div>
     </>
   )

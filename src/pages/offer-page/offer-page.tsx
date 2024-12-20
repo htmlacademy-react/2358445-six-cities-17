@@ -2,7 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
 import {NEARBY_COUNT} from '../../const';
 import {Offer} from '../../types';
-import {showRating} from '../../utils';
+import {getMapPoints, showRating} from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -39,7 +39,7 @@ function OfferPage({ neighbourhoodOffers, countFavorites }: OfferPageProps): JSX
 
   const premiumIcon = isPremium && <OfferLabel page={page} />;
   const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
-  const offersForMap = [offer, ...nearOffers];
+  const offersForMap = getMapPoints(nearOffers, offer);
 
   return (
     <div className='page'>
