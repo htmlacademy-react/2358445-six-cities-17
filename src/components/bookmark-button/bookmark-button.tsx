@@ -2,6 +2,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {SettingsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
+import {useAppSelector} from '../../hooks';
 
 const BookmarkSettings: SettingsType = {
   'place-card': {
@@ -17,10 +18,10 @@ const BookmarkSettings: SettingsType = {
 type BookmarkButtonProps = {
   isFavorite: boolean;
   page?: 'place-card' | 'offer';
-  authorizationStatus: AuthorizationStatus;
 };
 
-function BookmarkButton({isFavorite, page = 'place-card', authorizationStatus = AuthorizationStatus.Unknown}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({isFavorite, page = 'place-card'}: BookmarkButtonProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
   return (
     <button className={

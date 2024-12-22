@@ -1,13 +1,17 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, changeSort} from './action';
-import {FIRST_CITY, SortType} from '../const';
-import {offers} from '../mocks/offers';
-import {getCitySortOffers} from '../utils';
+import {addReviewToList, changeCity, changeSort, loadNearBy, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {AuthorizationStatus, EMPTY_OFFER, FIRST_CITY, SortType} from '../const';
+import {InitalState} from '../types';
 
-const initialState = {
+const initialState: InitalState = {
   city: FIRST_CITY,
-  offers: offers.filter((el) => el.city.name === FIRST_CITY),
-  sort: SortType.POPULAR
+  offers: [],
+  offer: EMPTY_OFFER,
+  sort: SortType.POPULAR,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false,
+  reviews: [],
+  nearBy: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -15,11 +19,30 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
       state.sort = SortType.POPULAR;
-      state.offers = getCitySortOffers(offers, state.sort, state.city);
     })
     .addCase(changeSort, (state, action) => {
       state.sort = action.payload;
-      state.offers = getCitySortOffers(offers, state.sort, state.city);
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
+    })
+    .addCase(loadOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(addReviewToList, (state, action) => {
+      state.reviews = [ action.payload, ...state.reviews ];
+    })
+    .addCase(loadNearBy, (state, action) => {
+      state.nearBy = action.payload;
     });
 });
 

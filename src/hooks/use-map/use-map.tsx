@@ -1,8 +1,9 @@
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
 import {Map, TileLayer} from 'leaflet';
 import {City} from '../../types';
+import {MapAttribution} from '../../const';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
+function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City, shouldScrollOnZoom: boolean = true): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
@@ -13,16 +14,11 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
           lat: city.location.latitude,
           lng: city.location.longitude
         },
-        zoom: city.location.zoom
+        zoom: city.location.zoom,
+        scrollWheelZoom: shouldScrollOnZoom
       });
 
-      const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
+      const layer = new TileLayer(MapAttribution.TileLayer, {attribution: MapAttribution.Copyright});
 
       instance.addLayer(layer);
 

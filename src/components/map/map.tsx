@@ -7,7 +7,7 @@ import useMap from '../../hooks/use-map/use-map';
 
 type MapProps = {
   page: string;
-  offers: Offer[];
+  offers: Omit<Offer, 'type' | 'price' | 'previewImage' | 'isFavorite' | 'isPremium' | 'rating'>[];
   selectedOffer: Offer | null;
 }
 
@@ -26,7 +26,8 @@ const currentMapIcon = new Icon({
 function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
   const city = offers[0].city;
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const shouldScrollOnZoom = (page !== 'offer');
+  const map = useMap(mapRef, city, shouldScrollOnZoom);
 
   useEffect(() => {
     if (map) {

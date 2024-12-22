@@ -1,4 +1,4 @@
-import {AuthorizationStatus, AppRoute} from '../../const';
+import {AppRoute} from '../../const';
 import {SettingsType, OfferSimple} from '../../types';
 import {toUpFirstLetter, showRating} from '../../utils';
 import {Link} from 'react-router-dom';
@@ -24,12 +24,11 @@ const CardSettings: SettingsType = {
 type CardProps = {
   offer: OfferSimple;
   page?: 'cities' | 'near-places' | 'favorites';
-  authorizationStatus: AuthorizationStatus;
   onCardMouseEnter?: () => void;
   onCardMouseLeave?: () => void;
 };
 
-function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus.Unknown, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
+function Card({offer, page = 'cities', onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
   const {id, title, type, previewImage, price, isFavorite, rating} = offer;
   const premiumIcon = offer.isPremium && <OfferLabel/>;
   return (
@@ -51,7 +50,7 @@ function Card({offer, page = 'cities', authorizationStatus = AuthorizationStatus
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite} authorizationStatus={authorizationStatus}/>
+          <BookmarkButton isFavorite={isFavorite}/>
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>

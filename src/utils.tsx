@@ -1,5 +1,5 @@
 import {SortType, CITIES} from './const';
-import {Offer} from './types';
+import {Offer, OfferFull, Offers} from './types';
 
 const toUpFirstLetter = (value: string) => value[0].toUpperCase() + value.slice(1);
 
@@ -38,4 +38,19 @@ const checkPassword = (password: string): boolean => {
   return result;
 };
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword };
+const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
+  const mapPoints = offers.map(({id, title, city, location}) => ({id, title, city, location}));
+
+  if (currentOffer) {
+    return mapPoints.concat({
+      id: currentOffer.id,
+      title: currentOffer.title,
+      city: currentOffer.city,
+      location: currentOffer.location
+    });
+  }
+
+  return mapPoints;
+};
+
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints };
