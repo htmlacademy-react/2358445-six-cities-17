@@ -9,7 +9,7 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
-import {getCitySortOffers, getMapPoints} from '../../utils';
+import {getMapPoints} from '../../utils';
 
 type MainPageProps = {
   cities: string[];
@@ -19,10 +19,7 @@ type MainPageProps = {
 function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
-  const sort = useAppSelector((state) => state.sort);
-  const city = useAppSelector((state) => state.city);
-  const sortedOffers = getCitySortOffers(offers, sort, city);
+  const sortedOffers = useAppSelector((state) => state.sortedOffers);
   const mapPoints = getMapPoints(sortedOffers);
 
   const handleCardHover = (offer: Offer | null) => {

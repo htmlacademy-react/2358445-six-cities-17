@@ -1,5 +1,5 @@
-import {SortType, CITIES} from './const';
-import {Offer, OfferFull, Offers} from './types';
+import {SortType, CITIES, REVIEWS_COUNT} from './const';
+import {Offer, OfferFull, Offers, Reviews} from './types';
 
 const toUpFirstLetter = (value: string) => value[0].toUpperCase() + value.slice(1);
 
@@ -53,4 +53,8 @@ const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
   return mapPoints;
 };
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints };
+const sortReviews = (reviews: Reviews): Reviews => {
+  return [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
+};
+
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints, sortReviews };

@@ -20,13 +20,13 @@ function Nav({countFavorites}: NavProps): JSX.Element {
       </Link>
     </li>;
   let actionLink = (
-    <Link className='header__nav-link' to='/' onClick={(evt) => {
+    <a href='/' className='header__nav-link' onClick={(evt) => {
       evt.preventDefault();
       dispatch(logoutAction());
     }}
     >
       <span className='header__signout'>Log Out</span>
-    </Link>
+    </a>
   );
   if (authorizationStatus !== AuthorizationStatus.Auth) {
     actionLink = <Link className='header__nav-link' to={AppRoute.Login}><span className='header__signout'>Sign in</span></Link>;
