@@ -53,8 +53,6 @@ const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
   return mapPoints;
 };
 
-const sortReviews = (reviews: Reviews): Reviews => {
-  return [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
-};
+const sortReviews = (reviews: Reviews): Reviews => [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
 
 export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints, sortReviews };
