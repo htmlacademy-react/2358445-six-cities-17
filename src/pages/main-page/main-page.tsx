@@ -13,10 +13,9 @@ import {getMapPoints} from '../../utils';
 
 type MainPageProps = {
   cities: string[];
-  countFavorites: number;
 }
 
-function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
+function MainPage({cities}: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector((state) => state.city);
   const sortedOffers = useAppSelector((state) => state.sortedOffers);
@@ -48,7 +47,7 @@ function MainPage({cities, countFavorites}: MainPageProps): JSX.Element {
 
   return (
     <div className='page page--gray page--main'>
-      <Header isNavShow countFavorites={countFavorites}/>
+      <Header isNavShow/>
       <main className={cn('page__main', 'page__main--index', {'page__main--index-empty': !sortedOffers.length})}>
         <Helmet>
           <title>Six cities</title>

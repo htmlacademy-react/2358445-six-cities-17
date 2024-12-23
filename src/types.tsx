@@ -78,6 +78,7 @@ export type InitalState = {
   isOffersDataLoading: boolean;
   reviews: Reviews;
   nearBy: Offers;
+  favorites: Offers;
 };
 
 export type AuthData = {
@@ -102,3 +103,8 @@ export type ThunkType = {
   state: AppState;
   extra: AxiosInstance;
 }
+
+export type ChangeFavoriteData = {
+  offerId: string;
+  status: number;
+};

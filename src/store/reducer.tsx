@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {addReviewToList, changeCity, changeSort, loadNearBy, loadOffer, loadOffers, loadReviews, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {addReviewToList, addToFavoriteList, changeCity, changeSort, loadFavoriteList, loadNearBy, loadOffer, loadOffers, loadReviews, removeFromFavoriteList, requireAuthorization, setOffersDataLoadingStatus} from './action';
 import {AuthorizationStatus, EMPTY_OFFER, FIRST_CITY, SortType} from '../const';
 import {InitalState} from '../types';
-import { getCitySortOffers } from '../utils';
+import {getCitySortOffers} from '../utils';
 
 const initialState: InitalState = {
   city: FIRST_CITY,
@@ -13,7 +13,8 @@ const initialState: InitalState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   reviews: [],
-  nearBy: []
+  nearBy: [],
+  favorites: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -48,6 +49,15 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearBy, (state, action) => {
       state.nearBy = action.payload;
+    })
+    .addCase(addToFavoriteList, (state, action) => {
+      state.favorites = [ action.payload, ...state.favorites ];
+    })
+    .addCase(removeFromFavoriteList, (state, action) => {
+      state.favorites = state.favorites.filter((item) =>(item.id !== action.payload.id));
+    })
+    .addCase(loadFavoriteList, (state, action) => {
+      state.favorites = action.payload;
     });
 });
 

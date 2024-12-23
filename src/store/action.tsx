@@ -21,3 +21,9 @@ export const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLo
 export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
+
+export const addToFavoriteList = createAction<OfferFull>('addToFavoriteList');
+
+export const removeFromFavoriteList = createAction<OfferFull>('removeFromFavoriteList');
+
+export const loadFavoriteList = createAction<Offer[]>('loadFavoriteList');

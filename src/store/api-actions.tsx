@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AuthData, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
-import {addReviewToList, loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {AuthData, ChangeFavoriteData, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
+import {addReviewToList, addToFavoriteList, loadFavoriteList, loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, removeFromFavoriteList, requireAuthorization, setOffersDataLoadingStatus} from './action';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {dropToken, saveToken} from '../services/token';
 
@@ -49,12 +49,23 @@ export const fetchNearByAction = createAsyncThunk<void, string, ThunkType>(
   },
 );
 
+export const fetchFavoriteListAction = createAsyncThunk<void, undefined, ThunkType>(
+  'fetchFavoriteList',
+  async (_arg, { dispatch, extra: api }) => {
+    dispatch(setOffersDataLoadingStatus(true));
+    const { data } = await api.get<Offers>(APIRoute.Favorite);
+    dispatch(setOffersDataLoadingStatus(false));
+    dispatch(loadFavoriteList(data));
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, ThunkType>(
   'checkAuth',
   async (_arg, { dispatch, extra: api }) => {
     try {
       await api.get(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(fetchFavoriteListAction());
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
@@ -85,5 +96,17 @@ export const addReviewAction = createAsyncThunk<void, ReviewData, ThunkType>(
   async ({ comment, rating, offerId }, { dispatch, extra: api }) => {
     const { data } = await api.post<Review>(APIRoute.Comments + offerId, { comment, rating });
     dispatch(addReviewToList(data));
+  },
+);
+
+export const changeFavoriteAction = createAsyncThunk<void, ChangeFavoriteData, ThunkType>(
+  'changeFavorite',
+  async ({ status, offerId }, { dispatch, extra: api }) => {
+    const { data } = await api.post<OfferFull>(`${APIRoute.FavoriteStatus}${offerId}/${String(status)}`, { offerId, status });
+    if (status) {
+      dispatch(addToFavoriteList(data));
+    } else {
+      dispatch(removeFromFavoriteList(data));
+    }
   },
 );
