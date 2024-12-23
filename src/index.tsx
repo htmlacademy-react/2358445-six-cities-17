@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {CITIES} from './const';
-import {savedListing} from './mocks/saved-listing';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {checkAuthAction, fetchOffersAction} from './store/api-actions';
@@ -22,7 +21,6 @@ root.render(
       <ToastContainer/>
       <App
         cities = {CITIES}
-        favorites = {savedListing}
       />
     </Provider>
   </React.StrictMode>

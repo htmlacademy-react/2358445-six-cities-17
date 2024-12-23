@@ -1,17 +1,13 @@
 import {Helmet} from 'react-helmet-async';
-import {Offer} from '../../types';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
+import {useAppSelector} from '../../hooks';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-  countFavorites: number;
-}
-
-function FavoritesPage({offers, countFavorites}: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
+  const offers = useAppSelector((state) => state.favorites);
   const favoritesInner = (offers.length ?
     <><h1 className='favorites__title'>Saved listing</h1><FavoritesList offers={offers}/></>
     :
@@ -19,7 +15,7 @@ function FavoritesPage({offers, countFavorites}: FavoritesPageProps): JSX.Elemen
   );
   return (
     <div className='page'>
-      <Header isNavShow countFavorites={countFavorites}/>
+      <Header isNavShow/>
       <main className={cn('page__main', 'page__main--favorites', {'page__main--favorites-empty': !offers.length})}>
         <Helmet>
           <title>Saved listing</title>

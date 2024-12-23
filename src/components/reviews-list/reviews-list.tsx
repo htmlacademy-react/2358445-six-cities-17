@@ -1,6 +1,7 @@
-import {AuthorizationStatus, REVIEWS_COUNT} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {Review} from '../../types';
+import {sortReviews} from '../../utils';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 
@@ -13,8 +14,7 @@ function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   let reviewsList;
   if (reviews.length) {
-    let sortedReviews = [...reviews];
-    sortedReviews = sortedReviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
+    const sortedReviews = sortReviews(reviews);
     reviewsList = sortedReviews.map((review) => (
       <ReviewItem
         key={review.id}

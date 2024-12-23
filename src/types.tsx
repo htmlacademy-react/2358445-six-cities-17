@@ -1,3 +1,4 @@
+import {AxiosInstance} from 'axios';
 import {AuthorizationStatus, SortType} from './const';
 import {store} from './store';
 
@@ -70,12 +71,14 @@ export type AppDispatch = typeof store.dispatch;
 export type InitalState = {
   city: string;
   offers: Offers;
+  sortedOffers: Offers;
   offer: OfferFull;
   sort: SortType;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
   reviews: Reviews;
   nearBy: Offers;
+  favorites: Offers;
 };
 
 export type AuthData = {
@@ -93,4 +96,15 @@ export type ReviewData = {
   offerId: string;
   comment: string;
   rating: number;
+};
+
+export type ThunkType = {
+  dispatch: AppDispatch;
+  state: AppState;
+  extra: AxiosInstance;
+}
+
+export type ChangeFavoriteData = {
+  offerId: string;
+  status: number;
 };

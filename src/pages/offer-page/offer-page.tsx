@@ -15,11 +15,7 @@ import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../sto
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
 
-type OfferPageProps = {
-  countFavorites: number;
-}
-
-function OfferPage({ countFavorites }: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const params = useParams();
   const page = 'offer';
   const offer = useAppSelector((state) => state.offer);
@@ -58,7 +54,7 @@ function OfferPage({ countFavorites }: OfferPageProps): JSX.Element {
 
   return (
     <div className='page'>
-      <Header isNavShow countFavorites={countFavorites}/>
+      <Header isNavShow/>
       <main className='page__main page__main--offer'>
         <section className={page}>
           <Helmet>
@@ -70,7 +66,7 @@ function OfferPage({ countFavorites }: OfferPageProps): JSX.Element {
               {premiumIcon}
               <div className='offer__name-wrapper'>
                 <h1 className='offer__name'>{title}</h1>
-                <BookmarkButton isFavorite={isFavorite} page={page} />
+                <BookmarkButton isFavorite={isFavorite} page={page} offerId={id} />
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>

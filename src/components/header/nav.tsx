@@ -3,11 +3,8 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {logoutAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
-type NavProps = {
-  countFavorites: number;
-}
-
-function Nav({countFavorites}: NavProps): JSX.Element {
+function Nav(): JSX.Element {
+  const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userLine = (authorizationStatus === AuthorizationStatus.Auth) &&
@@ -16,17 +13,17 @@ function Nav({countFavorites}: NavProps): JSX.Element {
         <div className='header__avatar-wrapper user__avatar-wrapper'>
         </div>
         <span className='header__user-name user__name'>Oliver.conner@gmail.com</span>
-        <span className='header__favorite-count'>{countFavorites}</span>
+        <span className='header__favorite-count'>{favorites.length}</span>
       </Link>
     </li>;
   let actionLink = (
-    <Link className='header__nav-link' to='/' onClick={(evt) => {
+    <a href='/' className='header__nav-link' onClick={(evt) => {
       evt.preventDefault();
       dispatch(logoutAction());
     }}
     >
       <span className='header__signout'>Log Out</span>
-    </Link>
+    </a>
   );
   if (authorizationStatus !== AuthorizationStatus.Auth) {
     actionLink = <Link className='header__nav-link' to={AppRoute.Login}><span className='header__signout'>Sign in</span></Link>;
