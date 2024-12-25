@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AuthData, ChangeFavoriteData, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
-import {addReviewToList, addToFavoriteList, loadFavoriteList, loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, removeFromFavoriteList, requireAuthorization, setOffersDataLoadingStatus} from './action';
+import {addReviewToList, addToFavoriteList, loadFavoriteList, loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, removeFromFavoriteList, requireAuthorization, setFavoriteListDataLoadingStatus, setNearByDataLoadingStatus, setOfferDataLoadingStatus, setOffersDataLoadingStatus, setReviewsDataLoadingStatus} from './action';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {dropToken, saveToken} from '../services/token';
 
@@ -17,13 +17,13 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkType>(
 export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
   'fetchOffer',
   async (offerId, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+    dispatch(setOfferDataLoadingStatus(true));
     try {
       const { data } = await api.get<OfferFull>(APIRoute.Offer + offerId);
-      dispatch(setOffersDataLoadingStatus(false));
+      dispatch(setOfferDataLoadingStatus(false));
       dispatch(loadOffer(data));
     } catch {
-      dispatch(setOffersDataLoadingStatus(false));
+      dispatch(setOfferDataLoadingStatus(false));
       dispatch(redirectToRoute(AppRoute.Page404));
     }
   },
@@ -32,9 +32,9 @@ export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
 export const fetchReviewsAction = createAsyncThunk<void, string, ThunkType>(
   'fetchReviews',
   async (offerId, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+    dispatch(setReviewsDataLoadingStatus(true));
     const { data } = await api.get<Reviews>(APIRoute.Comments + offerId);
-    dispatch(setOffersDataLoadingStatus(false));
+    dispatch(setReviewsDataLoadingStatus(false));
     dispatch(loadReviews(data));
   },
 );
@@ -42,9 +42,9 @@ export const fetchReviewsAction = createAsyncThunk<void, string, ThunkType>(
 export const fetchNearByAction = createAsyncThunk<void, string, ThunkType>(
   'fetchNearBy',
   async (offerId, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+    dispatch(setNearByDataLoadingStatus(true));
     const { data } = await api.get<Offers>(APIRoute.Offer + offerId + APIRoute.NearBy);
-    dispatch(setOffersDataLoadingStatus(false));
+    dispatch(setNearByDataLoadingStatus(false));
     dispatch(loadNearBy(data));
   },
 );
@@ -52,9 +52,9 @@ export const fetchNearByAction = createAsyncThunk<void, string, ThunkType>(
 export const fetchFavoriteListAction = createAsyncThunk<void, undefined, ThunkType>(
   'fetchFavoriteList',
   async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+    dispatch(setFavoriteListDataLoadingStatus(true));
     const { data } = await api.get<Offers>(APIRoute.Favorite);
-    dispatch(setOffersDataLoadingStatus(false));
+    dispatch(setFavoriteListDataLoadingStatus(false));
     dispatch(loadFavoriteList(data));
   },
 );

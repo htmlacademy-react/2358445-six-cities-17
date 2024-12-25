@@ -22,13 +22,15 @@ function OfferPage(): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews);
   const neighbourhoodOffers = useAppSelector((state) => state.nearBy);
   const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, id, host} = offer;
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const isReviewsDataLoading = useAppSelector((state) => state.isReviewsDataLoading);
+  const isNearByDataLoading = useAppSelector((state) => state.isNearByDataLoading);
   const dispatch = useAppDispatch();
-  if (params.id && !isOffersDataLoading && ((offer === null) || (id !== params.id))) {
+  if (params.id && !isOfferDataLoading && ((offer === null) || (id !== params.id))) {
     dispatch(fetchOfferAction(params.id));
     dispatch(fetchReviewsAction(params.id));
     dispatch(fetchNearByAction(params.id));
-    if (isOffersDataLoading) {
+    if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
       return <LoadingPage/>;
     }
   }

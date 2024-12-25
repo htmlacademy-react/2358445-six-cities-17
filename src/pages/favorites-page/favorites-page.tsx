@@ -5,9 +5,14 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks';
+import LoadingPage from '../loading-page/loading-page';
 
 function FavoritesPage(): JSX.Element {
   const offers = useAppSelector((state) => state.favorites);
+  const isFavoriteListDataLoading = useAppSelector((state) => state.isFavoriteListDataLoading);
+  if (isFavoriteListDataLoading) {
+    return <LoadingPage/>;
+  }
   const favoritesInner = (offers.length ?
     <><h1 className='favorites__title'>Saved listing</h1><FavoritesList offers={offers}/></>
     :

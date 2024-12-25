@@ -55,4 +55,13 @@ const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
 
 const sortReviews = (reviews: Reviews): Reviews => [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints, sortReviews };
+const changeIsFavorite = (id: string, isFavorite: boolean, offers: Offers): Offers => {
+  offers.find((item) => {
+    if (item.id === id) {
+      item.isFavorite = isFavorite;
+    }
+  });
+  return offers;
+};
+
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints, sortReviews, changeIsFavorite };

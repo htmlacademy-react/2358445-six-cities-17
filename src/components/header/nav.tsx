@@ -17,7 +17,7 @@ function Nav(): JSX.Element {
       </Link>
     </li>;
   let actionLink = (
-    <a href='/' className='header__nav-link' onClick={(evt) => {
+    <a href='#' className='header__nav-link' onClick={(evt) => {
       evt.preventDefault();
       dispatch(logoutAction());
     }}

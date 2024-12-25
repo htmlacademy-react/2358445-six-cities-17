@@ -67,6 +67,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         rating: formData.rating,
         offerId: offerId
       }));
+      setFormData((prevState) => ({ ...prevState, 'ratingDisabled': false, 'reviewDisabled': false, 'submitDisabled': false }));
     }}
     >
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>

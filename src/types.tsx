@@ -76,6 +76,10 @@ export type InitalState = {
   sort: SortType;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
+  isOfferDataLoading: boolean;
+  isReviewsDataLoading: boolean;
+  isNearByDataLoading: boolean;
+  isFavoriteListDataLoading: boolean;
   reviews: Reviews;
   nearBy: Offers;
   favorites: Offers;
