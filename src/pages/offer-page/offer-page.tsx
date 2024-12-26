@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {NEARBY_COUNT} from '../../const';
+import {NEARBY_COUNT, Page} from '../../const';
 import {getMapPoints, showRating} from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -14,25 +14,32 @@ import OfferLabel from '../../components/offerLabel/offerLabel';
 import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
+import {useEffect} from 'react';
 
 function OfferPage(): JSX.Element {
-  const params = useParams();
-  const page = 'offer';
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchReviewsAction(id));
+      dispatch(fetchNearByAction(id));
+    }
+  }, [dispatch, id]);
+
+  const page = Page.Offer;
   const offer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
   const neighbourhoodOffers = useAppSelector((state) => state.nearBy);
-  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, id, host} = offer;
+  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
   const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
   const isReviewsDataLoading = useAppSelector((state) => state.isReviewsDataLoading);
   const isNearByDataLoading = useAppSelector((state) => state.isNearByDataLoading);
-  const dispatch = useAppDispatch();
-  if (params.id && !isOfferDataLoading && ((offer === null) || (id !== params.id))) {
-    dispatch(fetchOfferAction(params.id));
-    dispatch(fetchReviewsAction(params.id));
-    dispatch(fetchNearByAction(params.id));
-    if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
-      return <LoadingPage/>;
-    }
+
+
+  if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
+    return <LoadingPage/>;
   }
 
   const premiumIcon = isPremium && <OfferLabel page={page} />;
@@ -47,7 +54,7 @@ function OfferPage(): JSX.Element {
           <h2 className='near-places__title'>Other places in the neighbourhood</h2>
           <CardsList
             offers={nearOffers}
-            page='near-places'
+            page={Page.NearPlaces}
           />
         </section>
       </div>
@@ -68,7 +75,7 @@ function OfferPage(): JSX.Element {
               {premiumIcon}
               <div className='offer__name-wrapper'>
                 <h1 className='offer__name'>{title}</h1>
-                <BookmarkButton isFavorite={isFavorite} page={page} offerId={id} />
+                <BookmarkButton isFavorite={isFavorite} page={page} offerId={offer.id} />
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
@@ -100,7 +107,7 @@ function OfferPage(): JSX.Element {
                   <p className='offer__text'>{description}</p>
                 </div>
               </div>
-              <ReviewsList reviews={reviews} offerId={id} />
+              <ReviewsList reviews={reviews} offerId={offer.id} />
             </div>
           </div>
           <Map page={page} offers={offersForMap} selectedOffer={offer}/>

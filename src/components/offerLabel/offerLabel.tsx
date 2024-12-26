@@ -1,9 +1,11 @@
+import {Page} from '../../const';
+
 type OfferLabelProps = {
   text?: string;
-  page?: 'offer' | 'place-card';
+  page?: Page.Offer | Page.PlaceCard;
 };
 
-function OfferLabel({ text = 'Premium', page = 'place-card' }: OfferLabelProps): JSX.Element {
+function OfferLabel({ text = 'Premium', page = Page.PlaceCard }: OfferLabelProps): JSX.Element {
   return (
     <div className={`${page}__mark`}>
       <span>{text}</span>

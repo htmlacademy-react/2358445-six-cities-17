@@ -1,4 +1,4 @@
-import {AppRoute} from '../../const';
+import {AppRoute, Page} from '../../const';
 import {SettingsType, OfferSimple} from '../../types';
 import {toUpFirstLetter, showRating} from '../../utils';
 import {Link} from 'react-router-dom';
@@ -23,12 +23,12 @@ const CardSettings: SettingsType = {
 
 type CardProps = {
   offer: OfferSimple;
-  page?: 'cities' | 'near-places' | 'favorites';
+  page?: Page.Cities | Page.NearPlaces | Page.Favorites;
   onCardMouseEnter?: () => void;
   onCardMouseLeave?: () => void;
 };
 
-function Card({offer, page = 'cities', onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
+function Card({offer, page = Page.Cities, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
   const {id, title, type, previewImage, price, isFavorite, rating} = offer;
   const premiumIcon = offer.isPremium && <OfferLabel/>;
   return (

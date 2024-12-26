@@ -1,4 +1,4 @@
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, Page} from '../../const';
 import {SettingsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
@@ -18,11 +18,11 @@ const BookmarkSettings: SettingsType = {
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
-  page?: 'place-card' | 'offer';
+  page?: Page.PlaceCard | Page.Offer;
   offerId: string;
 };
 
-function BookmarkButton({isFavorite, page = 'place-card', offerId}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkButtonProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

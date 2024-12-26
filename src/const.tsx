@@ -85,3 +85,11 @@ export enum APIRoute {
   Comments = '/comments/'
 }
 
+export enum Page {
+  PlaceCard = 'place-card',
+  Cities = 'cities',
+  NearPlaces = 'near-places',
+  Favorites = 'favorites',
+  Offer = 'offer'
+}
+
