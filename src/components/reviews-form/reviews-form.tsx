@@ -1,7 +1,7 @@
-import {STARS_COUNT, RATING_VALUES} from '../../const';
+import {STARS_COUNT, RATING_VALUES, ReviewLimit} from '../../const';
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import { useAppDispatch } from '../../hooks';
-import { addReviewAction } from '../../store/api-actions';
+import {useAppDispatch} from '../../hooks';
+import {addReviewAction} from '../../store/api-actions';
 
 type ReviewsFormProps = {
   offerId: string;
@@ -17,7 +17,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     reviewDisabled: false,
     submitDisabled: true
   });
-  const reviewCondition: boolean = (formData.review.length >= 50 && formData.review.length < 300);
+  const reviewCondition: boolean = ((formData.review.length as ReviewLimit) >= ReviewLimit.Min && (formData.review.length as ReviewLimit) < ReviewLimit.Max);
   const dispatch = useAppDispatch();
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +36,23 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       setFormData((prevState) => ({ ...prevState, 'submitDisabled': true }));
     }
   };
+  const handleSubmitAddReviewForm = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    setFormData((prevState) => ({ ...prevState, 'ratingDisabled': true, 'reviewDisabled': true,'submitDisabled': true}));
+    dispatch(addReviewAction({
+      comment: formData.review,
+      rating: formData.rating,
+      offerId: offerId
+    }))
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          setFormData({ 'rating': 0, 'review': '', 'ratingDisabled': false, 'reviewDisabled': false, 'submitDisabled': false });
+        }
+        if (response.meta.requestStatus === 'rejected') {
+          setFormData((prevState) => ({ ...prevState, 'ratingDisabled': false, 'reviewDisabled': false,'submitDisabled': false}));
+        }
+      });
+  };
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((prevState) => ({ ...prevState, 'review': evt.target.value }));
     if (formData.rating) {
@@ -53,23 +70,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     }
   };
   return (
-    <form className='reviews__form form' action='#' method='post' onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-      evt.preventDefault();
-      setFormData({
-        rating: 0,
-        review: '',
-        ratingDisabled: true,
-        reviewDisabled: true,
-        submitDisabled: true
-      });
-      dispatch(addReviewAction({
-        comment: formData.review,
-        rating: formData.rating,
-        offerId: offerId
-      }));
-      setFormData((prevState) => ({ ...prevState, 'ratingDisabled': false, 'reviewDisabled': false, 'submitDisabled': false }));
-    }}
-    >
+    <form className='reviews__form form' action='#' method='post' onSubmit={handleSubmitAddReviewForm}>
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
       <div className='reviews__rating-form form__rating'>
         {RATING_VALUES.map((value: string, key: number)=> (

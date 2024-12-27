@@ -60,3 +60,8 @@ export enum Page {
   Offer = 'offer'
 }
 
+export enum ReviewLimit {
+  Min = 50,
+  Max = 300
+}
+

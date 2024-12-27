@@ -9,13 +9,13 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import OfferGalery from '../../components/offer-galery/offer-galery';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import HostUser from '../../components/host-user/host-user';
-import CardsList from '../../components/cards-list/cards-list';
 import OfferLabel from '../../components/offerLabel/offerLabel';
 import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
 import {useEffect} from 'react';
 import Page404 from '../page-404/page-404';
+import NearByOffers from '../../components/near-by-offers/near-by-offers';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -54,21 +54,6 @@ function OfferPage(): JSX.Element {
   const premiumIcon = isPremium && <OfferLabel page={page} />;
   const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
   const offersForMap = getMapPoints(nearOffers, offer);
-  let nearOffersBlock = <div className='container'></div>;
-
-  if (nearOffers.length) {
-    nearOffersBlock = (
-      <div className='container'>
-        <section className='near-places places'>
-          <h2 className='near-places__title'>Other places in the neighbourhood</h2>
-          <CardsList
-            offers={nearOffers}
-            page={Page.NearPlaces}
-          />
-        </section>
-      </div>
-    );
-  }
 
   return (
     <div className='page'>
@@ -121,7 +106,7 @@ function OfferPage(): JSX.Element {
           </div>
           <Map page={page} offers={offersForMap} selectedOffer={offer}/>
         </section>
-        {nearOffersBlock}
+        {nearOffers.length && <NearByOffers/>}
       </main>
     </div>
   );
