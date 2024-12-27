@@ -20,9 +20,7 @@ function CardsList({page = Page.Cities, offers, onCardHover}: CardsListProps): J
       key={offer.id}
       offer={offer}
       page={page}
-      onCardMouseEnter={() => {
-        cardMouseEnterHandler(offer);
-      }}
+      onCardMouseEnter={() => cardMouseEnterHandler(offer)}
       onCardMouseLeave={cardMouseLeaveHandler}
     />
   ));
