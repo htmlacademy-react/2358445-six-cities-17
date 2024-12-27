@@ -4,6 +4,8 @@ export const FIRST_CITY = CITIES[0];
 
 export const STARS_COUNT = 5;
 
+export const GALERY_IMAGES_COUNT = 6;
+
 export const REVIEWS_COUNT = 10;
 
 export const NEARBY_COUNT = 3;
