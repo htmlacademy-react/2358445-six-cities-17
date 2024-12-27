@@ -16,7 +16,8 @@ import LoadingPage from '../loading-page/loading-page';
 import {useEffect} from 'react';
 import Page404 from '../page-404/page-404';
 import NearByOffers from '../../components/near-by-offers/near-by-offers';
-import {selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/selectors';
+import {selectIsErrorInOfferDataLoading, selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/selectors';
+import ServerErrorPage from '../server-error-page/server-error-page';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -39,11 +40,16 @@ function OfferPage(): JSX.Element {
   const reviews = useAppSelector(selectReviews);
   const neighbourhoodOffers = useAppSelector(selectNearByOffers);
   const isOfferDataLoading = useAppSelector(selectIsOfferDataLoading);
+  const isErrorInOfferDataLoading = useAppSelector(selectIsErrorInOfferDataLoading);
   const isReviewsDataLoading = useAppSelector(selectIsReviewsDataLoading);
   const isNearByDataLoading = useAppSelector(selectIsNearByDataLoading);
 
   if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
     return <LoadingPage/>;
+  }
+
+  if (isErrorInOfferDataLoading) {
+    return <ServerErrorPage/>;
   }
 
   if (!offer) {

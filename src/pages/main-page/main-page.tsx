@@ -10,17 +10,23 @@ import cn from 'classnames';
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks';
 import {getMapPoints} from '../../utils';
-import {selectActiveCity, selectCitySortOffers} from '../../store/selectors';
+import {selectActiveCity, selectCitySortOffers, selectIsErrorInOffersDataLoading} from '../../store/selectors';
+import ServerErrorPage from '../server-error-page/server-error-page';
 
 type MainPageProps = {
   cities: string[];
 }
 
 function MainPage({cities}: MainPageProps): JSX.Element {
+  const isErrorInOffersDataLoading = useAppSelector(selectIsErrorInOffersDataLoading);
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector(selectActiveCity);
   const sortedOffers = useAppSelector(selectCitySortOffers);
   const mapPoints = getMapPoints(sortedOffers);
+
+  if (isErrorInOffersDataLoading) {
+    return <ServerErrorPage/>;
+  }
 
   const handleCardHover = (offer: Offer | null) => {
     setActiveCard(offer);

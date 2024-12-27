@@ -6,14 +6,22 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
-import {selectFavorites, selectIsFavoriteListDataLoading} from '../../store/selectors';
+import {selectFavorites, selectIsErrorInFavoriteListDataLoading, selectIsFavoriteListDataLoading} from '../../store/selectors';
+import ServerErrorPage from '../server-error-page/server-error-page';
 
 function FavoritesPage(): JSX.Element {
   const offers = useAppSelector(selectFavorites);
   const isFavoriteListDataLoading = useAppSelector(selectIsFavoriteListDataLoading);
+  const isErrorInFavoriteListDataLoading = useAppSelector(selectIsErrorInFavoriteListDataLoading);
+
   if (isFavoriteListDataLoading) {
     return <LoadingPage/>;
   }
+
+  if (isErrorInFavoriteListDataLoading) {
+    return <ServerErrorPage/>;
+  }
+
   const favoritesInner = (offers.length ?
     <><h1 className='favorites__title'>Saved listing</h1><FavoritesList offers={offers}/></>
     :
