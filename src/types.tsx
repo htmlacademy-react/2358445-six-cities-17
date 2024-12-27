@@ -70,19 +70,29 @@ export type AppDispatch = typeof store.dispatch;
 
 export type InitalState = {
   city: string;
-  offers: Offers;
-  sortedOffers: Offers;
-  offer: OfferFull;
   sort: SortType;
   authorizationStatus: AuthorizationStatus;
+  isErrorInAuthRequest: boolean;
+  isErrorInCheckAuthRequest: boolean;
+  offers: Offers;
   isOffersDataLoading: boolean;
+  isErrorInOffersDataLoading: boolean;
+  sortedOffers: Offers;
+  offer: OfferFull | null;
   isOfferDataLoading: boolean;
-  isReviewsDataLoading: boolean;
-  isNearByDataLoading: boolean;
-  isFavoriteListDataLoading: boolean;
+  isErrorInOfferDataLoading: boolean;
   reviews: Reviews;
+  isReviewsDataLoading: boolean;
+  isErrorInReviewsDataLoading: boolean;
+  isAddReviewLoading: boolean;
+  isErrorInAddReviewLoading: boolean;
   nearBy: Offers;
+  isNearByDataLoading: boolean;
+  isErrorInNearByDataLoading: boolean;
   favorites: Offers;
+  isFavoriteListDataLoading: boolean;
+  isErrorInFavoriteListDataLoading: boolean;
+  userInfo: UserData | null;
 };
 
 export type AuthData = {
@@ -90,8 +100,7 @@ export type AuthData = {
   password: string;
 };
 
-export type UserData = {
-  id: number;
+export type UserData = User & {
   email: string;
   token: string;
 };

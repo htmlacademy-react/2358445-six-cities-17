@@ -1,105 +1,85 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AuthData, ChangeFavoriteData, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
-import {addReviewToList, addToFavoriteList, loadFavoriteList, loadNearBy, loadOffer, loadOffers, loadReviews, redirectToRoute, removeFromFavoriteList, requireAuthorization, setFavoriteListDataLoadingStatus, setNearByDataLoadingStatus, setOfferDataLoadingStatus, setOffersDataLoadingStatus, setReviewsDataLoadingStatus} from './action';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
+import {addToFavoriteList, removeFromFavoriteList} from './action';
+import {APIRoute} from '../const';
 import {dropToken, saveToken} from '../services/token';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkType>(
+const createAppAsyncThunk = createAsyncThunk.withTypes<ThunkType>();
+
+export const fetchOffersAction = createAppAsyncThunk<Offers, undefined>(
   'fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+  async (_arg, { extra: api }) => {
     const { data } = await api.get<Offers>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchOfferAction = createAppAsyncThunk<OfferFull, string>(
   'fetchOffer',
-  async (offerId, { dispatch, extra: api }) => {
-    dispatch(setOfferDataLoadingStatus(true));
-    try {
-      const { data } = await api.get<OfferFull>(APIRoute.Offer + offerId);
-      dispatch(setOfferDataLoadingStatus(false));
-      dispatch(loadOffer(data));
-    } catch {
-      dispatch(setOfferDataLoadingStatus(false));
-      dispatch(redirectToRoute(AppRoute.Page404));
-    }
+  async (offerId, { extra: api }) => {
+    const { data } = await api.get<OfferFull>(APIRoute.Offer + offerId);
+    return data;
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchReviewsAction = createAppAsyncThunk<Reviews, string>(
   'fetchReviews',
-  async (offerId, { dispatch, extra: api }) => {
-    dispatch(setReviewsDataLoadingStatus(true));
+  async (offerId, { extra: api }) => {
     const { data } = await api.get<Reviews>(APIRoute.Comments + offerId);
-    dispatch(setReviewsDataLoadingStatus(false));
-    dispatch(loadReviews(data));
+    return data;
   },
 );
 
-export const fetchNearByAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchNearByAction = createAppAsyncThunk<Offers, string>(
   'fetchNearBy',
-  async (offerId, { dispatch, extra: api }) => {
-    dispatch(setNearByDataLoadingStatus(true));
+  async (offerId, { extra: api }) => {
     const { data } = await api.get<Offers>(APIRoute.Offer + offerId + APIRoute.NearBy);
-    dispatch(setNearByDataLoadingStatus(false));
-    dispatch(loadNearBy(data));
+    return data;
   },
 );
 
-export const fetchFavoriteListAction = createAsyncThunk<void, undefined, ThunkType>(
+export const fetchFavoriteListAction = createAppAsyncThunk<Offers, undefined>(
   'fetchFavoriteList',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setFavoriteListDataLoadingStatus(true));
+  async (_arg, { extra: api }) => {
     const { data } = await api.get<Offers>(APIRoute.Favorite);
-    dispatch(setFavoriteListDataLoadingStatus(false));
-    dispatch(loadFavoriteList(data));
+    return data;
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, ThunkType>(
-  'checkAuth',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(fetchFavoriteListAction());
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+export const addReviewAction = createAppAsyncThunk<Review, ReviewData>(
+  'addReview',
+  async ({ comment, rating, offerId }, { extra: api }) => {
+    const { data } = await api.post<Review>(APIRoute.Comments + offerId, { comment, rating });
+    return data;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, ThunkType>(
+export const loginAction = createAppAsyncThunk<UserData, AuthData>(
   'login',
-  async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.Main));
+  async ({ login: email, password }, { extra: api }) => {
+    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(data.token);
+    return data;
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
+export const logoutAction = createAppAsyncThunk<void, undefined>(
   'logout',
-  async (_arg, { dispatch, extra: api }) => {
+  async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
 
-export const addReviewAction = createAsyncThunk<void, ReviewData, ThunkType>(
-  'addReview',
-  async ({ comment, rating, offerId }, { dispatch, extra: api }) => {
-    const { data } = await api.post<Review>(APIRoute.Comments + offerId, { comment, rating });
-    dispatch(addReviewToList(data));
+export const checkAuthAction = createAppAsyncThunk<UserData, undefined>(
+  'checkAuth',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<UserData>(APIRoute.Login);
+    return data;
   },
 );
 
-export const changeFavoriteAction = createAsyncThunk<void, ChangeFavoriteData, ThunkType>(
+export const changeFavoriteAction = createAppAsyncThunk<void, ChangeFavoriteData>(
   'changeFavorite',
   async ({ status, offerId }, { dispatch, extra: api }) => {
     const { data } = await api.post<OfferFull>(`${APIRoute.FavoriteStatus}${offerId}/${String(status)}`, { offerId, status });

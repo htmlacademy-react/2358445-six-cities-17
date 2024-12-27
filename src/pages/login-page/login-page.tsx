@@ -2,7 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {AuthorizationStatus, AppRoute} from '../../const';
-import {Navigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {randomizeCity, checkPassword} from '../../utils';
 import {ChangeEvent, FormEvent, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -12,17 +12,23 @@ function LoginPage(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmitLoginForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current && passwordRef.current) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            navigate(AppRoute.Main);
+          }
+        });
     }
   };
 
@@ -48,7 +54,7 @@ function LoginPage(): JSX.Element {
               <title>Login</title>
             </Helmet>
             <h1 className='login__title'>Sign in</h1>
-            <form className='login__form form' action='#' method='post' onSubmit={handleSubmit}>
+            <form className='login__form form' action='#' method='post' onSubmit={handleSubmitLoginForm}>
               <div className='login__input-wrapper form__input-wrapper'>
                 <label className='visually-hidden'>E-mail</label>
                 <input ref={loginRef} className='login__input form__input' type='email' name='email' placeholder='Email' required />

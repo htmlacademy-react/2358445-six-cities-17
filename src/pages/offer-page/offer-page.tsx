@@ -15,6 +15,7 @@ import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../sto
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
 import {useEffect} from 'react';
+import Page404 from '../page-404/page-404';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -22,9 +23,13 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchOfferAction(id));
-      dispatch(fetchReviewsAction(id));
-      dispatch(fetchNearByAction(id));
+      dispatch(fetchOfferAction(id))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            dispatch(fetchReviewsAction(id));
+            dispatch(fetchNearByAction(id));
+          }
+        });
     }
   }, [dispatch, id]);
 
@@ -32,15 +37,19 @@ function OfferPage(): JSX.Element {
   const offer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
   const neighbourhoodOffers = useAppSelector((state) => state.nearBy);
-  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
   const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
   const isReviewsDataLoading = useAppSelector((state) => state.isReviewsDataLoading);
   const isNearByDataLoading = useAppSelector((state) => state.isNearByDataLoading);
 
-
   if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
     return <LoadingPage/>;
   }
+
+  if (!offer) {
+    return <Page404/>;
+  }
+
+  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
 
   const premiumIcon = isPremium && <OfferLabel page={page} />;
   const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
