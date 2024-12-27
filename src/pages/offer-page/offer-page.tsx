@@ -16,6 +16,7 @@ import LoadingPage from '../loading-page/loading-page';
 import {useEffect} from 'react';
 import Page404 from '../page-404/page-404';
 import NearByOffers from '../../components/near-by-offers/near-by-offers';
+import {selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -34,12 +35,12 @@ function OfferPage(): JSX.Element {
   }, [dispatch, id]);
 
   const page = Page.Offer;
-  const offer = useAppSelector((state) => state.offer);
-  const reviews = useAppSelector((state) => state.reviews);
-  const neighbourhoodOffers = useAppSelector((state) => state.nearBy);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  const isReviewsDataLoading = useAppSelector((state) => state.isReviewsDataLoading);
-  const isNearByDataLoading = useAppSelector((state) => state.isNearByDataLoading);
+  const offer = useAppSelector(selectOffer);
+  const reviews = useAppSelector(selectReviews);
+  const neighbourhoodOffers = useAppSelector(selectNearByOffers);
+  const isOfferDataLoading = useAppSelector(selectIsOfferDataLoading);
+  const isReviewsDataLoading = useAppSelector(selectIsReviewsDataLoading);
+  const isNearByDataLoading = useAppSelector(selectIsNearByDataLoading);
 
   if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
     return <LoadingPage/>;

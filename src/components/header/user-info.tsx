@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import {AppRoute} from '../../const';
+import {selectFavorites, selectUserName} from '../../store/selectors';
 
 function UserInfo(): JSX.Element {
-  const favorites = useAppSelector((state) => state.favorites);
-  const userName = useAppSelector((state) => state.userInfo && state.userInfo.email);
+  const favorites = useAppSelector(selectFavorites);
+  const userName = useAppSelector(selectUserName);
 
   return (
     <li className='header__nav-item user'>

@@ -1,13 +1,14 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {useAppSelector} from '../../hooks';
+import {selectActiveCity} from '../../store/selectors';
 
 type CitiesProps = {
   cities: string[];
 }
 
 function Cities({cities}: CitiesProps): JSX.Element {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(selectActiveCity);
   const citiesUl = cities &&
     cities.map((city)=>
       <li className='locations__item' key={city}><LocationItemLink text={city} isTab isActive={city === activeCity}/></li>

@@ -4,12 +4,13 @@ import cn from 'classnames';
 import {SortType} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeSort} from '../../store/action';
+import {selectSortName} from '../../store/selectors';
 
 function SortForm(): JSX.Element {
   const sortSpanRef = useRef<HTMLElement>(null);
   const [isShowSort, setIsShowSort] = useState(false);
   const dispatch = useAppDispatch();
-  const sortName = useAppSelector((state) => state.sort);
+  const sortName = useAppSelector(selectSortName);
 
   useEffect(() => {
     const hideSortForm = (evt: MouseEvent | Event): void => {

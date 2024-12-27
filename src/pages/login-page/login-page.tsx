@@ -7,9 +7,10 @@ import {randomizeCity} from '../../utils';
 import {FormEvent, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
+import {selectAuthorizationStatus} from '../../store/selectors';
 
 function LoginPage(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();

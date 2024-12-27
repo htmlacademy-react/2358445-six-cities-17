@@ -77,7 +77,6 @@ export type InitalState = {
   offers: Offers;
   isOffersDataLoading: boolean;
   isErrorInOffersDataLoading: boolean;
-  sortedOffers: Offers;
   offer: OfferFull | null;
   isOfferDataLoading: boolean;
   isErrorInOfferDataLoading: boolean;

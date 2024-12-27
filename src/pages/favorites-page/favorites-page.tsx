@@ -6,10 +6,11 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
+import {selectFavorites, selectIsFavoriteListDataLoading} from '../../store/selectors';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.favorites);
-  const isFavoriteListDataLoading = useAppSelector((state) => state.isFavoriteListDataLoading);
+  const offers = useAppSelector(selectFavorites);
+  const isFavoriteListDataLoading = useAppSelector(selectIsFavoriteListDataLoading);
   if (isFavoriteListDataLoading) {
     return <LoadingPage/>;
   }

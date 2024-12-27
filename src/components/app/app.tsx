@@ -12,14 +12,15 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {selectAuthorizationStatus, selectIsOffersDataLoading} from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
 }
 
 function App({cities}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (

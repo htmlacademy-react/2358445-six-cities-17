@@ -1,7 +1,8 @@
-import { useAppSelector } from '../../hooks';
+import {useAppSelector} from '../../hooks';
+import {selectActiveCity} from '../../store/selectors';
 
 function MainEmpty(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(selectActiveCity);
   return (
     <>
       <section className='cities__no-places'>

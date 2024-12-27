@@ -1,9 +1,10 @@
 import {NEARBY_COUNT, Page} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {selectNearByOffers} from '../../store/selectors';
 import CardsList from '../cards-list/cards-list';
 
 function NearByOffers(): JSX.Element {
-  const offers = useAppSelector((state) => state.nearBy);
+  const offers = useAppSelector(selectNearByOffers);
   const nearOffers = offers.slice(0, NEARBY_COUNT);
   return (
     <div className='container'>

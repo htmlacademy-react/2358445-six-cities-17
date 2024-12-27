@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoriteAction} from '../../store/api-actions';
+import {selectAuthorizationStatus} from '../../store/selectors';
 
 const BookmarkSettings: SettingsType = {
   'place-card': {
@@ -23,7 +24,7 @@ type BookmarkButtonProps = {
 };
 
 function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkButtonProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

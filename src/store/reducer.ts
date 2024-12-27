@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {addToFavoriteList, changeCity, changeSort, removeFromFavoriteList} from './action';
 import {AuthorizationStatus, FIRST_CITY, SortType} from '../const';
 import {InitalState} from '../types';
-import {changeIsFavorite, getCitySortOffers} from '../utils';
+import {changeIsFavorite} from '../utils';
 import {addReviewAction, checkAuthAction, fetchFavoriteListAction, fetchNearByAction, fetchOfferAction, fetchOffersAction, fetchReviewsAction, loginAction, logoutAction} from './api-actions';
 
 const initialState: InitalState = {
@@ -14,7 +14,6 @@ const initialState: InitalState = {
   offers: [],
   isOffersDataLoading: false,
   isErrorInOffersDataLoading: false,
-  sortedOffers: [],
   offer: null,
   isOfferDataLoading: false,
   isErrorInOfferDataLoading: false,
@@ -37,11 +36,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
       state.sort = SortType.POPULAR;
-      state.sortedOffers = getCitySortOffers(state.offers, state.sort, state.city);
     })
     .addCase(changeSort, (state, action) => {
       state.sort = action.payload;
-      state.sortedOffers = getCitySortOffers(state.offers, state.sort, state.city);
     })
     .addCase(fetchOffersAction.pending, (state) => {
       state.isOffersDataLoading = true;
@@ -51,7 +48,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.isOffersDataLoading = false;
       state.isErrorInOffersDataLoading = false;
       state.offers = action.payload;
-      state.sortedOffers = getCitySortOffers(state.offers, state.sort, state.city);
     })
     .addCase(fetchOffersAction.rejected, (state) => {
       state.isOffersDataLoading = false;
@@ -150,7 +146,6 @@ const reducer = createReducer(initialState, (builder) => {
         state.offer.isFavorite = action.payload.isFavorite;
       }
       state.offers = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.offers);
-      state.sortedOffers = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.sortedOffers);
       state.nearBy = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.nearBy);
     })
     .addCase(removeFromFavoriteList, (state, action) => {
@@ -159,7 +154,6 @@ const reducer = createReducer(initialState, (builder) => {
         state.offer.isFavorite = action.payload.isFavorite;
       }
       state.offers = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.offers);
-      state.sortedOffers = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.sortedOffers);
       state.nearBy = changeIsFavorite(action.payload.id, action.payload.isFavorite, state.nearBy);
     });
 });

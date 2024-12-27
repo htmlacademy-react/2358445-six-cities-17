@@ -1,5 +1,6 @@
 import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {selectAuthorizationStatus} from '../../store/selectors';
 import {Review} from '../../types';
 import {sortReviews} from '../../utils';
 import ReviewItem from '../review-item/review-item';
@@ -11,7 +12,7 @@ type ReviewsListProps = {
 };
 
 function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   let reviewsList;
   if (reviews.length) {
     const sortedReviews = sortReviews(reviews);
