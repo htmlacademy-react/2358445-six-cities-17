@@ -65,3 +65,9 @@ export enum ReviewLimit {
   Max = 300
 }
 
+export enum ReviewFormSubmitMessages {
+  RatingSetError = ' Error is detected! You didn&apos;t set rating.',
+  ReviewSizeError = ' Error is detected! Your text lenght is incorrect.',
+  Success = 'Your review was added.'
+}
+
