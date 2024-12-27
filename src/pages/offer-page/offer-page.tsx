@@ -48,12 +48,12 @@ function OfferPage(): JSX.Element {
     return <LoadingPage/>;
   }
 
-  if (isErrorInOfferDataLoading) {
-    return <ServerErrorPage/>;
-  }
-
   if (!offer) {
     return <Page404/>;
+  }
+
+  if (isErrorInOfferDataLoading) {
+    return <ServerErrorPage/>;
   }
 
   const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
