@@ -1,6 +1,6 @@
 import {NEARBY_COUNT, Page} from '../../const';
 import {useAppSelector} from '../../hooks';
-import {selectNearByOffers} from '../../store/selectors';
+import {selectNearByOffers} from '../../store/offer-process/selectors';
 import CardsList from '../cards-list/cards-list';
 
 function NearByOffers(): JSX.Element {

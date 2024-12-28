@@ -16,8 +16,8 @@ import LoadingPage from '../loading-page/loading-page';
 import {useEffect} from 'react';
 import Page404 from '../page-404/page-404';
 import NearByOffers from '../../components/near-by-offers/near-by-offers';
-import {selectIsErrorInOfferDataLoading, selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/selectors';
 import ServerErrorPage from '../server-error-page/server-error-page';
+import {selectIsErrorInOfferDataLoading, selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -53,7 +53,7 @@ function OfferPage(): JSX.Element {
   }
 
   if (isErrorInOfferDataLoading) {
-    return <ServerErrorPage/>;
+    return <ServerErrorPage page={Page.Offer}/>;
   }
 
   const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;

@@ -1,5 +1,5 @@
 import {useAppSelector} from '../../hooks';
-import {selectActiveCity} from '../../store/selectors';
+import {selectActiveCity} from '../../store/cards-process/selectors';
 
 function MainEmpty(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);

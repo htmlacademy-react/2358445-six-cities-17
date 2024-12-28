@@ -68,32 +68,6 @@ export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type InitalState = {
-  city: string;
-  sort: SortType;
-  authorizationStatus: AuthorizationStatus;
-  isErrorInAuthRequest: boolean;
-  isErrorInCheckAuthRequest: boolean;
-  offers: Offers;
-  isOffersDataLoading: boolean;
-  isErrorInOffersDataLoading: boolean;
-  offer: OfferFull | null;
-  isOfferDataLoading: boolean;
-  isErrorInOfferDataLoading: boolean;
-  reviews: Reviews;
-  isReviewsDataLoading: boolean;
-  isErrorInReviewsDataLoading: boolean;
-  isAddReviewLoading: boolean;
-  isErrorInAddReviewLoading: boolean;
-  nearBy: Offers;
-  isNearByDataLoading: boolean;
-  isErrorInNearByDataLoading: boolean;
-  favorites: Offers;
-  isFavoriteListDataLoading: boolean;
-  isErrorInFavoriteListDataLoading: boolean;
-  userInfo: UserData | null;
-};
-
 export type AuthData = {
   login: string;
   password: string;
@@ -119,4 +93,36 @@ export type ThunkType = {
 export type ChangeFavoriteData = {
   offerId: string;
   status: number;
+};
+
+export type UserProcessType = {
+  authorizationStatus: AuthorizationStatus;
+  isErrorInAuthRequest: boolean;
+  isErrorInCheckAuthRequest: boolean;
+  userInfo: UserData | null;
+};
+
+export type OfferProcessType = {
+  offer: OfferFull | null;
+  isOfferDataLoading: boolean;
+  isErrorInOfferDataLoading: boolean;
+  reviews: Reviews;
+  isReviewsDataLoading: boolean;
+  isErrorInReviewsDataLoading: boolean;
+  isAddReviewLoading: boolean;
+  isErrorInAddReviewLoading: boolean;
+  nearBy: Offers;
+  isNearByDataLoading: boolean;
+  isErrorInNearByDataLoading: boolean;
+};
+
+export type CardsProcessType = {
+  city: string;
+  sort: SortType;
+  offers: Offers;
+  isOffersDataLoading: boolean;
+  isErrorInOffersDataLoading: boolean;
+  favorites: Offers;
+  isFavoriteListDataLoading: boolean;
+  isErrorInFavoriteListDataLoading: boolean;
 };

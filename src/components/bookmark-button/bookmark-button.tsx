@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoriteAction} from '../../store/api-actions';
-import {selectAuthorizationStatus} from '../../store/selectors';
+import {selectAuthorizationStatus} from '../../store/user-process/selectors';
 
 const BookmarkSettings: SettingsType = {
   'place-card': {

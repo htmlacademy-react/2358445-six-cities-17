@@ -1,7 +1,8 @@
 import {Link} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import {AppRoute} from '../../const';
-import {selectFavorites, selectUserName} from '../../store/selectors';
+import {selectFavorites} from '../../store/cards-process/selectors';
+import {selectUserName} from '../../store/user-process/selectors';
 
 function UserInfo(): JSX.Element {
   const favorites = useAppSelector(selectFavorites);

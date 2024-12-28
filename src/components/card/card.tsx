@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import OfferLabel from '../offerLabel/offerLabel';
 import {generatePath} from 'react-router';
+import { memo, useMemo } from 'react';
 
 const CardSettings: SettingsType = {
   'cities': {
@@ -31,6 +32,7 @@ type CardProps = {
 function Card({offer, page = Page.Cities, onCardMouseEnter, onCardMouseLeave}: CardProps): JSX.Element {
   const {id, title, type, previewImage, price, isFavorite, rating} = offer;
   const premiumIcon = offer.isPremium && <OfferLabel/>;
+  const offerType = useMemo(() => toUpFirstLetter(type), [type]);
   return (
     <article
       key={id}
@@ -63,10 +65,10 @@ function Card({offer, page = Page.Cities, onCardMouseEnter, onCardMouseLeave}: C
             {title}
           </Link>
         </h2>
-        <p className='place-card__type'>{toUpFirstLetter(type)}</p>
+        <p className='place-card__type'>{toUpFirstLetter(offerType)}</p>
       </div>
     </article>
   );
 }
 
-export default Card;
+export default memo(Card);

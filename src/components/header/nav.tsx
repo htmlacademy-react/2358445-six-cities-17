@@ -4,7 +4,7 @@ import {logoutAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {MouseEvent} from 'react';
 import UserInfo from './user-info';
-import {selectAuthorizationStatus} from '../../store/selectors';
+import {selectAuthorizationStatus} from '../../store/user-process/selectors';
 
 function Nav(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);

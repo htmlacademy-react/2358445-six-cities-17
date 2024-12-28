@@ -1,7 +1,7 @@
 
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {useAppSelector} from '../../hooks';
-import {selectActiveCity} from '../../store/selectors';
+import {selectActiveCity} from '../../store/cards-process/selectors';
 
 type CitiesProps = {
   cities: string[];

@@ -6,8 +6,9 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
-import {selectFavorites, selectIsErrorInFavoriteListDataLoading, selectIsFavoriteListDataLoading} from '../../store/selectors';
 import ServerErrorPage from '../server-error-page/server-error-page';
+import {Page} from '../../const';
+import { selectFavorites, selectIsErrorInFavoriteListDataLoading, selectIsFavoriteListDataLoading } from '../../store/cards-process/selectors';
 
 function FavoritesPage(): JSX.Element {
   const offers = useAppSelector(selectFavorites);
@@ -19,7 +20,7 @@ function FavoritesPage(): JSX.Element {
   }
 
   if (isErrorInFavoriteListDataLoading) {
-    return <ServerErrorPage/>;
+    return <ServerErrorPage page={Page.Favorites}/>;
   }
 
   const favoritesInner = (offers.length ?

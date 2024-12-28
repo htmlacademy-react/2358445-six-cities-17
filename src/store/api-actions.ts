@@ -1,6 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AuthData, ChangeFavoriteData, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
-import {addToFavoriteList, removeFromFavoriteList} from './action';
+import {AuthData, ChangeFavoriteData, Offer, OfferFull, Offers, Review, ReviewData, Reviews, ThunkType, UserData} from '../types';
 import {APIRoute} from '../const';
 import {dropToken, saveToken} from '../services/token';
 
@@ -79,14 +78,10 @@ export const checkAuthAction = createAppAsyncThunk<UserData, undefined>(
   },
 );
 
-export const changeFavoriteAction = createAppAsyncThunk<void, ChangeFavoriteData>(
+export const changeFavoriteAction = createAppAsyncThunk<Offer, ChangeFavoriteData>(
   'cards/changeFavorite',
-  async ({ status, offerId }, { dispatch, extra: api }) => {
+  async ({ status, offerId }, { extra: api }) => {
     const { data } = await api.post<OfferFull>(`${APIRoute.FavoriteStatus}${offerId}/${String(status)}`, { offerId, status });
-    if (status) {
-      dispatch(addToFavoriteList(data));
-    } else {
-      dispatch(removeFromFavoriteList(data));
-    }
+    return data;
   },
 );

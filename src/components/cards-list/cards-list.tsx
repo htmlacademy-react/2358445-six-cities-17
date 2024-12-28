@@ -2,6 +2,7 @@ import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
 import {Page} from '../../const';
+import { memo, useCallback } from 'react';
 
 
 type CardsListProps = {
@@ -11,9 +12,9 @@ type CardsListProps = {
 };
 
 function CardsList({page = Page.Cities, offers, onCardHover}: CardsListProps): JSX.Element {
-  const cardMouseEnterHandler = (offer: Offer): void => onCardHover?.(offer);
+  const cardMouseEnterHandler = useCallback((offer: Offer): void => onCardHover?.(offer), []);
 
-  const cardMouseLeaveHandler = (): void => onCardHover?.(null);
+  const cardMouseLeaveHandler = useCallback((): void => onCardHover?.(null), []);
 
   const cardsList = offers.map((offer) => (
     <Card
@@ -36,4 +37,4 @@ function CardsList({page = Page.Cities, offers, onCardHover}: CardsListProps): J
   );
 }
 
-export default CardsList;
+export default memo(CardsList);

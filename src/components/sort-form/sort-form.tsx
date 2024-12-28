@@ -3,8 +3,8 @@ import {MouseEvent} from 'react';
 import cn from 'classnames';
 import {SortType} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeSort} from '../../store/action';
-import {selectSortName} from '../../store/selectors';
+import {selectSortName} from '../../store/cards-process/selectors';
+import {changeSort} from '../../store/cards-process/cards-process';
 
 function SortForm(): JSX.Element {
   const sortSpanRef = useRef<HTMLElement>(null);

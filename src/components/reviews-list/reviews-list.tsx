@@ -1,6 +1,6 @@
 import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
-import {selectAuthorizationStatus} from '../../store/selectors';
+import {selectAuthorizationStatus} from '../../store/user-process/selectors';
 import {Review} from '../../types';
 import {sortReviews} from '../../utils';
 import ReviewItem from '../review-item/review-item';

@@ -73,3 +73,9 @@ export enum ReviewFormSubmitMessages {
   Success = 'Your review was added.'
 }
 
+export enum NameSpace {
+  Cards = 'CARDS',
+  Offer = 'OFFER',
+  User = 'USER',
+}
+

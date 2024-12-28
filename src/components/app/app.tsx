@@ -12,7 +12,8 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-import {selectAuthorizationStatus, selectIsOffersDataLoading} from '../../store/selectors';
+import { selectIsOffersDataLoading } from '../../store/cards-process/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type AppProps = {
   cities: string[];
