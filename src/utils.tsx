@@ -27,17 +27,6 @@ const getCitySortOffers = (offers: Offer[], sortType: SortType, city: string): O
 
 const randomizeCity = (): string => CITIES[Math.floor(Math.random() * CITIES.length)];
 
-const checkPassword = (password: string): boolean => {
-  let result = true;
-  if (!/\d/.test(password)) {
-    result = false;
-  }
-  if (!/[a-zа-яё]/i.test(password)) {
-    result = false;
-  }
-  return result;
-};
-
 const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
   const mapPoints = offers.map(({id, title, city, location}) => ({id, title, city, location}));
 
@@ -55,4 +44,13 @@ const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
 
 const sortReviews = (reviews: Reviews): Reviews => [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, checkPassword, getMapPoints, sortReviews };
+const changeIsFavorite = (id: string, isFavorite: boolean, offers: Offers): Offers => {
+  offers.find((item) => {
+    if (item.id === id) {
+      item.isFavorite = isFavorite;
+    }
+  });
+  return offers;
+};
+
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, getMapPoints, sortReviews, changeIsFavorite };

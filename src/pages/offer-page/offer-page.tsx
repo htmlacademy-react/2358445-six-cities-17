@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {NEARBY_COUNT} from '../../const';
+import {NEARBY_COUNT, Page} from '../../const';
 import {getMapPoints, showRating} from '../../utils';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -9,48 +9,58 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import OfferGalery from '../../components/offer-galery/offer-galery';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import HostUser from '../../components/host-user/host-user';
-import CardsList from '../../components/cards-list/cards-list';
 import OfferLabel from '../../components/offerLabel/offerLabel';
 import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
+import {useEffect} from 'react';
+import Page404 from '../page-404/page-404';
+import NearByOffers from '../../components/near-by-offers/near-by-offers';
+import ServerErrorPage from '../server-error-page/server-error-page';
+import {selectIsErrorInOfferDataLoading, selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
-  const params = useParams();
-  const page = 'offer';
-  const offer = useAppSelector((state) => state.offer);
-  const reviews = useAppSelector((state) => state.reviews);
-  const neighbourhoodOffers = useAppSelector((state) => state.nearBy);
-  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, id, host} = offer;
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const { id } = useParams();
   const dispatch = useAppDispatch();
-  if (params.id && !isOffersDataLoading && ((offer === null) || (id !== params.id))) {
-    dispatch(fetchOfferAction(params.id));
-    dispatch(fetchReviewsAction(params.id));
-    dispatch(fetchNearByAction(params.id));
-    if (isOffersDataLoading) {
-      return <LoadingPage/>;
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(id))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            dispatch(fetchReviewsAction(id));
+            dispatch(fetchNearByAction(id));
+          }
+        });
     }
+  }, [dispatch, id]);
+
+  const page = Page.Offer;
+  const offer = useAppSelector(selectOffer);
+  const reviews = useAppSelector(selectReviews);
+  const neighbourhoodOffers = useAppSelector(selectNearByOffers);
+  const isOfferDataLoading = useAppSelector(selectIsOfferDataLoading);
+  const isErrorInOfferDataLoading = useAppSelector(selectIsErrorInOfferDataLoading);
+  const isReviewsDataLoading = useAppSelector(selectIsReviewsDataLoading);
+  const isNearByDataLoading = useAppSelector(selectIsNearByDataLoading);
+
+  if (isOfferDataLoading || isReviewsDataLoading || isNearByDataLoading) {
+    return <LoadingPage/>;
   }
+
+  if (!offer) {
+    return <Page404/>;
+  }
+
+  if (isErrorInOfferDataLoading) {
+    return <ServerErrorPage page={Page.Offer}/>;
+  }
+
+  const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
 
   const premiumIcon = isPremium && <OfferLabel page={page} />;
   const nearOffers = neighbourhoodOffers.slice(0, NEARBY_COUNT);
   const offersForMap = getMapPoints(nearOffers, offer);
-  let nearOffersBlock = <div className='container'></div>;
-
-  if (nearOffers.length) {
-    nearOffersBlock = (
-      <div className='container'>
-        <section className='near-places places'>
-          <h2 className='near-places__title'>Other places in the neighbourhood</h2>
-          <CardsList
-            offers={nearOffers}
-            page='near-places'
-          />
-        </section>
-      </div>
-    );
-  }
 
   return (
     <div className='page'>
@@ -66,7 +76,7 @@ function OfferPage(): JSX.Element {
               {premiumIcon}
               <div className='offer__name-wrapper'>
                 <h1 className='offer__name'>{title}</h1>
-                <BookmarkButton isFavorite={isFavorite} page={page} offerId={id} />
+                <BookmarkButton isFavorite={isFavorite} page={page} offerId={offer.id} />
               </div>
               <div className='offer__rating rating'>
                 <div className='offer__stars rating__stars'>
@@ -98,12 +108,12 @@ function OfferPage(): JSX.Element {
                   <p className='offer__text'>{description}</p>
                 </div>
               </div>
-              <ReviewsList reviews={reviews} offerId={id} />
+              <ReviewsList reviews={reviews} offerId={offer.id} />
             </div>
           </div>
           <Map page={page} offers={offersForMap} selectedOffer={offer}/>
         </section>
-        {nearOffersBlock}
+        {nearOffers.length && <NearByOffers/>}
       </main>
     </div>
   );

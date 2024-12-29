@@ -1,3 +1,4 @@
+import {Page} from '../../const';
 import {Offer} from '../../types';
 import CardsList from '../cards-list/cards-list';
 import LocationItemLink from '../location-item-link/location-item-link';
@@ -29,7 +30,7 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
       </div>
       <CardsList
         offers={items[1]}
-        page='favorites'
+        page={Page.Favorites}
       />
     </li>
   ));

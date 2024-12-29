@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import {useAppDispatch} from '../../hooks';
-import {changeCity} from '../../store/action';
 import {MouseEvent} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {changeCity} from '../../store/cards-process/cards-process';
 
 type LocationItemLinkProps = {
   isTab?: boolean;

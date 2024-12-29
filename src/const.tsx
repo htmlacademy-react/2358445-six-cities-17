@@ -4,44 +4,13 @@ export const FIRST_CITY = CITIES[0];
 
 export const STARS_COUNT = 5;
 
+export const GALERY_IMAGES_COUNT = 6;
+
 export const REVIEWS_COUNT = 10;
 
 export const NEARBY_COUNT = 3;
 
 export const RATING_VALUES = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
-
-export const EMPTY_OFFER = {
-  'id': '',
-  'title': '',
-  'description': '',
-  'type': '',
-  'price': 0,
-  'images': [],
-  'city': {
-    'name': 'Paris',
-    'location': {
-      'latitude': 48.85661,
-      'longitude': 2.351499,
-      'zoom': 13
-    }
-  },
-  'location': {
-    'latitude': 0,
-    'longitude': 0,
-    'zoom': 0
-  },
-  'goods': [],
-  'host': {
-    'isPro': true,
-    'name': '',
-    'avatarUrl': ''
-  },
-  'isPremium': false,
-  'isFavorite': false,
-  'rating': 0,
-  'bedrooms': 0,
-  'maxAdults': 0
-};
 
 export enum MapAttribution {
   TileLayer = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
@@ -83,5 +52,30 @@ export enum APIRoute {
   Favorite = '/favorite',
   FavoriteStatus = '/favorite/',
   Comments = '/comments/'
+}
+
+export enum Page {
+  PlaceCard = 'place-card',
+  Cities = 'cities',
+  NearPlaces = 'near-places',
+  Favorites = 'favorites',
+  Offer = 'offer'
+}
+
+export enum ReviewLimit {
+  Min = 50,
+  Max = 300
+}
+
+export enum ReviewFormSubmitMessages {
+  RatingSetError = ' Error is detected! You didn&apos;t set rating.',
+  ReviewSizeError = ' Error is detected! Your text lenght is incorrect.',
+  Success = 'Your review was added.'
+}
+
+export enum NameSpace {
+  Cards = 'CARDS',
+  Offer = 'OFFER',
+  User = 'USER',
 }
 

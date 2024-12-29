@@ -1,35 +1,35 @@
 import {Offer} from '../../types';
 import Card from '../../components/card/card';
 import cn from 'classnames';
+import {Page} from '../../const';
+import { memo, useCallback } from 'react';
 
 
 type CardsListProps = {
   offers: Offer[];
-  page?: 'cities' | 'near-places' | 'favorites';
+  page?: Page.Cities | Page.NearPlaces | Page.Favorites;
   onCardHover?: (offer: Offer | null) => void;
 };
 
-function CardsList({page = 'cities', offers, onCardHover}: CardsListProps): JSX.Element {
-  const cardMouseEnterHandler = (offer: Offer): void => onCardHover?.(offer);
+function CardsList({page = Page.Cities, offers, onCardHover}: CardsListProps): JSX.Element {
+  const cardMouseEnterHandler = useCallback((offer: Offer): void => onCardHover?.(offer), []);
 
-  const cardMouseLeaveHandler = (): void => onCardHover?.(null);
+  const cardMouseLeaveHandler = useCallback((): void => onCardHover?.(null), []);
 
   const cardsList = offers.map((offer) => (
     <Card
       key={offer.id}
       offer={offer}
       page={page}
-      onCardMouseEnter={() => {
-        cardMouseEnterHandler(offer);
-      }}
+      onCardMouseEnter={() => cardMouseEnterHandler(offer)}
       onCardMouseLeave={cardMouseLeaveHandler}
     />
   ));
   return (
     <div className={cn(
-      {'cities__places-list places__list tabs__content': page === 'cities'},
-      {'near-places__list places__list': page === 'near-places'},
-      {'favorites__places': page === 'favorites'}
+      {'cities__places-list places__list tabs__content': page === Page.Cities},
+      {'near-places__list places__list': page === Page.NearPlaces},
+      {'favorites__places': page === Page.Favorites}
     )}
     >
       {cardsList}
@@ -37,4 +37,4 @@ function CardsList({page = 'cities', offers, onCardHover}: CardsListProps): JSX.
   );
 }
 
-export default CardsList;
+export default memo(CardsList);
