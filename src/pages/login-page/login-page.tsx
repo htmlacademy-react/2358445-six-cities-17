@@ -32,7 +32,8 @@ function LoginPage(): JSX.Element {
           if (response.meta.requestStatus === 'fulfilled') {
             navigate(AppRoute.Main);
           }
-        });
+        })
+        .finally(() => setSubmitDisabled(false));
     }
   };
 

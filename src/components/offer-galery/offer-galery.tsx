@@ -5,8 +5,8 @@ type OfferGaleryProps = {
 }
 
 function OfferGalery({images}: OfferGaleryProps): JSX.Element {
-  const galeryList = images.map((image, index) => (
-    (index < GALERY_IMAGES_COUNT) && <div className='offer__image-wrapper' key={image}><img className='offer__image' src={image} alt='Photo studio' /></div>
+  const galeryList = images.slice(0, GALERY_IMAGES_COUNT).map((image) => (
+    <div className='offer__image-wrapper' key={`image_${image}`}><img className='offer__image' src={image} alt='Photo studio' /></div>
   ));
   return (
     <div className='offer__gallery-container container'>

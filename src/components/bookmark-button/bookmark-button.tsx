@@ -28,7 +28,7 @@ function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkBu
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handlerClickBookmarkButton = () => {
+  const handleClickBookmarkButton = () => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       navigate(AppRoute.Login);
     }
@@ -44,7 +44,7 @@ function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkBu
         'button',
         { [`${page}__bookmark-button--active`]: isFavorite }
       )
-    } type='button' onClick={handlerClickBookmarkButton}
+    } type='button' onClick={handleClickBookmarkButton}
     >
       <svg className={`${page}__bookmark-icon`} width={BookmarkSettings[page].width} height={BookmarkSettings[page].height}>
         <use xlinkHref='#icon-bookmark'></use>

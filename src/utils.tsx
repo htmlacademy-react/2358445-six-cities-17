@@ -45,9 +45,11 @@ const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
 const sortReviews = (reviews: Reviews): Reviews => [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, REVIEWS_COUNT);
 
 const changeIsFavorite = (id: string, isFavorite: boolean, offers: Offers): Offers => {
-  offers.find((item) => {
+  offers.find((item, index) => {
     if (item.id === id) {
-      item.isFavorite = isFavorite;
+      const changedOffer = {...item, isFavorite: isFavorite};
+      const changedOffers = offers.splice(index, 1, changedOffer);
+      return changedOffers;
     }
   });
   return offers;

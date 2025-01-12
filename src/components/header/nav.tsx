@@ -22,16 +22,18 @@ function Nav(): JSX.Element {
       });
   };
 
-  let actionLink = <a href='#' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Log Out</span></a>;
-  if (authorizationStatus !== AuthorizationStatus.Auth) {
-    actionLink = <Link className='header__nav-link' to={AppRoute.Login}><span className='header__signout'>Sign in</span></Link>;
-  }
   return (
     <nav className='header__nav'>
       <ul className='header__nav-list'>
         {(authorizationStatus === AuthorizationStatus.Auth) && <UserInfo/>}
         <li className='header__nav-item'>
-          {actionLink}
+          {
+            (authorizationStatus !== AuthorizationStatus.Auth)
+              ?
+              <Link className='header__nav-link' to={AppRoute.Login}><span className='header__signout'>Sign in</span></Link>
+              :
+              <a href='#' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Log Out</span></a>
+          }
         </li>
       </ul>
     </nav>

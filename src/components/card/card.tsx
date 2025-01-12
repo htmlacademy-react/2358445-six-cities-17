@@ -65,7 +65,7 @@ function Card({offer, page = Page.Cities, onCardMouseEnter, onCardMouseLeave}: C
             {title}
           </Link>
         </h2>
-        <p className='place-card__type'>{toUpFirstLetter(offerType)}</p>
+        <p className='place-card__type'>{offerType}</p>
       </div>
     </article>
   );

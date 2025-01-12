@@ -1,4 +1,4 @@
-import {STARS_COUNT, RATING_VALUES, ReviewLimit, ReviewFormSubmitMessages} from '../../const';
+import {STARS_COUNT, RATING_VALUES, ReviewLimit, ReviewFormSubmitMessages, FIRST_STATE_REVIEW_FORM} from '../../const';
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {addReviewAction} from '../../store/api-actions';
@@ -10,24 +10,18 @@ type ReviewsFormProps = {
 
 function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   const defaultTextUnderForm = <>To submit review please make sure to set <span className='reviews__star'>rating</span> and describe your stay with at least <b className='reviews__text-amount'>50 characters</b></>;
-  const [textUnderForm, setTextUnderForm] = useState(defaultTextUnderForm);
-  const [formData, setFormData] = useState({
-    rating: 0,
-    review: '',
-    ratingDisabled: false,
-    reviewDisabled: false,
-    submitDisabled: true
-  });
+  let textUnderForm = defaultTextUnderForm;
+  const [formData, setFormData] = useState(FIRST_STATE_REVIEW_FORM);
   const reviewCondition: boolean = ((formData.review.length as ReviewLimit) >= ReviewLimit.Min && (formData.review.length as ReviewLimit) < ReviewLimit.Max);
   const dispatch = useAppDispatch();
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({ ...prevState, 'rating': +evt.target.value, 'submitDisabled': false }));
-    setTextUnderForm(defaultTextUnderForm);
+    textUnderForm = defaultTextUnderForm;
   };
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((prevState) => ({ ...prevState, 'review': evt.target.value, 'submitDisabled': false }));
-    setTextUnderForm(defaultTextUnderForm);
+    textUnderForm = defaultTextUnderForm;
   };
 
   const handleSubmitAddReviewForm = (evt: FormEvent<HTMLFormElement>) => {
@@ -46,9 +40,9 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       }
 
       if (errorMessage === '') {
-        setTextUnderForm(defaultTextUnderForm);
+        textUnderForm = defaultTextUnderForm;
       } else {
-        setTextUnderForm(<ReviewsFormMessage text={errorMessage}/>);
+        textUnderForm = <ReviewsFormMessage text={errorMessage}/>;
         setFormData((prevState) => ({ ...prevState, 'submitDisabled': true }));
       }
       return false;
@@ -62,8 +56,8 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     }))
       .then((response) => {
         if (response.meta.requestStatus === 'fulfilled') {
-          setFormData({ 'rating': 0, 'review': '', 'ratingDisabled': false, 'reviewDisabled': false, 'submitDisabled': false });
-          setTextUnderForm(<ReviewsFormMessage text={ReviewFormSubmitMessages.Success}/>);
+          setFormData(FIRST_STATE_REVIEW_FORM);
+          textUnderForm = <ReviewsFormMessage text={ReviewFormSubmitMessages.Success}/>;
         }
         if (response.meta.requestStatus === 'rejected') {
           setFormData((prevState) => ({ ...prevState, 'ratingDisabled': false, 'reviewDisabled': false,'submitDisabled': false}));
