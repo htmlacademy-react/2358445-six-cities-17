@@ -74,8 +74,16 @@ export enum ReviewFormSubmitMessages {
 }
 
 export enum NameSpace {
-  Cards = 'CARDS',
-  Offer = 'OFFER',
-  User = 'USER',
+  Cards = 'cards',
+  Offer = 'offer',
+  User = 'user',
 }
+
+export const FIRST_STATE_REVIEW_FORM = {
+  rating: 0,
+  review: '',
+  ratingDisabled: false,
+  reviewDisabled: false,
+  submitDisabled: false
+};
 

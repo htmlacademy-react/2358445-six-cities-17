@@ -17,19 +17,25 @@ import {useEffect} from 'react';
 import Page404 from '../page-404/page-404';
 import NearByOffers from '../../components/near-by-offers/near-by-offers';
 import ServerErrorPage from '../server-error-page/server-error-page';
-import {selectIsErrorInOfferDataLoading, selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/offer-process/selectors';
+import {selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/offer-process/selectors';
+import {AxiosError} from 'axios';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  let errorPage = <ServerErrorPage page={Page.Offer}/>;
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferAction(id))
-        .then((response) => {
-          if (response.meta.requestStatus === 'fulfilled') {
-            dispatch(fetchReviewsAction(id));
-            dispatch(fetchNearByAction(id));
+        .unwrap()
+        .then(() => {
+          dispatch(fetchReviewsAction(id));
+          dispatch(fetchNearByAction(id));
+        })
+        .catch((error) => {
+          if ((error as AxiosError).code === 'ERR_BAD_REQUEST') {
+            errorPage = <Page404/>;
           }
         });
     }
@@ -40,7 +46,6 @@ function OfferPage(): JSX.Element {
   const reviews = useAppSelector(selectReviews);
   const neighbourhoodOffers = useAppSelector(selectNearByOffers);
   const isOfferDataLoading = useAppSelector(selectIsOfferDataLoading);
-  const isErrorInOfferDataLoading = useAppSelector(selectIsErrorInOfferDataLoading);
   const isReviewsDataLoading = useAppSelector(selectIsReviewsDataLoading);
   const isNearByDataLoading = useAppSelector(selectIsNearByDataLoading);
 
@@ -49,11 +54,7 @@ function OfferPage(): JSX.Element {
   }
 
   if (!offer) {
-    return <Page404/>;
-  }
-
-  if (isErrorInOfferDataLoading) {
-    return <ServerErrorPage page={Page.Offer}/>;
+    return errorPage;
   }
 
   const {isPremium, title, images, isFavorite, rating, type, bedrooms, maxAdults, price, goods, description, host} = offer;
@@ -113,7 +114,7 @@ function OfferPage(): JSX.Element {
           </div>
           <Map page={page} offers={offersForMap} selectedOffer={offer}/>
         </section>
-        {nearOffers.length && <NearByOffers/>}
+        {!!nearOffers.length && <NearByOffers/>}
       </main>
     </div>
   );
