@@ -1,5 +1,6 @@
-import { Review } from '../../types';
-import { formatDate, showRating } from '../../utils';
+import {memo} from 'react';
+import {Review} from '../../types';
+import {formatDate, showRating} from '../../utils';
 
 type ReviewItemProps = Review;
 
@@ -26,4 +27,4 @@ function ReviewItem({ comment, date, rating, user }: ReviewItemProps): JSX.Eleme
   );
 }
 
-export default ReviewItem;
+export default memo(ReviewItem);

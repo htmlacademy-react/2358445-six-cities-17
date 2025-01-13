@@ -1,5 +1,6 @@
 import {Link, useLocation} from 'react-router-dom';
 import Nav from '../../components/header/nav';
+import {memo} from 'react';
 
 type HeaderProps = {
   isNavShow?: boolean;
@@ -24,4 +25,4 @@ function Header({isNavShow}: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

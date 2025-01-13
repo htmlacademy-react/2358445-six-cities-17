@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {selectAuthorizationStatus} from '../../store/user-process/selectors';
@@ -38,4 +39,4 @@ function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
   );
 }
 
-export default ReviewsList;
+export default memo(ReviewsList);

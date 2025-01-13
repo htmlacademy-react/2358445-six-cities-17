@@ -5,6 +5,7 @@ import cn from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFavoriteAction} from '../../store/api-actions';
 import {selectAuthorizationStatus} from '../../store/user-process/selectors';
+import {memo} from 'react';
 
 const BookmarkSettings: SettingsType = {
   'place-card': {
@@ -54,4 +55,4 @@ function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkBu
   );
 }
 
-export default BookmarkButton;
+export default memo(BookmarkButton);

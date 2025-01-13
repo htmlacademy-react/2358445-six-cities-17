@@ -13,29 +13,30 @@ import OfferLabel from '../../components/offerLabel/offerLabel';
 import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Page404 from '../page-404/page-404';
 import NearByOffers from '../../components/near-by-offers/near-by-offers';
 import ServerErrorPage from '../server-error-page/server-error-page';
 import {selectIsNearByDataLoading, selectIsOfferDataLoading, selectIsReviewsDataLoading, selectNearByOffers, selectOffer, selectReviews} from '../../store/offer-process/selectors';
 import {AxiosError} from 'axios';
+import {unwrapResult} from '@reduxjs/toolkit';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  let errorPage = <ServerErrorPage page={Page.Offer}/>;
+  const [errorPage, setErrorPage] = useState(<ServerErrorPage page={Page.Offer}/>);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferAction(id))
-        .unwrap()
+        .then(unwrapResult)
         .then(() => {
           dispatch(fetchReviewsAction(id));
           dispatch(fetchNearByAction(id));
         })
         .catch((error) => {
           if ((error as AxiosError).code === 'ERR_BAD_REQUEST') {
-            errorPage = <Page404/>;
+            setErrorPage(<Page404/>);
           }
         });
     }

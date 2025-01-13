@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {NEARBY_COUNT, Page} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {selectNearByOffers} from '../../store/offer-process/selectors';
@@ -19,4 +20,4 @@ function NearByOffers(): JSX.Element {
   );
 }
 
-export default NearByOffers;
+export default memo(NearByOffers);

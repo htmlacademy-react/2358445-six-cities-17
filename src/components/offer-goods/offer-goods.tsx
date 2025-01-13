@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 type OfferGoodsProps = {
   goods: string[];
 }
@@ -16,4 +18,4 @@ function OfferGoods({ goods }: OfferGoodsProps): JSX.Element {
   );
 }
 
-export default OfferGoods;
+export default memo(OfferGoods);

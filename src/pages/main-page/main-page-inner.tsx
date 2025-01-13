@@ -18,7 +18,7 @@ function MainPageInner({sortedOffers}: MainPageInnerProps): JSX.Element {
 
   const handleCardHover = useCallback((offer: Offer | null) => {
     setActiveCard(offer);
-  }, [activeCard]);
+  }, []);
 
   return (
     <>

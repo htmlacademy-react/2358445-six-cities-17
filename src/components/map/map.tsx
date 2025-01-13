@@ -1,7 +1,7 @@
 import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types';
-import {useEffect, useRef} from 'react';
+import {memo, useEffect, useRef} from 'react';
 import {UrlMarker} from '../../const';
 import useMap from '../../hooks/use-map/use-map';
 
@@ -63,4 +63,4 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }
 
-export default Map;
+export default memo(Map);

@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {GALERY_IMAGES_COUNT} from '../../const';
 
 type OfferGaleryProps = {
@@ -17,4 +18,4 @@ function OfferGalery({images}: OfferGaleryProps): JSX.Element {
   );
 }
 
-export default OfferGalery;
+export default memo(OfferGalery);
