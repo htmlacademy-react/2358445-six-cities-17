@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {MouseEvent} from 'react';
 import UserInfo from './user-info';
 import {selectAuthorizationStatus} from '../../store/user-process/selectors';
+import cn from 'classnames';
 
 function Nav(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -17,7 +18,7 @@ function Nav(): JSX.Element {
     dispatch(logoutAction())
       .then((response) => {
         if (response.meta.requestStatus === 'fulfilled' && currentPath as AppRoute === AppRoute.Favorites) {
-          navigate(AppRoute.Main);
+          navigate(AppRoute.Login);
         }
       });
   };
@@ -26,13 +27,13 @@ function Nav(): JSX.Element {
     <nav className='header__nav'>
       <ul className='header__nav-list'>
         {(authorizationStatus === AuthorizationStatus.Auth) && <UserInfo/>}
-        <li className='header__nav-item'>
+        <li className={cn('header__nav-item', {'user': authorizationStatus !== AuthorizationStatus.Auth})}>
           {
             (authorizationStatus !== AuthorizationStatus.Auth)
               ?
-              <Link className='header__nav-link' to={AppRoute.Login}><span className='header__signout'>Sign in</span></Link>
+              <Link className='header__nav-link header__nav-link--profile' to={AppRoute.Login}><div className='header__avatar-wrapper user__avatar-wrapper'></div><span className='header__login'>Sign in</span></Link>
               :
-              <a href='#' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Log Out</span></a>
+              <a href='#' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Sign out</span></a>
           }
         </li>
       </ul>

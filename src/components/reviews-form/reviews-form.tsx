@@ -16,11 +16,21 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevState) => ({ ...prevState, 'rating': +evt.target.value, 'submitDisabled': false }));
+    setFormData((prevState) => ({ ...prevState, 'rating': +evt.target.value }));
+    if (reviewCondition && formData.rating) {
+      setFormData((prevState) => ({ ...prevState, 'submitDisabled': false }));
+    } else {
+      setFormData((prevState) => ({ ...prevState, 'submitDisabled': true }));
+    }
     textUnderForm = defaultTextUnderForm;
   };
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData((prevState) => ({ ...prevState, 'review': evt.target.value, 'submitDisabled': false }));
+    setFormData((prevState) => ({ ...prevState, 'review': evt.target.value }));
+    if (reviewCondition && formData.rating) {
+      setFormData((prevState) => ({ ...prevState, 'submitDisabled': false }));
+    } else {
+      setFormData((prevState) => ({ ...prevState, 'submitDisabled': true }));
+    }
     textUnderForm = defaultTextUnderForm;
   };
 

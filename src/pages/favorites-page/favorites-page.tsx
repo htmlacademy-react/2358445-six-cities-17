@@ -29,7 +29,7 @@ function FavoritesPage(): JSX.Element {
     <FavoritesEmpty/>
   );
   return (
-    <div className='page'>
+    <div className={cn('page', {'page--favorites-empty': !offers.length})}>
       <Header isNavShow/>
       <main className={cn('page__main', 'page__main--favorites', {'page__main--favorites-empty': !offers.length})}>
         <Helmet>
