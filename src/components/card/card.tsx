@@ -3,7 +3,7 @@ import {SettingsType, OfferSimple} from '../../types';
 import {toUpFirstLetter, showRating} from '../../utils';
 import {Link} from 'react-router-dom';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
-import OfferLabel from '../offerLabel/offerLabel';
+import OfferLabel from '../offer-label/offer-label';
 import {generatePath} from 'react-router';
 import { memo, useMemo } from 'react';
 

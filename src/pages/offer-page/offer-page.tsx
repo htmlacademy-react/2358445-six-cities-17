@@ -9,7 +9,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import OfferGalery from '../../components/offer-galery/offer-galery';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import HostUser from '../../components/host-user/host-user';
-import OfferLabel from '../../components/offerLabel/offerLabel';
+import OfferLabel from '../../components/offer-label/offer-label';
 import {fetchNearByAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import LoadingPage from '../loading-page/loading-page';

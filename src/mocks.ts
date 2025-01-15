@@ -2,13 +2,17 @@ import {system, name, internet} from 'faker';
 import {Action} from 'redux';
 import {AppState, Offer, UserData} from './types';
 import {AuthorizationStatus, FIRST_CITY, SortType} from './const';
+import {ThunkDispatch} from '@reduxjs/toolkit';
+import {createAPI} from './services/api';
+
+export type AppThunkDispatch = ThunkDispatch<AppState, ReturnType<typeof createAPI>, Action>;
 
 export const makeFakeUserData = (): UserData => ({
   name: name.title(),
   avatarUrl: system.filePath(),
   isPro: true,
   email: internet.email(),
-  token: ''
+  token: 'secret'
 } as UserData);
 
 export const makeFakeOffer = (): Offer => ({
