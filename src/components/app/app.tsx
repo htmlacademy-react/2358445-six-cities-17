@@ -49,7 +49,7 @@ function App({cities}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <FavoritesPage/>
               </PrivateRoute>
             }
