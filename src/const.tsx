@@ -37,10 +37,10 @@ export enum AuthorizationStatus {
 }
 
 export enum SortType {
-  TOP_RATED_FIRST = 'Top rated first',
+  POPULAR = 'Popular',
   PRICE_LOW_TO_HIGH = 'Price: low to high',
   PRICE_HIGH_TO_LOW = 'Price: high to low',
-  POPULAR = 'Popular'
+  TOP_RATED_FIRST = 'Top rated first'
 }
 
 export enum APIRoute {
@@ -84,6 +84,6 @@ export const FIRST_STATE_REVIEW_FORM = {
   review: '',
   ratingDisabled: false,
   reviewDisabled: false,
-  submitDisabled: false
+  submitDisabled: true
 };
 

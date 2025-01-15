@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {memo, useEffect, useRef, useState} from 'react';
 import {MouseEvent} from 'react';
 import cn from 'classnames';
 import {SortType} from '../../const';
@@ -55,4 +55,4 @@ function SortForm(): JSX.Element {
   );
 }
 
-export default SortForm;
+export default memo(SortForm);

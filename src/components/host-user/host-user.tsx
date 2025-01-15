@@ -1,4 +1,5 @@
-import { User } from '../../types';
+import {memo} from 'react';
+import {User} from '../../types';
 import cn from 'classnames';
 
 type HostUserProps = {
@@ -18,4 +19,4 @@ function HostUser({host}: HostUserProps): JSX.Element {
   );
 }
 
-export default HostUser;
+export default memo(HostUser);

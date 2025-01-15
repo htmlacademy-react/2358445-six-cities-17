@@ -25,7 +25,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City, should
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, shouldScrollOnZoom]);
 
   return map;
 }

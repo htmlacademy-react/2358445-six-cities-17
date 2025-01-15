@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Page} from '../../const';
 
 type OfferLabelProps = {
@@ -13,4 +14,4 @@ function OfferLabel({ text = 'Premium', page = Page.PlaceCard }: OfferLabelProps
   );
 }
 
-export default OfferLabel;
+export default memo(OfferLabel);

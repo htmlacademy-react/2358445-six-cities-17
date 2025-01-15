@@ -32,7 +32,7 @@ function ServerErrorPage({ page }: ServerErrorPageProps): JSX.Element {
     if (page === Page.Favorites) {
       dispatch(fetchFavoriteListAction());
     }
-  }, [page]);
+  }, [dispatch, id, page]);
   return (
     <div className='page page--gray page--login'>
       <Header />

@@ -18,13 +18,13 @@ function MainPageInner({sortedOffers}: MainPageInnerProps): JSX.Element {
 
   const handleCardHover = useCallback((offer: Offer | null) => {
     setActiveCard(offer);
-  }, [activeCard]);
+  }, []);
 
   return (
     <>
       <section className='cities__places places'>
         <h2 className='visually-hidden'>Places</h2>
-        <b className='places__found'>{sortedOffers.length} places to stay in {activeCity}</b>
+        <b className='places__found'>{sortedOffers.length} place{sortedOffers.length > 1 && 's'} to stay in {activeCity}</b>
         <SortForm />
         <CardsList
           offers={sortedOffers}
