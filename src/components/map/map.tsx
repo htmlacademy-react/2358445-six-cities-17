@@ -60,7 +60,7 @@ function Map({page, offers, selectedOffer}: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <section className={`${page}__map map`} ref={mapRef}></section>;
+  return <section className={`${page}__map map`} ref={mapRef} data-testid='map-container'></section>;
 }
 
 export default memo(Map);

@@ -3,7 +3,7 @@ import {MemoryHistory, createMemoryHistory} from 'history';
 import {AppRoute, AuthorizationStatus, CITIES, FIRST_CITY} from '../../const';
 import App from './app';
 import { withHistory, withStore } from '../../mock-component';
-import { makeFakeOffer, makeFakeStore, makeFakeUserData } from '../../mocks';
+import { makeFakeOffer, makeFakeOfferFull, makeFakeStore, makeFakeUserData } from '../../mocks';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;
@@ -14,7 +14,14 @@ describe('Application Routing', () => {
 
   it('should render "MainPage" when user navigate to "/"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
-    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
+      user: {
+        authorizationStatus: AuthorizationStatus.Auth,
+        isErrorInAuthRequest: false,
+        isErrorInCheckAuthRequest: false,
+        userInfo: makeFakeUserData()
+      }
+    }));
     mockHistory.push(AppRoute.Main);
 
     render(withStoreComponent);
@@ -33,7 +40,7 @@ describe('Application Routing', () => {
         userInfo: makeFakeUserData()
       },
       offer: {
-        offer: null,
+        offer: makeFakeOfferFull(),
         isOfferDataLoading: false,
         isErrorInOfferDataLoading: false,
         reviews: [],
@@ -50,7 +57,7 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
+    expect(screen.getByText('Meet the host')).toBeInTheDocument();
     expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
     expect(screen.getByText(/Your review/i)).toBeInTheDocument();
   });
@@ -75,20 +82,33 @@ describe('Application Routing', () => {
 
   it('should render "LoginPage" when user navigate to "/login"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
-    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
+      user: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        isErrorInAuthRequest: false,
+        isErrorInCheckAuthRequest: false,
+        userInfo: null
+      }
+    }));
     mockHistory.push(AppRoute.Login);
 
     render(withStoreComponent);
 
-    expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
-    expect(screen.getByLabelText(/E-mail/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByText('E-mail')).toBeInTheDocument();
+    expect(screen.getByText('Password')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('Sign in');
   });
 
   it('should render "Page404" when user navigate to non-existent route', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
-    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
+      user: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        isErrorInAuthRequest: false,
+        isErrorInCheckAuthRequest: false,
+        userInfo: null
+      }
+    }));
     const unknownRoute = '/unknown-route';
     mockHistory.push(unknownRoute);
 
