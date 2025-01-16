@@ -29,8 +29,8 @@ function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
   }
 
   return (
-    <section className='offer__reviews reviews'>
-      <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{reviews.length}</span></h2>
+    <section className='offer__reviews reviews' data-testid='offer-reviews-container'>
+      <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount' data-testid='offer-common-count'>{reviews.length}</span></h2>
       <ul className='reviews__list'>
         {reviewsList}
       </ul>

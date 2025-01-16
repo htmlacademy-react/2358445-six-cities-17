@@ -56,7 +56,7 @@ function LoginPage(): JSX.Element {
             <form className='login__form form' action='#' method='post' onSubmit={handleSubmitLoginForm}>
               <div className='login__input-wrapper form__input-wrapper'>
                 <label className='visually-hidden'>E-mail</label>
-                <input ref={loginRef} className='login__input form__input' type='email' name='email' placeholder='Email' required />
+                <input ref={loginRef} className='login__input form__input' type='email' name='email' placeholder='Email' data-testid='loginElement' required />
               </div>
               <div className='login__input-wrapper form__input-wrapper'>
                 <label className='visually-hidden'>Password</label>
@@ -68,6 +68,7 @@ function LoginPage(): JSX.Element {
                   placeholder='Password'
                   title='The password must consist of at least one letter and one number'
                   pattern='^.*(?=.*[a-zа-яё])(?=.*\d).*$'
+                  data-testid='passwordElement'
                   required
                 />
               </div>

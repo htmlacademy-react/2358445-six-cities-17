@@ -41,6 +41,6 @@ export function withStore(
   return ({
     withStoreComponent: <Provider store={mockStore}>{component}</Provider>,
     mockStore,
-    mockAxiosAdapter,
+    mockAxiosAdapter
   });
 }

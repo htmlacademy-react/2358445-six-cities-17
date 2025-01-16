@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import FavoritesEmpty from './favorites-empty';
 
 describe('Component: FavoritesEmpty', () => {
-  it('should render correct', () => {
+  it('should render correctly', () => {
     const favoritesEmptyContainerTestId = 'favorites-empty-container';
     const favoritesEmptyH1Text = 'Favorites (empty)';
     const favoritesEmptyStatusText = 'Nothing yet saved.';

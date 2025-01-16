@@ -10,8 +10,6 @@ import Page404 from '../../pages/page-404/page-404';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 import { selectIsOffersDataLoading } from '../../store/cards-process/selectors';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
@@ -31,35 +29,33 @@ function App({cities}: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <ScrollToTop/>
-        <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<MainPage cities={cities}/>}
-          />
-          <Route
-            path={AppRoute.Login}
-            element={<LoginPage/>}
-          />
-          <Route
-            path={AppRoute.Offer}
-            element={<OfferPage/>}
-          />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
-                <FavoritesPage/>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={AppRoute.Page404}
-            element={<Page404 />}
-          />
-        </Routes>
-      </HistoryRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path={AppRoute.Main}
+          element={<MainPage cities={cities} />}
+        />
+        <Route
+          path={AppRoute.Login}
+          element={<LoginPage />}
+        />
+        <Route
+          path={AppRoute.Offer}
+          element={<OfferPage />}
+        />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute authorizationStatus={authorizationStatus}>
+              <FavoritesPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoute.Page404}
+          element={<Page404 />}
+        />
+      </Routes>
     </HelmetProvider>
   );
 }

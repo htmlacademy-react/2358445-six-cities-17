@@ -8,7 +8,7 @@ type OfferLabelProps = {
 
 function OfferLabel({ text = 'Premium', page = Page.PlaceCard }: OfferLabelProps): JSX.Element {
   return (
-    <div className={`${page}__mark`}>
+    <div className={`${page}__mark`} data-testid='premium-label-container'>
       <span>{text}</span>
     </div>
   );

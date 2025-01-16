@@ -1,6 +1,6 @@
-import {system, name, internet} from 'faker';
+import {system, name, internet, lorem} from 'faker';
 import {Action} from 'redux';
-import {AppState, Offer, UserData} from './types';
+import {AppState, Offer, Review, UserData} from './types';
 import {AuthorizationStatus, FIRST_CITY, SortType} from './const';
 import {ThunkDispatch} from '@reduxjs/toolkit';
 import {createAPI} from './services/api';
@@ -14,6 +14,15 @@ export const makeFakeUserData = (): UserData => ({
   email: internet.email(),
   token: 'secret'
 } as UserData);
+
+export const makeFakeImagesData = (): string[] => Array<string>(10).fill(system.filePath());
+
+export const makeFakeReview = (): Review => ({
+  comment: lorem.lines(1),
+  date: '2024-11-05T21:00:00.490Z',
+  rating: Math.floor(Math.random() * 5 + 1),
+  user: makeFakeUserData()
+} as Review);
 
 export const makeFakeOffer = (): Offer => ({
   id: 'ae9218e7-dfe9-4d3d-b807-a0fdff9d0a58',
