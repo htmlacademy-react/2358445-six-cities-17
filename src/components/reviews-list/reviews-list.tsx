@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo, useMemo} from 'react';
 import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {selectAuthorizationStatus} from '../../store/user-process/selectors';
@@ -14,6 +14,7 @@ type ReviewsListProps = {
 
 function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const isAuthorized = useMemo(() => authorizationStatus === AuthorizationStatus.Auth, [authorizationStatus]);
   let reviewsList;
   if (reviews.length) {
     const sortedReviews = sortReviews(reviews);
@@ -34,7 +35,7 @@ function ReviewsList({ reviews, offerId }: ReviewsListProps): JSX.Element {
       <ul className='reviews__list'>
         {reviewsList}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={offerId}/>}
+      {isAuthorized && <ReviewsForm offerId={offerId}/>}
     </section>
   );
 }

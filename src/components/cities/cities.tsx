@@ -1,4 +1,5 @@
 
+import {memo} from 'react';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {useAppSelector} from '../../hooks';
 import {selectActiveCity} from '../../store/cards-process/selectors';
@@ -27,4 +28,4 @@ function Cities({cities}: CitiesProps): JSX.Element {
   );
 }
 
-export default Cities;
+export default memo(Cities);
