@@ -4,7 +4,7 @@ type ReviewsFormMessageProps = {
 
 function ReviewsFormMessage({ text }: ReviewsFormMessageProps): JSX.Element {
   return (
-    <div>{text}</div>
+    <div data-testid='review-form-message-text'>{text}</div>
   );
 }
 

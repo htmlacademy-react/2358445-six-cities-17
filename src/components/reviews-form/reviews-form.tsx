@@ -1,5 +1,5 @@
 import {STARS_COUNT, RATING_VALUES, ReviewLimit, ReviewFormSubmitMessages, FIRST_STATE_REVIEW_FORM} from '../../const';
-import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
+import {ChangeEvent, FormEvent, Fragment, memo, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {addReviewAction} from '../../store/api-actions';
 import ReviewsFormMessage from './reviews-form-message';
@@ -101,4 +101,4 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   );
 }
 
-export default ReviewsForm;
+export default memo(ReviewsForm);

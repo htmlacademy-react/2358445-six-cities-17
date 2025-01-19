@@ -9,7 +9,7 @@ function UserInfo(): JSX.Element {
   const user = useAppSelector(selectUser);
 
   return (
-    <li className='header__nav-item user'>
+    <li className='header__nav-item user' data-testid='header-user-info-container'>
       <Link className='header__nav-link header__nav-link--profile' to={AppRoute.Favorites}>
         <div className='header__avatar-wrapper user__avatar-wrapper' style={{borderRadius: '20px', backgroundImage: (user ? `url(${user.avatarUrl})` : 'url(../img/avatar.svg)')}}></div>
         <span className='header__user-name user__name'>{user && user.email}</span>

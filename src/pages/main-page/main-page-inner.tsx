@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useMemo, useState} from 'react';
 import {Offer, Offers} from '../../types';
 import {getMapPoints} from '../../utils';
 import SortForm from '../../components/sort-form/sort-form';
@@ -14,7 +14,7 @@ type MainPageInnerProps = {
 function MainPageInner({sortedOffers}: MainPageInnerProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const activeCity = useAppSelector(selectActiveCity);
-  const mapPoints = getMapPoints(sortedOffers);
+  const mapPoints = useMemo(() => getMapPoints(sortedOffers), [sortedOffers]);
 
   const handleCardHover = useCallback((offer: Offer | null) => {
     setActiveCard(offer);

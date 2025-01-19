@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import {useAppDispatch} from '../../hooks';
-import {MouseEvent} from 'react';
+import {memo, MouseEvent, useCallback} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {changeCity} from '../../store/cards-process/cards-process';
@@ -16,7 +16,7 @@ function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.E
   const navigate = useNavigate();
   const isNeedNavigate = useLocation().pathname !== '/';
 
-  const handleListCitiesItemClick = (evt: MouseEvent<HTMLElement>) => {
+  const handleListCitiesItemClick = useCallback((evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     if (isNeedNavigate) {
       navigate(AppRoute.Main);
@@ -24,7 +24,7 @@ function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.E
     if (evt.currentTarget.textContent) {
       dispatch(changeCity(evt.currentTarget.textContent));
     }
-  };
+  }, [dispatch, isNeedNavigate, navigate]);
   return (
     <a href='#' onClick={handleListCitiesItemClick} className={cn('locations__item-link', {'tabs__item': isTab}, {'tabs__item--active': isActive})}>
       <span>{text}</span>
@@ -32,4 +32,4 @@ function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.E
   );
 }
 
-export default LocationItemLink;
+export default memo(LocationItemLink);
