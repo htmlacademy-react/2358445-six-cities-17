@@ -24,7 +24,7 @@ function LocationItemLink({isTab, text, isActive}: LocationItemLinkProps): JSX.E
     if (evt.currentTarget.textContent) {
       dispatch(changeCity(evt.currentTarget.textContent));
     }
-  }, [text, dispatch]);
+  }, [dispatch, isNeedNavigate, navigate]);
   return (
     <a href='#' onClick={handleListCitiesItemClick} className={cn('locations__item-link', {'tabs__item': isTab}, {'tabs__item--active': isActive})}>
       <span>{text}</span>
