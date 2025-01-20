@@ -26,7 +26,7 @@ function CardsList({page = Page.Cities, offers, onCardHover}: CardsListProps): J
     />
   ));
   return (
-    <div className={cn(
+    <div data-testid='cards-list-container' className={cn(
       {'cities__places-list places__list tabs__content': page === Page.Cities},
       {'near-places__list places__list': page === Page.NearPlaces},
       {'favorites__places': page === Page.Favorites}

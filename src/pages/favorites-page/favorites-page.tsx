@@ -33,7 +33,7 @@ function FavoritesPage(): JSX.Element {
       <Header isNavShow/>
       <main className={cn('page__main', 'page__main--favorites', {'page__main--favorites-empty': !offers.length})}>
         <Helmet>
-          <title>Saved listing</title>
+          <title>Saved offers listing</title>
         </Helmet>
         <div className='page__favorites-container container'>
           <section className={cn('favorites', {'favorites--empty': !offers.length})}>

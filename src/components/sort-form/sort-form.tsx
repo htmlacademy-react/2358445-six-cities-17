@@ -32,11 +32,11 @@ function SortForm(): JSX.Element {
   const handleChangeShowSort = () => setIsShowSort((lastOpened) => (!lastOpened));
 
   const sortListUl = (Object.values(SortType) as string[]).map((value) => (
-    <li key={value} className={cn('places__option', {'places__option--active': sortName === value as SortType})} tabIndex={0} onClick={handleClickSortOption}>{value}</li>
+    <li data-testid='sort-option-container' key={value} className={cn('places__option', {'places__option--active': sortName === value as SortType})} tabIndex={0} onClick={handleClickSortOption}>{value}</li>
   ));
 
   return (
-    <form className='places__sorting' action='#' method='get'>
+    <form className='places__sorting' action='#' method='get' data-testid='sort-form-container'>
       <span className='places__sorting-caption'>Sort by</span>{' '}
       <span ref={sortSpanRef} className='places__sorting-type' tabIndex={0} onClick={handleChangeShowSort}>
         {sortName}

@@ -24,7 +24,7 @@ function Nav(): JSX.Element {
   };
 
   return (
-    <nav className='header__nav'>
+    <nav className='header__nav' data-testid='header-nav-container'>
       <ul className='header__nav-list'>
         {(authorizationStatus === AuthorizationStatus.Auth) && <UserInfo/>}
         <li className={cn('header__nav-item', {'user': authorizationStatus !== AuthorizationStatus.Auth})}>
@@ -33,7 +33,7 @@ function Nav(): JSX.Element {
               ?
               <Link className='header__nav-link header__nav-link--profile' to={AppRoute.Login}><div className='header__avatar-wrapper user__avatar-wrapper'></div><span className='header__login'>Sign in</span></Link>
               :
-              <a href='#' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Sign out</span></a>
+              <a href='#' data-testid='sign-out-link' className='header__nav-link' onClick={handleLogoutClick}><span className='header__signout'>Sign out</span></a>
           }
         </li>
       </ul>
