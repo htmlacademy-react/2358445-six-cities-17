@@ -41,7 +41,7 @@ function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkBu
   };
 
   return (
-    <button className={
+    <button data-testid='bookmark-button-container' className={
       cn(`${page}__bookmark-button`,
         'button',
         { [`${page}__bookmark-button--active`]: isFavorite && isAuthorized }
