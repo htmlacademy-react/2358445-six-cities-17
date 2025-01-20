@@ -35,7 +35,7 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
     </li>
   ));
   return (
-    <ul className='favorites__list'>
+    <ul className='favorites__list' data-testid='favorites-list-container'>
       {FavoritesListUl}
     </ul>
   );

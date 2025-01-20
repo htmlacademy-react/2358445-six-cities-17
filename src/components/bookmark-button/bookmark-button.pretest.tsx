@@ -118,6 +118,7 @@ describe('Component: BookmarkButton', () => {
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
     await userEvent.click(screen.getByRole('button'));
+
     expect(mockHistory.location.pathname).toBe(AppRoute.Login);
   });
 });
