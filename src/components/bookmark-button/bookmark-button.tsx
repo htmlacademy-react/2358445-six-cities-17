@@ -33,11 +33,12 @@ function BookmarkButton({isFavorite, page = Page.PlaceCard, offerId}: BookmarkBu
   const handleClickBookmarkButton = () => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       navigate(AppRoute.Login);
+    } else {
+      dispatch(changeFavoriteAction({
+        status: (+!isFavorite),
+        offerId
+      }));
     }
-    dispatch(changeFavoriteAction({
-      status: (+!isFavorite),
-      offerId
-    }));
   };
 
   return (
