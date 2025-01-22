@@ -14,6 +14,7 @@ describe('Application Routing', () => {
 
   it('should render "MainPage" when user navigate to "/"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
+    Object.defineProperty(global.window, 'scrollTo', { value: vi.fn() });
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
         authorizationStatus: AuthorizationStatus.Auth,
@@ -32,6 +33,7 @@ describe('Application Routing', () => {
 
   it('should render "OfferPage" when user navigate to "/offer"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
+    Object.defineProperty(global.window, 'scrollTo', { value: vi.fn() });
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
         authorizationStatus: AuthorizationStatus.Auth,
@@ -64,6 +66,7 @@ describe('Application Routing', () => {
 
   it('should render "FavoritesPage" when user navigate to "/favorites"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
+    Object.defineProperty(global.window, 'scrollTo', { value: vi.fn() });
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
         authorizationStatus: AuthorizationStatus.Auth,
@@ -82,6 +85,7 @@ describe('Application Routing', () => {
 
   it('should render "LoginPage" when user navigate to "/login"', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
+    Object.defineProperty(global.window, 'scrollTo', { value: vi.fn() });
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
         authorizationStatus: AuthorizationStatus.NoAuth,
@@ -101,6 +105,7 @@ describe('Application Routing', () => {
 
   it('should render "Page404" when user navigate to non-existent route', () => {
     const withHistoryComponent = withHistory(<App cities = {CITIES}/>, mockHistory);
+    Object.defineProperty(global.window, 'scrollTo', { value: vi.fn() });
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
         authorizationStatus: AuthorizationStatus.NoAuth,

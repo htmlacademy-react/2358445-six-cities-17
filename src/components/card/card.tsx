@@ -39,6 +39,7 @@ function Card({offer, page = Page.Cities, onCardMouseEnter, onCardMouseLeave}: C
       className={`${page}__card place-card`}
       onMouseEnter={onCardMouseEnter}
       onMouseLeave={onCardMouseLeave}
+      data-testid='place-card-container'
     >
       {premiumIcon}
       <div className={`${page}__image-wrapper place-card__image-wrapper`}>

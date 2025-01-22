@@ -13,7 +13,7 @@ function Page404(): JSX.Element {
             <Helmet>
               <title>404 Not Found</title>
             </Helmet>
-            <h1 className="login__title">404 Not Found</h1>
+            <h1 className="login__title" data-testid='page-404-title-container'>404 Not Found</h1>
             <Link className="header__logo-link" to="/">Back to main page</Link>
           </section>
           <section className="locations locations--login locations--current">

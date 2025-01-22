@@ -39,7 +39,7 @@ export const makeFakeOffer = (): Offer => ({
   type: 'room',
   price: 198,
   previewImage: system.filePath(),
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   rating: 2.2,
   city: makeFakeCity(),

@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import Nav from '../../components/header/nav';
+import Nav from '../nav/nav';
 import {memo} from 'react';
 
 type HeaderProps = {
@@ -14,7 +14,7 @@ function Header({isNavShow}: HeaderProps): JSX.Element {
     logo
   );
   return (
-    <header className='header'>
+    <header className='header' data-testid='header-container'>
       <div className='container'>
         <div className='header__wrapper'>
           <div className='header__left'>{logoBlock}</div>

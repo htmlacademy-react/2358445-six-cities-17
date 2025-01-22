@@ -2,7 +2,7 @@ import {STARS_COUNT, RATING_VALUES, ReviewLimit, ReviewFormSubmitMessages, FIRST
 import {ChangeEvent, FormEvent, Fragment, memo, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {addReviewAction} from '../../store/api-actions';
-import ReviewsFormMessage from './reviews-form-message';
+import ReviewsFormMessage from '../reviews-form-message/reviews-form-message';
 
 type ReviewsFormProps = {
   offerId: string;
@@ -81,7 +81,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       <div className='reviews__rating-form form__rating'>
         {RATING_VALUES.map((value: string, key: number)=> (
           <Fragment key={`rating_${value}`}>
-            <input className='form__rating-input visually-hidden' name='rating' value={STARS_COUNT - key} id={`${STARS_COUNT - key}-stars`} type='radio' checked={formData.rating === STARS_COUNT - key} onChange={handleRatingChange} disabled={formData.ratingDisabled}/>
+            <input placeholder={value} className='form__rating-input visually-hidden' name='rating' value={STARS_COUNT - key} id={`${STARS_COUNT - key}-stars`} type='radio' checked={formData.rating === STARS_COUNT - key} onChange={handleRatingChange} disabled={formData.ratingDisabled}/>
             <label htmlFor={`${STARS_COUNT - key}-stars`} className='reviews__rating-label form__rating-label' title={value}>
               <svg className='form__star-image' width='37' height='33'>
                 <use xlinkHref='#icon-star'></use>
@@ -90,7 +90,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
           </Fragment>
         ))}
       </div>
-      <textarea className='reviews__textarea form__textarea' id='review' name='review' placeholder='Tell how was your stay, what you like and what can be improved' onChange={handleTextareaChange} value={formData.review} disabled={formData.reviewDisabled}></textarea>
+      <textarea data-testid='reviewElement' className='reviews__textarea form__textarea' id='review' name='review' placeholder='Tell how was your stay, what you like and what can be improved' onChange={handleTextareaChange} value={formData.review} disabled={formData.reviewDisabled}></textarea>
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           {textUnderForm}

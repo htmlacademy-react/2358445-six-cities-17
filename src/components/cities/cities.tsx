@@ -12,7 +12,7 @@ function Cities({cities}: CitiesProps): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
   const citiesUl = cities &&
     cities.map((city)=>
-      <li className='locations__item' key={city}><LocationItemLink text={city} isTab isActive={city === activeCity}/></li>
+      <li className='locations__item' data-testid='location-item-container' key={city}><LocationItemLink text={city} isTab isActive={city === activeCity}/></li>
     );
   return (
     <>
