@@ -122,4 +122,23 @@ describe('Application Routing', () => {
     expect(screen.getByText('404 Not Found')).toBeInTheDocument();
     expect(screen.getByText('Back to main page')).toBeInTheDocument();
   });
+
+  it('should render "LoginPage" when user navigates to "/favorites" and is not authorized', () => {
+    const fakeStoreWithAuthorizedStatus = makeFakeStore({
+      user: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        isErrorInAuthRequest: false,
+        isErrorInCheckAuthRequest: false,
+        userInfo: makeFakeUserData()
+      }
+    });
+    const expectedText = 'Sign in';
+    const { withStoreComponent } = withStore(<App cities = {CITIES}/>, fakeStoreWithAuthorizedStatus);
+    const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
+    mockHistory.push(AppRoute.Favorites);
+
+    render(withHistoryComponent);
+
+    expect(screen.getByRole('button')).toHaveTextContent(expectedText);
+  });
 });
