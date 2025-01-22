@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Header from './header';
 import { withHistory } from '../../mock-component';
 
-vi.mock('../../components/header/nav', () => {
+vi.mock('../nav/nav', () => {
   const mockNav = () => <>This is mock Nav</>;
   return {
     default: mockNav

@@ -1,8 +1,8 @@
 import {render, screen} from '@testing-library/react';
 import {withHistory, withStore} from '../../mock-component';
 import {makeFakeStore, makeFakeUserData} from '../../mocks';
-import UserInfo from './user-info';
 import { AuthorizationStatus } from '../../const';
+import UserInfo from './user-info';
 
 describe('Component: UserInfo', () => {
   it('should render correctly', () => {

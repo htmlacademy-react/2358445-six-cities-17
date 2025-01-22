@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import Nav from '../../components/header/nav';
+import Nav from '../nav/nav';
 import {memo} from 'react';
 
 type HeaderProps = {

@@ -2,7 +2,7 @@ import {STARS_COUNT, RATING_VALUES, ReviewLimit, ReviewFormSubmitMessages, FIRST
 import {ChangeEvent, FormEvent, Fragment, memo, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {addReviewAction} from '../../store/api-actions';
-import ReviewsFormMessage from './reviews-form-message';
+import ReviewsFormMessage from '../reviews-form-message/reviews-form-message';
 
 type ReviewsFormProps = {
   offerId: string;
