@@ -1,9 +1,9 @@
 import {useCallback, useMemo, useState} from 'react';
 import {Offer, Offers} from '../../types';
 import {getMapPoints} from '../../utils';
-import SortForm from '../../components/sort-form/sort-form';
-import CardsList from '../../components/cards-list/cards-list';
-import Map from '../../components/map/map';
+import SortForm from '../sort-form/sort-form';
+import CardsList from '../cards-list/cards-list';
+import Map from '../map/map';
 import {selectActiveCity} from '../../store/cards-process/selectors';
 import {useAppSelector} from '../../hooks';
 
