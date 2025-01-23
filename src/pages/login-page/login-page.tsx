@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import LocationItemLink from '../../components/location-item-link/location-item-link';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {Navigate, useNavigate} from 'react-router-dom';
-import {randomizeCity} from '../../utils';
+import {getRandomCity} from '../../utils';
 import {FormEvent, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
@@ -40,7 +40,7 @@ function LoginPage(): JSX.Element {
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
   }
-  const randomCity = randomizeCity();
+  const randomCity = getRandomCity();
 
   return (
     <div className='page page--gray page--login'>
