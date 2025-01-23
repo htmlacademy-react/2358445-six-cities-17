@@ -25,7 +25,7 @@ const getCitySortOffers = (offers: Offer[], sortType: SortType, city: string): O
   }
 };
 
-const randomizeCity = (): string => CITIES[Math.floor(Math.random() * CITIES.length)];
+const getRandomCity = (): string => CITIES[Math.floor(Math.random() * CITIES.length)];
 
 const getMapPoints = (offers: Offers, currentOffer?: OfferFull) => {
   const mapPoints = offers.map(({id, title, city, location}) => ({id, title, city, location}));
@@ -55,4 +55,4 @@ const changeIsFavorite = (id: string, isFavorite: boolean, offers: Offers): Offe
   return offers;
 };
 
-export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, randomizeCity, getMapPoints, sortReviews, changeIsFavorite };
+export { toUpFirstLetter, formatDate, showRating, getCitySortOffers, getRandomCity, getMapPoints, sortReviews, changeIsFavorite };

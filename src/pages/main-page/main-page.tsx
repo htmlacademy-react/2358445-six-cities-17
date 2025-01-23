@@ -5,7 +5,7 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 import {useAppSelector} from '../../hooks';
 import ServerErrorPage from '../server-error-page/server-error-page';
-import MainPageInner from './main-page-inner';
+import MainPageInner from '../../components/main-page-inner/main-page-inner';
 import {Page} from '../../const';
 import {selectCitySortOffers, selectIsErrorInOffersDataLoading} from '../../store/cards-process/selectors';
 
